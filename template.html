@@ -6,64 +6,38 @@
 <title>AI日报 · ___DATE___</title>
 <style>
 :root {
-  --black: #000000;
-  --dark-bg: #161617;
-  --gray-bg: #f5f5f7;
+  --bg: #f5f5f7;
   --white: #ffffff;
+  --black: #000000;
   --text: #1d1d1f;
-  --text-secondary: rgba(0,0,0,.64);
+  --text-secondary: rgba(0,0,0,.72);
   --text-tertiary: rgba(0,0,0,.42);
   --blue: #0071e3;
-  --blue-dark: #0066cc;
-  --blue-light: #e8f0fe;
+  --blue-active: #0066cc;
   --border: rgba(0,0,0,.06);
   --shadow: rgba(0,0,0,.08) 0px 2px 14px;
-  --shadow-lg: rgba(0,0,0,.12) 0px 4px 24px;
+  --shadow-hover: rgba(0,0,0,.12) 0px 4px 24px;
+  --radius-card: 14px;
+  --radius-pill: 980px;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background: var(--gray-bg);
+  background: var(--bg);
   color: var(--text);
-  line-height: 1.47;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   letter-spacing: -.01em;
 }
 
-/* 深色顶部 — 渐变 + 装饰线 */
+/* Dark hero */
 .hero {
-  background: linear-gradient(180deg, #000000 0%, #1a1a1c 100%);
+  background: var(--black);
   color: var(--white);
   text-align: center;
   padding: 72px 24px 56px;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent);
-}
-.hero::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 10%; right: 10%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.08), transparent);
-}
-/* 背景微网格 */
-.hero .mesh {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-image: 
-    radial-gradient(circle at 25% 40%, rgba(255,255,255,.02) 0%, transparent 50%),
-    radial-gradient(circle at 75% 60%, rgba(0,113,227,.04) 0%, transparent 50%);
-  pointer-events: none;
 }
 .hero .eyebrow {
-  position: relative;
   font-size: 11px;
   font-weight: 500;
   letter-spacing: .5em;
@@ -72,28 +46,26 @@ body {
   margin-bottom: 10px;
 }
 .hero h1 {
-  position: relative;
-  font-size: 44px;
+  font-size: 48px;
   font-weight: 600;
   line-height: 1.07;
   letter-spacing: -.015em;
 }
 .hero .sub {
-  position: relative;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
   color: rgba(255,255,255,.5);
   margin-top: 8px;
   letter-spacing: -.01em;
 }
 
-/* 容器 */
+/* Container */
 .container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
 
-/* 音频条 — 浮动卡片 */
-.audio-card {
+/* Audio player bar */
+.audio-bar {
   background: var(--white);
-  border-radius: 14px;
+  border-radius: var(--radius-card);
   padding: 10px 18px;
   display: flex;
   align-items: center;
@@ -103,20 +75,19 @@ body {
   box-shadow: var(--shadow);
   position: relative;
   z-index: 2;
-  border: 1px solid rgba(255,255,255,.3);
 }
-.audio-card .label {
+.audio-bar .label {
   font-size: 12px;
   font-weight: 500;
   color: var(--text-tertiary);
   white-space: nowrap;
 }
-.audio-card audio { flex: 1; min-width: 0; height: 28px; }
+.audio-bar audio { flex: 1; min-width: 0; height: 28px; }
 
-/* 焦点卡片 — 带左蓝色条 */
+/* Focus card — deference: content leads */
 .focus-card {
   background: var(--white);
-  border-radius: 14px;
+  border-radius: var(--radius-card);
   padding: 24px 28px;
   margin-bottom: 20px;
   box-shadow: var(--shadow);
@@ -143,42 +114,43 @@ body {
   font-size: 17px;
   font-weight: 400;
   color: var(--text);
-  line-height: 1.5;
+  line-height: 1.47;
+  letter-spacing: -.01em;
 }
 
-/* 卡片 */
+/* Cards */
 .card {
   background: var(--white);
-  border-radius: 14px;
-  padding: 22px 26px;
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
   margin-bottom: 14px;
   box-shadow: var(--shadow);
-  transition: box-shadow .3s;
+  transition: box-shadow .25s ease;
 }
-.card:hover { box-shadow: var(--shadow-lg); }
+.card:hover { box-shadow: var(--shadow-hover); }
 .card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 16px;
 }
-.card-header .title {
-  font-size: 12px;
+.card-header h2 {
+  font-size: 13px;
   font-weight: 600;
-  letter-spacing: .1em;
+  letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--text-tertiary);
 }
-.card-header .count {
+.card-header .badge {
   font-size: 11px;
   font-weight: 500;
   color: var(--blue);
-  background: var(--blue-light);
+  background: rgba(0,113,227,.08);
   padding: 2px 10px;
-  border-radius: 980px;
+  border-radius: var(--radius-pill);
 }
 
-/* TOP 列表 */
+/* Top list */
 .item-list { list-style: none; }
 .item {
   display: flex;
@@ -186,18 +158,18 @@ body {
   padding: 12px 0;
   border-bottom: 1px solid var(--border);
 }
-.item:last-child { border-bottom: none; }
+.item:last-child { border-bottom: none; padding-bottom: 0; }
 .item .rank {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--text-tertiary);
   min-width: 22px;
   height: 22px;
   text-align: center;
   line-height: 22px;
-  background: var(--gray-bg);
+  background: var(--bg);
   border-radius: 6px;
-  margin-top: 1px;
+  margin-top: 2px;
 }
 .item .body { flex: 1; min-width: 0; }
 .item .name {
@@ -219,12 +191,11 @@ body {
   color: var(--blue);
   margin-top: 4px;
   display: inline-block;
-  border-bottom: 1px dotted transparent;
-  transition: border-color .2s;
+  cursor: default;
 }
-.item .opp:hover { border-bottom-color: var(--blue); cursor: default; }
+.item .opp:hover { color: var(--blue-active); }
 
-/* 市场脉搏 */
+/* Pulse tags */
 .pulse-wrap {
   display: flex;
   flex-wrap: wrap;
@@ -235,25 +206,28 @@ body {
   font-size: 11px;
   font-weight: 500;
   padding: 3px 12px;
-  border-radius: 980px;
-  background: var(--gray-bg);
+  border-radius: var(--radius-pill);
+  background: var(--bg);
   color: var(--text-secondary);
   letter-spacing: -.01em;
 }
-.pulse-tag:nth-child(1) { background: rgba(0,113,227,.08); color: var(--blue); }
+.pulse-tag:first-child {
+  background: rgba(0,113,227,.08);
+  color: var(--blue);
+}
 .pulse-body {
   font-size: 14px;
   font-weight: 400;
   color: var(--text-secondary);
-  line-height: 1.65;
+  line-height: 1.6;
 }
 
-/* 深度延伸 */
+/* Deep items */
 .deep-item {
   padding: 14px 0;
   border-bottom: 1px solid var(--border);
 }
-.deep-item:last-child { border-bottom: none; }
+.deep-item:last-child { border-bottom: none; padding-bottom: 0; }
 .deep-item h3 {
   font-size: 14px;
   font-weight: 600;
@@ -270,49 +244,39 @@ body {
 .deep-item ul { padding-left: 18px; }
 .deep-item li { margin: 3px 0; }
 
-/* 蓝色装饰分隔 */
-.section-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--blue), transparent);
-  opacity: .2;
-  margin: 24px 0;
-}
-
-/* 页脚 */
+/* Footer — blue link pill */
 .footer {
   text-align: center;
   padding: 36px 0 52px;
 }
 .footer a {
+  display: inline-block;
   font-size: 14px;
   font-weight: 500;
-  color: var(--blue-dark);
+  color: var(--blue-active);
   text-decoration: none;
   padding: 4px 18px;
-  border: 1px solid var(--blue-dark);
-  border-radius: 980px;
+  border: 1px solid var(--blue-active);
+  border-radius: var(--radius-pill);
   transition: all .2s;
 }
 .footer a:hover {
-  background: var(--blue-dark);
+  background: var(--blue-active);
   color: var(--white);
 }
 
 @media (max-width: 480px) {
   .hero { padding: 52px 20px 40px; }
-  .hero h1 { font-size: 30px; }
+  .hero h1 { font-size: 32px; }
   .focus-card { padding: 18px 16px; }
-  .focus-card p { font-size: 15px; }
-  .card { padding: 16px 16px; border-radius: 12px; }
-  .audio-card { margin-left: 12px; margin-right: 12px; }
-  .item .rank { min-width: 20px; height: 20px; line-height: 20px; font-size: 11px; }
+  .card { padding: 18px 16px; }
+  .audio-bar { margin-left: 12px; margin-right: 12px; }
 }
 </style>
 </head>
 <body>
 
 <div class="hero">
-  <div class="mesh"></div>
   <div class="eyebrow">AI 日报</div>
   <h1>___DATE___</h1>
   <div class="sub">每天早 6 点 · 小关出品</div>
@@ -320,8 +284,8 @@ body {
 
 <div class="container">
 
-<div class="audio-card">
-  <span class="label">🎧 收听</span>
+<div class="audio-bar">
+  <span class="label">收听</span>
   <audio controls preload="none" style="height:28px">
     <source src="___DATE___.mp3" type="audio/mpeg">
   </audio>
@@ -335,7 +299,7 @@ body {
 ___CONTENT___
 
 <div class="footer">
-  <a href="https://daily.guancn.me">查看全部历史 →</a>
+  <a href="https://daily.guancn.me">查看全部历史</a>
 </div>
 
 </div>
