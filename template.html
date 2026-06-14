@@ -278,12 +278,17 @@ let ttsPlaying = false;
 let ttsUtterance = null;
 
 function getTextContent() {
-  // 提取页面上所有主要文本内容，跳过按钮和页脚
-  const article = document.querySelector('article');
-  if (!article) return '';
-  // 清理 HTML 标签，保留文本
-  let text = article.innerText || article.textContent;
-  return text.replace(/\\s+/g, ' ').trim();
+  // 提取主要文本内容
+  const container = document.querySelector('.container');
+  if (!container) return '';
+  // 跳过朗读按钮所在区域
+  const ttsBar = document.querySelector('.tts-bar');
+  const footer = document.querySelector('.footer');
+  let text = container.innerText || container.textContent;
+  // 去掉 TTS 按钮和页脚的文本
+  if (ttsBar) text = text.replace(ttsBar.innerText, '');
+  if (footer) text = text.replace(footer.innerText, '');
+  return text.replace(/\s+/g, ' ').trim();
 }
 
 function toggleTTS() {
