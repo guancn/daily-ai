@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI日报 归档</title>
+<style>
+  body { font-family: -apple-system, "PingFang SC", sans-serif; max-width: 700px; margin: 0 auto; padding: 40px 24px; background: #f8f9fa; color: #1a1a2e; }
+  h1 { font-size: 24px; border-bottom: 3px solid #4361ee; padding-bottom: 10px; }
+  ul { list-style: none; padding: 0; }
+  li { padding: 12px 16px; margin: 8px 0; background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  a { color: #4361ee; text-decoration: none; font-size: 16px; }
+  a:hover { text-decoration: underline; }
+  .meta { color: #6b7280; font-size: 13px; margin-top: 4px; }
+  .empty { color: #9ca3af; text-align: center; padding: 60px 0; }
+  .footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #e0e0e0; font-size: 12px; color: #9ca3af; text-align: center; }
+</style>
+</head>
+<body>
+<h1>📋 AI日报 归档</h1>
+<div id="list"></div>
+<div class="footer">由 小关 · AI 日报 自动生成</div>
+<script>
+fetch('/daily-ai/filelist.json').then(r=>r.json()).then(files=>{
+  const ul = document.createElement('ul');
+  files.sort().reverse().forEach(f => {
+    const date = f.replace('.html','');
+    const li = document.createElement('li');
+    li.innerHTML = `<a href="${f}">${date}</a><div class="meta">AI日报 · ${date}</div>`;
+    ul.appendChild(li);
+  });
+  if(!files.length) ul.innerHTML = '<div class="empty">还没有日报，明天早上 6 点第一份将自动生成 🚀</div>';
+  document.getElementById('list').appendChild(ul);
+});
+</script>
+</body>
+</html>
