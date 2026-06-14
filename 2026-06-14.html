@@ -263,7 +263,7 @@
 </div>
 
 <div class="container">
-<div class="summary"><strong>今日焦点：</strong> 现在点击页面顶部的 <strong>🔊 朗读全文</strong> 按钮，浏览器会用中文语音朗读整篇日报。开车、做饭、跑步时都能听。</div><h2>🚀 朗读功能已上线</h2><p>以后每天的 AI 日报都支持语音朗读，点一下按钮就能听。</p><p>支持 Safari / Chrome / Edge 浏览器，中文语音朗读。</p>
+<div class="summary"><strong>今日焦点：</strong> 朗读功能修好了，现在点顶部的 <strong>🔊 朗读全文</strong> 按钮试试。</div><h2>🚀 语音朗读已上线</h2><p>以后的 AI 日报都支持朗读，开车、跑步、做家务时点一下就能听。</p><p>支持 Safari / Chrome / Edge。</p>
 
 <div class="footer">
   由 小关 · AI 日报 自动生成 &nbsp;|&nbsp;
@@ -278,12 +278,17 @@ let ttsPlaying = false;
 let ttsUtterance = null;
 
 function getTextContent() {
-  // 提取页面上所有主要文本内容，跳过按钮和页脚
-  const article = document.querySelector('article');
-  if (!article) return '';
-  // 清理 HTML 标签，保留文本
-  let text = article.innerText || article.textContent;
-  return text.replace(/\\s+/g, ' ').trim();
+  // 提取主要文本内容
+  const container = document.querySelector('.container');
+  if (!container) return '';
+  // 跳过朗读按钮所在区域
+  const ttsBar = document.querySelector('.tts-bar');
+  const footer = document.querySelector('.footer');
+  let text = container.innerText || container.textContent;
+  // 去掉 TTS 按钮和页脚的文本
+  if (ttsBar) text = text.replace(ttsBar.innerText, '');
+  if (footer) text = text.replace(footer.innerText, '');
+  return text.replace(/\s+/g, ' ').trim();
 }
 
 function toggleTTS() {
