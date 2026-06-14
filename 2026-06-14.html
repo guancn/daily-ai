@@ -4,25 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI日报 · 2026-06-14</title>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #ffffff;
-  --black: #171717;
-  --gray-600: #4d4d4d;
-  --gray-400: #808080;
-  --gray-100: #ebebeb;
-  --gray-50: #fafafa;
-  --blue: #0072f5;
-  --shadow-border: rgba(0,0,0,.08) 0px 0px 0px 1px;
-  --shadow-card: rgba(0,0,0,.08) 0px 0px 0px 1px, rgba(0,0,0,.04) 0px 2px 2px, #fafafa 0px 0px 0px 1px;
-  --radius: 8px;
+  --white: #ffffff;
+  --navy: #061b31;
+  --slate: #64748d;
+  --slate-dark: #273951;
+  --purple: #533afd;
+  --purple-hover: #4434d4;
+  --purple-light: #b9b9f9;
+  --border: #e5edf5;
+  --green: #15be53;
+  --green-bg: rgba(21,190,83,.12);
+  --shadow: rgba(50,50,93,.12) 0px 6px 18px -8px, rgba(0,0,0,.06) 0px 3px 8px -4px;
+  --radius: 6px;
+  --bg-alt: #f8faff;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
-  font-family: 'Geist', system-ui, -apple-system, sans-serif;
-  background: var(--bg);
-  color: var(--black);
+  font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+  background: var(--white);
+  color: var(--slate);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -30,95 +33,112 @@ body {
 .header {
   max-width: 680px;
   margin: 0 auto;
-  padding: 56px 24px 0;
+  padding: 52px 24px 0;
   text-align: center;
 }
-.header h1 {
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: var(--gray-400);
-}
-.header .date {
-  font-size: 32px;
+.header .eyebrow {
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: -1.28px;
-  margin-top: 4px;
-  color: var(--black);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--purple);
+}
+.header h1 {
+  font-size: 36px;
+  font-weight: 300;
+  letter-spacing: -.6px;
+  color: var(--navy);
+  margin-top: 2px;
 }
 .header .sub {
-  font-size: 14px;
-  color: var(--gray-600);
-  margin-top: 6px;
-  font-weight: 400;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--slate);
+  margin-top: 4px;
 }
 
-.container { max-width: 620px; margin: 0 auto; padding: 28px 20px 60px; }
+.container { max-width: 600px; margin: 0 auto; padding: 28px 20px 60px; }
 
-/* 音频播放器 — 极简 */
-.audio-wrap {
+/* 音频播放器 — 紧凑条 */
+.audio-card {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 14px;
   display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 24px;
-  padding: 8px 12px;
-  background: var(--gray-50);
-  border-radius: 6px;
-  box-shadow: var(--shadow-border);
 }
-.audio-wrap .label {
+.audio-card .label {
   font-size: 12px;
   font-weight: 500;
-  color: var(--gray-400);
+  color: var(--slate);
   white-space: nowrap;
-  letter-spacing: .3px;
-  text-transform: uppercase;
 }
-.audio-wrap audio {
+.audio-card audio {
   flex: 1;
   min-width: 0;
-  height: 32px;
+  height: 30px;
   border-radius: 4px;
 }
 
-/* 今日焦点 — 一句话 */
-.focus {
-  font-size: 15px;
-  line-height: 1.7;
-  color: var(--gray-600);
-  margin-bottom: 28px;
-  padding: 0 2px;
+/* 今日焦点 */
+.focus-card {
+  background: linear-gradient(135deg, var(--bg-alt) 0%, var(--white) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
 }
-.focus strong { color: var(--black); font-weight: 500; }
-
-/* 分割线 */
-.divider { border: none; border-top: 1px solid var(--gray-100); margin: 24px 0; }
-
-/* 章节标题 */
-.section-title {
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: .3px;
+.focus-card .label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--gray-400);
-  margin-bottom: 16px;
+  color: var(--purple);
+  margin-bottom: 6px;
+}
+.focus-card p {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--navy);
+  line-height: 1.6;
 }
 
-/* TOP 10 列表 */
+/* 白色卡片 */
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+}
+.card-title {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  color: var(--slate-dark);
+  margin-bottom: 14px;
+}
+
+/* TOP 列表 */
 .item-list { list-style: none; }
 .item {
   display: flex;
-  gap: 14px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--gray-100);
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
 }
 .item:last-child { border-bottom: none; }
 .item .rank {
   font-size: 13px;
   font-weight: 500;
-  color: var(--gray-400);
-  min-width: 22px;
+  color: var(--purple-light);
+  min-width: 20px;
   text-align: right;
   line-height: 1.5;
 }
@@ -126,59 +146,61 @@ body {
 .item .name {
   font-size: 15px;
   font-weight: 500;
-  color: var(--black);
-  letter-spacing: -.3px;
+  color: var(--navy);
 }
 .item .desc {
   font-size: 14px;
-  color: var(--gray-600);
+  font-weight: 300;
+  color: var(--slate);
   margin-top: 1px;
   line-height: 1.5;
 }
 .item .opp {
   font-size: 13px;
-  color: var(--blue);
+  font-weight: 400;
+  color: var(--purple);
   margin-top: 3px;
-  font-weight: 500;
 }
 
-/* 市场脉搏 */
-.pulse-tags {
+/* 脉搏 */
+.pulse-wrap {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 5px;
   margin-bottom: 10px;
 }
 .pulse-tag {
-  font-size: 12px;
-  padding: 2px 10px;
-  border-radius: 999px;
+  font-size: 11px;
   font-weight: 500;
-  background: var(--gray-50);
-  color: var(--gray-600);
-  box-shadow: var(--shadow-border);
+  padding: 2px 10px;
+  border-radius: 3px;
+  background: var(--bg-alt);
+  color: var(--slate-dark);
+  border: 1px solid var(--border);
 }
 .pulse-body {
   font-size: 14px;
-  color: var(--gray-600);
+  font-weight: 300;
+  color: var(--slate);
   line-height: 1.7;
 }
 
-/* 深度延伸 */
+/* 深度 */
 .deep-item {
-  padding: 14px 0;
-  border-bottom: 1px solid var(--gray-100);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
 }
 .deep-item:last-child { border-bottom: none; }
 .deep-item h3 {
   font-size: 14px;
   font-weight: 500;
-  color: var(--black);
-  margin-bottom: 3px;
+  color: var(--navy);
+  margin-bottom: 2px;
 }
 .deep-item p, .deep-item li {
   font-size: 14px;
-  color: var(--gray-600);
+  font-weight: 300;
+  color: var(--slate);
   line-height: 1.7;
 }
 .deep-item ul { padding-left: 18px; }
@@ -186,76 +208,78 @@ body {
 
 /* 页脚 */
 .footer {
-  margin-top: 48px;
-  padding: 20px 0 0;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
   text-align: center;
-  border-top: 1px solid var(--gray-100);
 }
 .footer a {
   font-size: 13px;
-  color: var(--gray-400);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-color: var(--gray-100);
+  font-weight: 400;
+  color: var(--purple);
+  text-decoration: none;
 }
-.footer a:hover { color: var(--black); }
+.footer a:hover { color: var(--purple-hover); text-decoration: underline; }
 
 @media (max-width: 480px) {
   .header { padding-top: 36px; }
-  .header .date { font-size: 24px; letter-spacing: -.8px; }
-  .container { padding: 20px 14px 40px; }
-  .item { gap: 10px; }
-  .item .rank { min-width: 18px; font-size: 12px; }
+  .header h1 { font-size: 28px; }
+  .card { padding: 16px 14px; }
+  .focus-card { padding: 16px 14px; }
+  .container { padding: 20px 12px 40px; }
 }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>AI 日报</h1>
-  <div class="date">2026-06-14</div>
+  <div class="eyebrow">AI 日报</div>
+  <h1>2026-06-14</h1>
   <div class="sub">每天早 6 点 · 小关出品</div>
 </div>
 
 <div class="container">
 
-<div class="audio-wrap">
-  <span class="label">🎧 听</span>
+<div class="audio-card">
+  <span class="label">🎧 收听</span>
   <audio controls preload="none">
     <source src="2026-06-14.mp3" type="audio/mpeg">
   </audio>
 </div>
 
-<div class="focus"><strong>Vercel 风格重做，黑白极简。音频播放器改为紧凑条状，不抢眼。</strong></div>
+<div class="focus-card">
+  <div class="label">今日焦点</div>
+  <p>Stripe 风格重做。有质感、有层次、有呼吸感。音频播放器整合成紧凑条，不占地方。</p>
+</div>
 
-<hr class="divider">
-
-<h2 class="section-title">今日必看 TOP 10</h2>
+<div class="card">
+<div class="card-title">今日必看 TOP 10</div>
 <ul class="item-list">
-  <li class="item"><span class="rank">1</span><div class="body"><div class="name">Clawdbot · Rust Agent 框架</div><div class="desc">48 万 Star，模块化 Agent 设计</div><div class="opp">→ 企业级私有 Agent 基础设施</div></div></li>
-  <li class="item"><span class="rank">2</span><div class="body"><div class="name">GitHub Agent HQ · Codex 集成</div><div class="desc">OpenAI 联合发布，首周 50 万下载</div><div class="opp">→ 自动化 CI/CD 和代码审查</div></div></li>
-  <li class="item"><span class="rank">3</span><div class="body"><div class="name">MiniCPM-o 4.5 · 全双工多模态</div><div class="desc">面壁智能，单卡可跑，开源首个</div><div class="opp">→ 私有语音助手首选</div></div></li>
-  <li class="item"><span class="rank">4</span><div class="body"><div class="name">DeepSeek R2 · 推理增强版</div><div class="desc">国产大模型多步推理新突破</div><div class="opp">→ API 价格仅为 GPT-4o 1/8</div></div></li>
-  <li class="item"><span class="rank">5</span><div class="body"><div class="name">OpenMemory · 开源记忆层</div><div class="desc">轻量级 Agent 记忆系统</div><div class="opp">→ 对比 MemOS 找最优方案</div></div></li>
+  <li class="item"><span class="rank">1</span><div class="body"><div class="name">Clawdbot · Rust Agent 框架</div><div class="desc">48 万 Star，模块化 Agent 架构，增长最快的项目</div><div class="opp">→ 企业级私有 Agent 首选</div></div></li>
+  <li class="item"><span class="rank">2</span><div class="body"><div class="name">GitHub Agent HQ · Codex 集成</div><div class="desc">OpenAI 联合发布，首周 50 万下载，原生 MCP 支持</div><div class="opp">→ 自动化 CI/CD 和代码审查</div></div></li>
+  <li class="item"><span class="rank">3</span><div class="body"><div class="name">MiniCPM-o 4.5 · 全双工多模态</div><div class="desc">面壁智能出品，首个开源全双工多模态，单卡可跑</div><div class="opp">→ 私有语音助手的最佳开源候选</div></div></li>
+  <li class="item"><span class="rank">4</span><div class="body"><div class="name">DeepSeek R2 · 推理增强版</div><div class="desc">国产大模型多步推理新突破，API 价格仅 GPT-4o 的 1/8</div><div class="opp">→ 批量数据处理首选方案</div></div></li>
+  <li class="item"><span class="rank">5</span><div class="body"><div class="name">OpenMemory · 开源 Agent 记忆层</div><div class="desc">轻量级记忆系统，OSI 许可，可替代 MemOS</div><div class="opp">→ 对比测试找最优记忆方案</div></div></li>
 </ul>
+</div>
 
-<hr class="divider">
-
-<h2 class="section-title">市场脉搏</h2>
-<div class="pulse-tags">
+<div class="card">
+<div class="card-title">市场脉搏</div>
+<div class="pulse-wrap">
   <span class="pulse-tag">模型发布</span><span class="pulse-tag">开源趋势</span><span class="pulse-tag">大公司</span>
   <span class="pulse-tag">Agent</span><span class="pulse-tag">开发工具</span><span class="pulse-tag">成本变化</span>
 </div>
-<div class="pulse-body">YC 最新 194 家创业公司 60% 是 AI，Agent 供应链爆发。国产模型百万上下文成标配，推理 API 价格同比降 40%。多家公司在为 Agent 造基础设施——电话、支付、保险，Agent 成了新客户。</div>
+<div class="pulse-body">YC 最新 194 家创业公司 60% 是 AI，Agent 供应链爆发。国产模型百万上下文成标配，推理 API 价格同比降 40%。多家公司在为 Agent 造基础设施——电话、支付、保险——Agent 成了一种新客户。</div>
+</div>
 
-<hr class="divider">
-
-<h2 class="section-title">深度延伸</h2>
-<div class="deep-item"><h3>📄 公众号 · 中国 AI 2026 趋势</h3><p>国内 AI 企业超 6000 家，Agent ROI 回收期缩至 3 个月。国产开源大模型全球下载突破 100 亿次。</p></div>
-<div class="deep-item"><h3>💰 成本 / 增长 Hack</h3><ul><li>国产模型 API 价格仅为 GPT-4o 八分之一，批量处理首选 DeepSeek / Qwen</li><li>Agent 供应链创业：给 Agent 卖铲子比造 Agent 利润更高</li></ul></div>
+<div class="card">
+<div class="card-title">深度延伸</div>
+<div class="deep-item"><h3>📄 公众号 · 中国 AI 2026 趋势</h3><p>国内 AI 企业超 6000 家，Agent ROI 回收期缩至 3 个月，国产开源大模型全球下载突破 100 亿次。</p></div>
+<div class="deep-item"><h3>💰 成本 / 增长 Hack</h3><ul><li>国产模型 API 价格仅为 GPT-4o 八分之一，批量处理首选 DeepSeek 或 Qwen</li><li>给 Agent 卖水和铲子比造 Agent 更赚钱——YC 正押注这个方向</li></ul></div>
+</div>
 
 <div class="footer">
-  <a href="https://daily.guancn.me">查看历史 →</a>
+  <a href="https://daily.guancn.me">查看全部历史 →</a>
 </div>
 
 </div>
