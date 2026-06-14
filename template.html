@@ -4,125 +4,127 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI日报 · ___DATE___</title>
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
+  --black: #000000;
+  --gray-bg: #f5f5f7;
+  --text: #1d1d1f;
+  --text-secondary: rgba(0,0,0,.72);
+  --text-tertiary: rgba(0,0,0,.48);
+  --blue: #0071e3;
+  --blue-dark: #0066cc;
   --white: #ffffff;
-  --navy: #061b31;
-  --slate: #64748d;
-  --slate-dark: #273951;
-  --purple: #533afd;
-  --purple-hover: #4434d4;
-  --purple-light: #b9b9f9;
-  --border: #e5edf5;
-  --green: #15be53;
-  --green-bg: rgba(21,190,83,.12);
-  --shadow: rgba(50,50,93,.12) 0px 6px 18px -8px, rgba(0,0,0,.06) 0px 3px 8px -4px;
-  --radius: 6px;
-  --bg-alt: #f8faff;
+  --card-shadow: rgba(0,0,0,.12) 0px 2px 12px;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
-  font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
-  background: var(--white);
-  color: var(--slate);
-  line-height: 1.6;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--gray-bg);
+  color: var(--text);
+  line-height: 1.47;
   -webkit-font-smoothing: antialiased;
+  letter-spacing: -.01em;
 }
 
-.header {
-  max-width: 680px;
-  margin: 0 auto;
-  padding: 52px 24px 0;
+/* 深色顶部 */
+.dark-section {
+  background: var(--black);
+  color: var(--white);
   text-align: center;
+  padding: 80px 24px 56px;
 }
-.header .eyebrow {
+.dark-section .eyebrow {
   font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 2px;
+  font-weight: 400;
+  letter-spacing: .5em;
   text-transform: uppercase;
-  color: var(--purple);
+  color: rgba(255,255,255,.6);
+  margin-bottom: 8px;
 }
-.header h1 {
-  font-size: 36px;
-  font-weight: 300;
-  letter-spacing: -.6px;
-  color: var(--navy);
-  margin-top: 2px;
+.dark-section h1 {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.07;
+  letter-spacing: -.015em;
 }
-.header .sub {
-  font-size: 15px;
-  font-weight: 300;
-  color: var(--slate);
-  margin-top: 4px;
+.dark-section .sub {
+  font-size: 17px;
+  font-weight: 400;
+  color: rgba(255,255,255,.6);
+  margin-top: 8px;
+  letter-spacing: -.01em;
 }
 
-.container { max-width: 600px; margin: 0 auto; padding: 28px 20px 60px; }
+/* 核心容器 */
+.container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
 
-/* 音频播放器 — 紧凑条 */
-.audio-card {
-  background: var(--bg-alt);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 8px 14px;
+/* 音频条 — 极简灰 */
+.audio-bar {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 8px 16px;
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 24px;
+  margin: -28px auto 20px;
+  max-width: 400px;
+  box-shadow: var(--card-shadow);
+  position: relative;
+  z-index: 1;
 }
-.audio-card .label {
+.audio-bar .label {
   font-size: 12px;
   font-weight: 500;
-  color: var(--slate);
+  color: var(--text-tertiary);
   white-space: nowrap;
+  letter-spacing: .02em;
 }
-.audio-card audio {
+.audio-bar audio {
   flex: 1;
   min-width: 0;
-  height: 30px;
-  border-radius: 4px;
+  height: 28px;
 }
 
-/* 今日焦点 */
-.focus-card {
-  background: linear-gradient(135deg, var(--bg-alt) 0%, var(--white) 100%);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px 24px;
-  margin-bottom: 20px;
-  box-shadow: var(--shadow);
+/* 今日焦点 — 大号灰色卡片 */
+.focus {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin: 24px auto;
+  box-shadow: var(--card-shadow);
+  text-align: center;
 }
-.focus-card .label {
+.focus .label {
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: .3em;
   text-transform: uppercase;
-  color: var(--purple);
+  color: var(--blue);
   margin-bottom: 6px;
 }
-.focus-card p {
-  font-size: 16px;
-  font-weight: 300;
-  color: var(--navy);
-  line-height: 1.6;
+.focus p {
+  font-size: 19px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.4;
+  letter-spacing: -.01em;
 }
 
-/* 白色卡片 */
+/* 卡片 */
 .card {
   background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 22px 24px;
+  border-radius: 16px;
+  padding: 24px 28px;
   margin-bottom: 14px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--card-shadow);
 }
 .card-title {
   font-size: 13px;
   font-weight: 600;
-  letter-spacing: .5px;
+  letter-spacing: .08em;
   text-transform: uppercase;
-  color: var(--slate-dark);
-  margin-bottom: 14px;
+  color: var(--text-tertiary);
+  margin-bottom: 16px;
 }
 
 /* TOP 列表 */
@@ -130,14 +132,14 @@ body {
 .item {
   display: flex;
   gap: 12px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border);
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(0,0,0,.06);
 }
 .item:last-child { border-bottom: none; }
 .item .rank {
   font-size: 13px;
   font-weight: 500;
-  color: var(--purple-light);
+  color: var(--text-tertiary);
   min-width: 20px;
   text-align: right;
   line-height: 1.5;
@@ -145,94 +147,112 @@ body {
 .item .body { flex: 1; min-width: 0; }
 .item .name {
   font-size: 15px;
-  font-weight: 500;
-  color: var(--navy);
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -.01em;
 }
 .item .desc {
   font-size: 14px;
-  font-weight: 300;
-  color: var(--slate);
+  font-weight: 400;
+  color: var(--text-secondary);
   margin-top: 1px;
   line-height: 1.5;
 }
 .item .opp {
   font-size: 13px;
   font-weight: 400;
-  color: var(--purple);
+  color: var(--blue);
   margin-top: 3px;
 }
+.item .opp:hover { text-decoration: underline; cursor: default; }
 
 /* 脉搏 */
 .pulse-wrap {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 6px;
   margin-bottom: 10px;
 }
 .pulse-tag {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
-  padding: 2px 10px;
-  border-radius: 3px;
-  background: var(--bg-alt);
-  color: var(--slate-dark);
-  border: 1px solid var(--border);
+  padding: 3px 12px;
+  border-radius: 980px;
+  background: var(--gray-bg);
+  color: var(--text-secondary);
+  letter-spacing: -.01em;
 }
 .pulse-body {
   font-size: 14px;
-  font-weight: 300;
-  color: var(--slate);
-  line-height: 1.7;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
 }
 
 /* 深度 */
 .deep-item {
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border);
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(0,0,0,.06);
 }
 .deep-item:last-child { border-bottom: none; }
 .deep-item h3 {
   font-size: 14px;
-  font-weight: 500;
-  color: var(--navy);
+  font-weight: 600;
+  color: var(--text);
   margin-bottom: 2px;
+  letter-spacing: -.01em;
 }
 .deep-item p, .deep-item li {
   font-size: 14px;
-  font-weight: 300;
-  color: var(--slate);
-  line-height: 1.7;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
 }
 .deep-item ul { padding-left: 18px; }
 .deep-item li { margin: 2px 0; }
 
+/* 链接 */
+.link-pill {
+  display: inline-block;
+  color: var(--blue-dark);
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+  border: 1px solid var(--blue-dark);
+  border-radius: 980px;
+  padding: 4px 16px;
+  transition: all .2s;
+}
+.link-pill:hover {
+  background: var(--blue-dark);
+  color: var(--white);
+}
+
 /* 页脚 */
 .footer {
-  margin-top: 40px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
   text-align: center;
+  padding: 32px 0 48px;
 }
 .footer a {
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--purple);
+  color: var(--blue-dark);
+  font-size: 14px;
   text-decoration: none;
 }
-.footer a:hover { color: var(--purple-hover); text-decoration: underline; }
+.footer a:hover { text-decoration: underline; }
 
 @media (max-width: 480px) {
-  .header { padding-top: 36px; }
-  .header h1 { font-size: 28px; }
-  .card { padding: 16px 14px; }
-  .focus-card { padding: 16px 14px; }
-  .container { padding: 20px 12px 40px; }
+  .dark-section { padding: 56px 20px 40px; }
+  .dark-section h1 { font-size: 32px; }
+  .focus { padding: 20px 16px; }
+  .focus p { font-size: 17px; }
+  .card { padding: 18px 16px; border-radius: 14px; }
+  .audio-bar { margin-left: 12px; margin-right: 12px; }
 }
 </style>
 </head>
 <body>
 
-<div class="header">
+<div class="dark-section">
   <div class="eyebrow">AI 日报</div>
   <h1>___DATE___</h1>
   <div class="sub">每天早 6 点 · 小关出品</div>
@@ -240,14 +260,14 @@ body {
 
 <div class="container">
 
-<div class="audio-card">
+<div class="audio-bar">
   <span class="label">🎧 收听</span>
-  <audio controls preload="none">
+  <audio controls preload="none" style="height:28px">
     <source src="___DATE___.mp3" type="audio/mpeg">
   </audio>
 </div>
 
-<div class="focus-card">
+<div class="focus">
   <div class="label">今日焦点</div>
   <p>___SUMMARY___</p>
 </div>
