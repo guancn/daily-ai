@@ -4,114 +4,105 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI日报 · ___DATE___</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --warm-bg: #f6f5f4;
-  --white: #ffffff;
-  --text: rgba(0,0,0,.92);
-  --text-secondary: #615d59;
-  --text-muted: #a39e98;
-  --blue: #0075de;
-  --border: rgba(0,0,0,.08);
-  --radius: 12px;
-  --shadow: rgba(0,0,0,.03) 0px 2px 8px, rgba(0,0,0,.02) 0px 1px 3px;
+  --bg: #ffffff;
+  --black: #171717;
+  --gray-600: #4d4d4d;
+  --gray-400: #808080;
+  --gray-100: #ebebeb;
+  --gray-50: #fafafa;
+  --blue: #0072f5;
+  --shadow-border: rgba(0,0,0,.08) 0px 0px 0px 1px;
+  --shadow-card: rgba(0,0,0,.08) 0px 0px 0px 1px, rgba(0,0,0,.04) 0px 2px 2px, #fafafa 0px 0px 0px 1px;
+  --radius: 8px;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background: var(--warm-bg);
-  color: var(--text);
+  font-family: 'Geist', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--black);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
-/* 顶栏 */
 .header {
-  max-width: 700px;
+  max-width: 680px;
   margin: 0 auto;
-  padding: 48px 24px 0;
+  padding: 56px 24px 0;
   text-align: center;
 }
 .header h1 {
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 2px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--gray-400);
 }
 .header .date {
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -1.28px;
   margin-top: 4px;
-  letter-spacing: -.4px;
+  color: var(--black);
 }
 .header .sub {
   font-size: 14px;
-  color: var(--text-secondary);
-  margin-top: 4px;
+  color: var(--gray-600);
+  margin-top: 6px;
+  font-weight: 400;
 }
 
-/* 核心容器 */
-.container {
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 24px 20px 60px;
-}
+.container { max-width: 620px; margin: 0 auto; padding: 28px 20px 60px; }
 
-/* 卡片 */
-.card {
-  background: var(--white);
-  border-radius: var(--radius);
-  padding: 24px 28px;
-  margin-bottom: 16px;
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
-}
-
-/* 今日结论 */
-.summary {
-  font-size: 15px;
-  line-height: 1.7;
-  color: var(--text-secondary);
-}
-.summary strong {
-  color: var(--text);
-  font-weight: 600;
-}
-
-/* 音频播放器 — 紧凑、不抢眼 */
+/* 音频播放器 — 极简 */
 .audio-wrap {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 16px;
-  background: var(--warm-bg);
-  border-radius: 8px;
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-bottom: 24px;
+  padding: 8px 12px;
+  background: var(--gray-50);
+  border-radius: 6px;
+  box-shadow: var(--shadow-border);
+}
+.audio-wrap .label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gray-400);
+  white-space: nowrap;
+  letter-spacing: .3px;
+  text-transform: uppercase;
 }
 .audio-wrap audio {
   flex: 1;
   min-width: 0;
-  height: 36px;
-  border-radius: 6px;
+  height: 32px;
+  border-radius: 4px;
 }
-.audio-wrap .label {
-  white-space: nowrap;
-  font-size: 12px;
-  color: var(--text-muted);
+
+/* 今日焦点 — 一句话 */
+.focus {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--gray-600);
+  margin-bottom: 28px;
+  padding: 0 2px;
 }
+.focus strong { color: var(--black); font-weight: 500; }
+
+/* 分割线 */
+.divider { border: none; border-top: 1px solid var(--gray-100); margin: 24px 0; }
 
 /* 章节标题 */
 .section-title {
-  font-size: 17px;
-  font-weight: 600;
-  color: var(--text);
-  margin: 28px 0 12px;
-  padding: 0 4px;
-  letter-spacing: -.2px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  margin-bottom: 16px;
 }
 
 /* TOP 10 列表 */
@@ -120,112 +111,101 @@ body {
   display: flex;
   gap: 14px;
   padding: 14px 0;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--gray-100);
 }
 .item:last-child { border-bottom: none; }
 .item .rank {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-muted);
-  min-width: 24px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray-400);
+  min-width: 22px;
   text-align: right;
   line-height: 1.5;
 }
 .item .body { flex: 1; min-width: 0; }
 .item .name {
   font-size: 15px;
-  font-weight: 600;
-  color: var(--text);
-  line-height: 1.4;
+  font-weight: 500;
+  color: var(--black);
+  letter-spacing: -.3px;
 }
 .item .desc {
   font-size: 14px;
-  color: var(--text-secondary);
-  margin-top: 2px;
+  color: var(--gray-600);
+  margin-top: 1px;
   line-height: 1.5;
 }
 .item .opp {
   font-size: 13px;
   color: var(--blue);
-  margin-top: 4px;
+  margin-top: 3px;
   font-weight: 500;
 }
 
 /* 市场脉搏 */
-.pulse-wrap {
+.pulse-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
   margin-bottom: 10px;
 }
 .pulse-tag {
-  display: inline-block;
   font-size: 12px;
   padding: 2px 10px;
   border-radius: 999px;
   font-weight: 500;
-  background: #f0eeed;
-  color: var(--text-secondary);
+  background: var(--gray-50);
+  color: var(--gray-600);
+  box-shadow: var(--shadow-border);
 }
-.pulse-text {
+.pulse-body {
   font-size: 14px;
-  color: var(--text-secondary);
+  color: var(--gray-600);
   line-height: 1.7;
 }
 
 /* 深度延伸 */
 .deep-item {
   padding: 14px 0;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--gray-100);
 }
 .deep-item:last-child { border-bottom: none; }
 .deep-item h3 {
   font-size: 14px;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 4px;
+  font-weight: 500;
+  color: var(--black);
+  margin-bottom: 3px;
 }
 .deep-item p, .deep-item li {
   font-size: 14px;
-  color: var(--text-secondary);
+  color: var(--gray-600);
   line-height: 1.7;
 }
 .deep-item ul { padding-left: 18px; }
-.deep-item li { margin: 3px 0; }
-.deep-item .tag {
-  display: inline-block;
-  font-size: 11px;
-  padding: 1px 7px;
-  border-radius: 4px;
-  background: #f0eeed;
-  color: var(--text-secondary);
-  margin-right: 3px;
-  font-weight: 500;
-}
+.deep-item li { margin: 2px 0; }
 
 /* 页脚 */
 .footer {
-  margin-top: 40px;
-  padding: 20px 0;
+  margin-top: 48px;
+  padding: 20px 0 0;
   text-align: center;
-  font-size: 12px;
-  color: var(--text-muted);
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--gray-100);
 }
 .footer a {
-  color: var(--text-muted);
+  font-size: 13px;
+  color: var(--gray-400);
   text-decoration: underline;
   text-underline-offset: 3px;
+  text-decoration-color: var(--gray-100);
 }
+.footer a:hover { color: var(--black); }
 
 @media (max-width: 480px) {
-  .header { padding-top: 32px; }
-  .header .date { font-size: 22px; }
-  .card { padding: 18px 16px; }
-  .audio-wrap { flex-wrap: wrap; }
-  .container { padding: 16px 12px 40px; }
+  .header { padding-top: 36px; }
+  .header .date { font-size: 24px; letter-spacing: -.8px; }
+  .container { padding: 20px 14px 40px; }
   .item { gap: 10px; }
-  .item .rank { min-width: 20px; font-size: 13px; }
+  .item .rank { min-width: 18px; font-size: 12px; }
 }
 </style>
 </head>
@@ -239,20 +219,21 @@ body {
 
 <div class="container">
 
-<div class="card">
-  <div class="audio-wrap">
-    <span class="label">🎧 听日报</span>
-    <audio controls preload="none">
-      <source src="___DATE___.mp3" type="audio/mpeg">
-    </audio>
-  </div>
-  <div class="summary">___SUMMARY___</div>
+<div class="audio-wrap">
+  <span class="label">🎧 听</span>
+  <audio controls preload="none">
+    <source src="___DATE___.mp3" type="audio/mpeg">
+  </audio>
 </div>
+
+<div class="focus"><strong>___SUMMARY___</strong></div>
+
+<hr class="divider">
 
 ___CONTENT___
 
 <div class="footer">
-  <a href="https://daily.guancn.me">📋 查看历史</a>
+  <a href="https://daily.guancn.me">查看历史 →</a>
 </div>
 
 </div>
