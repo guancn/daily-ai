@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI日报 · 2026-06-15</title>
+<style>
+:root {
+  --bg: #f5f5f7;
+  --white: #ffffff;
+  --black: #000000;
+  --text: #1d1d1f;
+  --text-secondary: rgba(0,0,0,.72);
+  --text-tertiary: rgba(0,0,0,.42);
+  --blue: #0071e3;
+  --blue-active: #0066cc;
+  --border: rgba(0,0,0,.06);
+  --shadow: rgba(0,0,0,.08) 0px 2px 14px;
+  --shadow-hover: rgba(0,0,0,.12) 0px 4px 24px;
+  --radius-card: 14px;
+  --radius-pill: 980px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -.01em;
+}
+
+/* Dark hero */
+.hero {
+  background: var(--black);
+  color: var(--white);
+  text-align: center;
+  padding: 72px 24px 56px;
+}
+.hero .eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .5em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 10px;
+}
+.hero h1 {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.07;
+  letter-spacing: -.015em;
+}
+.hero .sub {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255,255,255,.5);
+  margin-top: 8px;
+  letter-spacing: -.01em;
+}
+
+/* Container */
+.container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+
+/* Audio player bar */
+.audio-bar {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -28px auto 24px;
+  max-width: 420px;
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 2;
+}
+.audio-bar .label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+.audio-bar audio { flex: 1; min-width: 0; height: 28px; }
+
+/* Focus card — deference: content leads */
+.focus-card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.focus-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 3px;
+  background: var(--blue);
+  border-radius: 0 2px 2px 0;
+}
+.focus-card .label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+.focus-card p {
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.47;
+  letter-spacing: -.01em;
+}
+
+/* Cards */
+.card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+  transition: box-shadow .25s ease;
+}
+.card:hover { box-shadow: var(--shadow-hover); }
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.card-header h2 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.card-header .badge {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--blue);
+  background: rgba(0,113,227,.08);
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+}
+
+/* Top list */
+.item-list { list-style: none; }
+.item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.item:last-child { border-bottom: none; padding-bottom: 0; }
+.item .rank {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  min-width: 22px;
+  height: 22px;
+  text-align: center;
+  line-height: 22px;
+  background: var(--bg);
+  border-radius: 6px;
+  margin-top: 2px;
+}
+.item .body { flex: 1; min-width: 0; }
+.item .name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -.01em;
+}
+.item .desc {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-top: 1px;
+  line-height: 1.5;
+}
+.item .opp {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--blue);
+  margin-top: 4px;
+  display: inline-block;
+  cursor: default;
+}
+.item .opp:hover { color: var(--blue-active); }
+
+/* Pulse tags */
+.pulse-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.pulse-tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--text-secondary);
+  letter-spacing: -.01em;
+}
+.pulse-tag:first-child {
+  background: rgba(0,113,227,.08);
+  color: var(--blue);
+}
+.pulse-body {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Deep items */
+.deep-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.deep-item:last-child { border-bottom: none; padding-bottom: 0; }
+.deep-item h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 3px;
+  letter-spacing: -.01em;
+}
+.deep-item p, .deep-item li {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.deep-item ul { padding-left: 18px; }
+.deep-item li { margin: 3px 0; }
+
+/* Footer — blue link pill */
+.footer {
+  text-align: center;
+  padding: 36px 0 52px;
+}
+.footer a {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--blue-active);
+  text-decoration: none;
+  padding: 4px 18px;
+  border: 1px solid var(--blue-active);
+  border-radius: var(--radius-pill);
+  transition: all .2s;
+}
+.footer a:hover {
+  background: var(--blue-active);
+  color: var(--white);
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 52px 20px 40px; }
+  .hero h1 { font-size: 32px; }
+  .focus-card { padding: 18px 16px; }
+  .card { padding: 18px 16px; }
+  .audio-bar { margin-left: 12px; margin-right: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">AI 日报</div>
+  <h1>2026-06-15</h1>
+  <div class="sub">每天早 6 点 · 小关出品</div>
+</div>
+
+<div class="container">
+
+<div class="audio-bar">
+  <span class="label">收听</span>
+  <audio controls preload="none" style="height:28px">
+    <source src="2026-06-15.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<div class="focus-card">
+  <div class="label">今日焦点</div>
+  <p>Anthropic 计费改革今天正式生效——Agent SDK、claude -p、GitHub Actions 全部迁入独立计费池。与此同时 Fable 5 遭美国政府出口管制限制，6 月 12 日起非美国用户无法访问。AI Coding 工具赛道七雄争霸，OpenAI Codex 周活破 400 万，MCP 协议迎来史上最大更新。</p>
+</div>
+
+<div class="card">
+<div class="card-header">
+  <h2>今日必看</h2>
+  <span class="badge">10 条</span>
+</div>
+<ul class="item-list">
+  <li class="item"><span class="rank">1</span><div class="body"><div class="name">Anthropic 计费改革今日生效 · Agent SDK 独立池</div><div class="desc">今天起，claude -p、Code GitHub Actions、第三方 Agent（OpenClaw、Conductor 等）全部迁入独立月度 Credit 池。Pro $20 含 $20 SDK 信用，Max 5x/$100 含 $100，超量按 API 正价计费。交互式 Claude Code 不受影响。</div><div class="opp">如果你跑 CI/CD 流水线，今天需要做计费检查</div></div></li>
+  <li class="item"><span class="rank">2</span><div class="body"><div class="name">Claude Fable 5 被美国出口管制限制</div><div class="desc">6 月 9 日发布的 Mythos 级模型 Fable 5，仅三天后即因 US gov 出口管制指令在非美国地区被禁用。官方称其能力超越 Opus 4.8 超 10%，百万 token 上下文，API $10/$50 每百万 token。这是首个因"过于强大"而被限制的商用模型。</div><div class="opp">非美国用户需用 Opus 4.8 替代</div></div></li>
+  <li class="item"><span class="rank">3</span><div class="body"><div class="name">OpenAI Codex 进入 ChatGPT 移动端</div><div class="desc">Codex 正式集成到 iOS/Android 的 ChatGPT App，周活用户突破 400 万。支持远程连接桌面环境，实时查看终端输出、diff、截图、测试结果。同时宣布未来数周 Codex 核心功能并入 ChatGPT 全端，6 款行业插件同步上线。</div><div class="opp">手机也能接 Codex 了，随时审核代码任务</div></div></li>
+  <li class="item"><span class="rank">4</span><div class="body"><div class="name">MCP 规格 2026-07-28 RC · 六项破坏性变更</div><div class="desc">MCP 协议史上最大修订：Session 概念被彻底移除，协议层改为无状态；新增两个必选 HTTP 头 Mcp-Method 和 Mcp-Name；OAuth 2.1 授权强化。所有生产 MCP 服务器需在 7 月 28 日前完成迁移。</div><div class="opp">如果你跑 MCP 服务端，现在就要开始迁移</div></div></li>
+  <li class="item"><span class="rank">5</span><div class="body"><div class="name">Hermes Agent Desktop 发布 · v2026.6.5</div><div class="desc">Nous Research 发布 Hermes 桌面端，原生支持 macOS/Linux/Windows。一键安装、内建更新、拖拽聊天文件、模型切换器、中文界面、远程网关登录。Hermes 目前在 GitHub 上 193K stars，持续高速增长中。</div><div class="opp">爸爸你已经在用 Hermes 了，桌面端可以试试</div></div></li>
+  <li class="item"><span class="rank">6</span><div class="body"><div class="name">ECC · 统一 Agent 技能层开源</div><div class="desc">GitHub 热门项目（3 天 trending），为 Claude Code、Cursor、Codex、OpenCode、Gemini、Zed、Copilot 提供统一技能管理层。内置 63 个专用 Agent、251 个技能、1282 项安全测试。MIT 许可，跨 Agent 迁移成本降为零。</div><div class="opp">统一所有编码 Agent 的技能配置，省心</div></div></li>
+  <li class="item"><span class="rank">7</span><div class="body"><div class="name">Oh My OpenAgent (OMO) · 58K Stars</div><div class="desc">OpenCode 生态头部插件，提供 Sisyphus 编排引擎、10+ 专业 Agent、多模型路由、团队模式、54+ 生命周期钩子。OpenCode 已更新至 v1.17.0，新增 Cohere North 模型、Snowflake Cortex 提供商、背景 Agent 推送更新。</div><div class="opp">OpenCode + OMO 组合是 Agent 开发好搭档</div></div></li>
+  <li class="item"><span class="rank">8</span><div class="body"><div class="name">Headroom · 代理 Token 压缩方案</div><div class="desc">应对 AI Agent token 成本痛点——一次 Claude Code 代码审查可能烧掉 50K token。Headroom 提供 SmartCrusher (JSON)、CodeCompressor (AST)、Kompress-base (文本) 三种算法，支持零代码代理模式接入，还带 MCP 服务端。</div><div class="opp">省钱利器，尤其适合高频 CI 流水线</div></div></li>
+  <li class="item"><span class="rank">9</span><div class="body"><div class="name">Kimi K2.7-Code · 开源编码模型</div><div class="desc">月之暗面发布 Kimi K2.7-Code 开源模型，主打更好的 token 效率。在 Hugging Face 上线当日即登顶 HN 首页。国产编码模型持续逼近闭源前沿，Kimi 产品 ARR 已破 1 亿美元。</div><div class="opp">Token 效率是关键，值得跑测试对比</div></div></li>
+  <li class="item"><span class="rank">10</span><div class="body"><div class="name">Product Hunt 6月热品 · Minimi + Browse.sh</div><div class="desc">Minimi（Claude 环境记忆系统）和 Browse.sh（让 Agent 具备浏览器自动化肌肉记忆）成为本月 PH AI 赛道最热产品。Bond（AI 待办事项自动执行）也不容错过。</div><div class="opp">值得体验的 AI 产品，帮 Agent 更好"记住"和"操作"</div></div></li>
+</ul>
+</div>
+
+<div class="card">
+<div class="card-header">
+  <h2>市场脉搏</h2>
+</div>
+<div class="pulse-wrap">
+  <span class="pulse-tag">模型发布</span>
+  <span class="pulse-tag">计费变革</span>
+  <span class="pulse-tag">出口管制</span>
+  <span class="pulse-tag">Agent框架</span>
+  <span class="pulse-tag">开源工具</span>
+  <span class="pulse-tag">MCP协议</span>
+</div>
+<div class="pulse-body">AI Coding 工具进入"七雄争霸"阶段——Claude Code、Codex、Cursor、Kiro、Copilot、Windsurf (Devin Desktop)、Antigravity 各具优势。Anthropic 今天开始实施 Agent SDK 独立计费，开发者需要重新评估工作流成本。MCP 协议的 Session 废除标志着协议进入"无状态时代"，7 月 28 日前所有生产服务器必须完成迁移。与此同时，Google 投入 1800 亿美元布局 AI 基建，Alphabet 募资 800 亿，资本军备赛继续升温。</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+  <h2>深度延伸</h2>
+</div>
+<div class="deep-item"><h3>Anthropic 估值逼近万亿 · 开发者计费何去何从</h3><p>Anthropic 最新估值 9650 亿美元，年化收入从 2 月的 140 亿飙升至约 470 亿。Claude Code 贡献年化 63 亿美元（AI 编程 Agent 市场 54% 份额）。但今天生效的计费改革可能抑制第三方 Agent 生态——开发者的 CI/CD 成本正在从"固定订阅费"转向"按量计费"。</p></div>
+<div class="deep-item"><h3>Fable 5 出口管制 · "能力越强越危险"成真</h3><p>Anthropic 在 6 月 5 日曾公开呼吁全球 AI 实验室放缓研发——理由是递归自我改进风险上升，预估 2028 年有 60% 概率实现 AI 自进化。Fable 5 的出口管制限制可能是此担忧的第一次政策落地。这给模型部署策略增加了新的不确定性维度。</p></div>
+<div class="deep-item"><h3>增长 Hack</h3><ul><li>Headroom 代理压缩：高频使用 Codex/Claude Code 的 CI 流水线可以省 50%+ token</li><li>ECC 统一技能层：跨 Agent 迁移技能配置，不用为每个工具重写 CLAUDE.md</li><li>Minimi + Browse.sh：给 Agent 装"记忆"和"肌肉记忆"，大幅提升自动化可靠度</li></ul></div>
+</div>
+
+<div class="footer">
+  <a href="https://daily.guancn.me">查看全部历史</a>
+</div>
+
+</div>
+
+</body>
+</html>
