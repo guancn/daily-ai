@@ -3,378 +3,333 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI日报 - 2026-06-14</title>
+<title>AI日报 · 2026-06-14</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0f0f1a;
-    --card: #1a1a2e;
-    --card-hover: #222240;
-    --accent: #6c5ce7;
-    --accent2: #00cec9;
-    --accent3: #fd79a8;
-    --gold: #fdcb6e;
-    --text: #e0e0f0;
-    --text-muted: #8888aa;
-    --border: #2a2a45;
-    --radius: 14px;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.8;
-    min-height: 100vh;
-  }
+:root {
+  --warm-bg: #f6f5f4;
+  --white: #ffffff;
+  --text: rgba(0,0,0,.92);
+  --text-secondary: #615d59;
+  --text-muted: #a39e98;
+  --blue: #0075de;
+  --border: rgba(0,0,0,.08);
+  --radius: 12px;
+  --shadow: rgba(0,0,0,.03) 0px 2px 8px, rgba(0,0,0,.02) 0px 1px 3px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--warm-bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
 
-  /* 顶部渐变 */
-  .hero {
-    background: linear-gradient(135deg, #1a1a3e 0%, #0f0f1a 50%, #1a0f2e 100%);
-    padding: 48px 24px 32px;
-    text-align: center;
-    border-bottom: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
-    background: radial-gradient(circle at 30% 50%, rgba(108,92,231,.08) 0%, transparent 50%),
-                radial-gradient(circle at 70% 50%, rgba(0,206,201,.06) 0%, transparent 50%);
-    pointer-events: none;
-  }
-  .hero h1 {
-    font-size: 28px;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    position: relative;
-    letter-spacing: 2px;
-  }
-  .hero .date {
-    color: var(--text-muted);
-    font-size: 14px;
-    margin-top: 6px;
-    position: relative;
-  }
-  .hero .badge {
-    display: inline-block;
-    background: linear-gradient(135deg, var(--accent), #8b5cf6);
-    color: white;
-    font-size: 11px;
-    padding: 3px 12px;
-    border-radius: 20px;
-    margin-top: 10px;
-    position: relative;
-    letter-spacing: 1px;
-  }
+/* 顶栏 */
+.header {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 48px 24px 0;
+  text-align: center;
+}
+.header h1 {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.header .date {
+  font-size: 28px;
+  font-weight: 700;
+  margin-top: 4px;
+  letter-spacing: -.4px;
+}
+.header .sub {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
 
-  /* 朗读按钮 */
-  .tts-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin: 16px 0 8px;
-    position: relative;
-  }
-  .tts-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: linear-gradient(135deg, var(--accent), #8b5cf6);
-    color: white;
-    border: none;
-    padding: 10px 24px;
-    border-radius: 30px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all .2s;
-    font-family: inherit;
-  }
-  .tts-btn:hover { transform: scale(1.05); box-shadow: 0 4px 20px rgba(108,92,231,.3); }
-  .tts-btn.playing { background: linear-gradient(135deg, #e74c3c, #c0392b); }
-  .tts-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
-  .tts-status {
-    font-size: 12px;
-    color: var(--text-muted);
-    min-height: 18px;
-  }
+/* 核心容器 */
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+}
 
-  .container { max-width: 880px; margin: 0 auto; padding: 24px 20px 60px; }
+/* 卡片 */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
 
-  /* 今日结论 */
-  .summary {
-    background: linear-gradient(135deg, rgba(108,92,231,.1), rgba(0,206,201,.05));
-    border: 1px solid rgba(108,92,231,.2);
-    border-radius: var(--radius);
-    padding: 20px 24px;
-    margin-bottom: 28px;
-    font-size: 15px;
-    line-height: 1.7;
-    color: #c8c8e8;
-    border-left: 4px solid var(--accent);
-  }
-  .summary strong { color: var(--accent2); }
-  .summary em { color: var(--gold); font-style: normal; }
+/* 今日结论 */
+.summary {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+.summary strong {
+  color: var(--text);
+  font-weight: 600;
+}
 
-  /* 章节标题 */
-  .section-title {
-    font-size: 18px;
-    margin: 32px 0 16px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .section-title .icon { font-size: 20px; }
+/* 音频播放器 — 紧凑、不抢眼 */
+.audio-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: var(--warm-bg);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+.audio-wrap audio {
+  flex: 1;
+  min-width: 0;
+  height: 36px;
+  border-radius: 6px;
+}
+.audio-wrap .label {
+  white-space: nowrap;
+  font-size: 12px;
+  color: var(--text-muted);
+}
 
-  /* TOP 10 卡片网格 */
-  .rank-grid { display: flex; flex-direction: column; gap: 10px; }
-  .rank-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px 20px;
-    display: grid;
-    grid-template-columns: 36px 1fr auto;
-    gap: 12px;
-    align-items: start;
-    transition: all .2s;
-    cursor: default;
-  }
-  .rank-card:hover {
-    background: var(--card-hover);
-    border-color: var(--accent);
-    transform: translateX(4px);
-  }
-  .rank-card .num {
-    font-size: 18px;
-    font-weight: 800;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-align: center;
-    line-height: 36px;
-  }
-  .rank-card .name {
-    font-size: 15px;
-    font-weight: 600;
-    color: #e8e8ff;
-  }
-  .rank-card .highlight {
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-top: 2px;
-  }
-  .rank-card .opportunity {
-    font-size: 13px;
-    color: var(--gold);
-    text-align: right;
-    max-width: 200px;
-    line-height: 1.5;
-    padding: 4px 0;
-  }
+/* 章节标题 */
+.section-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 28px 0 12px;
+  padding: 0 4px;
+  letter-spacing: -.2px;
+}
 
-  /* 脉搏标签 */
-  .pulse-tag {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 6px;
-    font-size: 12px;
-    margin: 2px 4px 2px 0;
-    font-weight: 500;
-  }
-  .pulse-model { background: rgba(108,92,231,.2); color: #a78bfa; border: 1px solid rgba(108,92,231,.3); }
-  .pulse-open { background: rgba(0,206,201,.12); color: #00cec9; border: 1px solid rgba(0,206,201,.2); }
-  .pulse-company { background: rgba(253,121,168,.12); color: #fd79a8; border: 1px solid rgba(253,121,168,.2); }
-  .pulse-agent { background: rgba(253,203,110,.12); color: #fdcb6e; border: 1px solid rgba(253,203,110,.2); }
-  .pulse-tool { background: rgba(116,185,255,.12); color: #74b9ff; border: 1px solid rgba(116,185,255,.2); }
-  .pulse-price { background: rgba(85,239,196,.12); color: #55efc4; border: 1px solid rgba(85,239,196,.2); }
+/* TOP 10 列表 */
+.item-list { list-style: none; }
+.item {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.item:last-child { border-bottom: none; }
+.item .rank {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  min-width: 24px;
+  text-align: right;
+  line-height: 1.5;
+}
+.item .body { flex: 1; min-width: 0; }
+.item .name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+}
+.item .desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+  line-height: 1.5;
+}
+.item .opp {
+  font-size: 13px;
+  color: var(--blue);
+  margin-top: 4px;
+  font-weight: 500;
+}
 
-  .pulse-section {
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: 18px 20px;
-    border: 1px solid var(--border);
-    margin-bottom: 16px;
-  }
-  .pulse-section p { margin-top: 8px; font-size: 14px; color: var(--text-muted); }
+/* 市场脉搏 */
+.pulse-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.pulse-tag {
+  display: inline-block;
+  font-size: 12px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-weight: 500;
+  background: #f0eeed;
+  color: var(--text-secondary);
+}
+.pulse-text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
 
-  /* 深度延伸 */
-  .deep-card {
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: 18px 20px;
-    border: 1px solid var(--border);
-    margin-bottom: 12px;
-  }
-  .deep-card h3 { font-size: 15px; color: var(--accent2); margin-bottom: 6px; }
-  .deep-card p, .deep-card li { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
-  .deep-card ul { padding-left: 18px; }
-  .deep-card li { margin: 4px 0; }
-  .deep-card .tag {
-    display: inline-block;
-    font-size: 11px;
-    padding: 1px 8px;
-    border-radius: 10px;
-    background: rgba(108,92,231,.15);
-    color: #a78bfa;
-    margin-right: 4px;
-  }
+/* 深度延伸 */
+.deep-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.deep-item:last-child { border-bottom: none; }
+.deep-item h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.deep-item p, .deep-item li {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.deep-item ul { padding-left: 18px; }
+.deep-item li { margin: 3px 0; }
+.deep-item .tag {
+  display: inline-block;
+  font-size: 11px;
+  padding: 1px 7px;
+  border-radius: 4px;
+  background: #f0eeed;
+  color: var(--text-secondary);
+  margin-right: 3px;
+  font-weight: 500;
+}
 
-  /* 页脚 */
-  .footer {
-    margin-top: 48px;
-    padding: 20px;
-    text-align: center;
-    border-top: 1px solid var(--border);
-    font-size: 12px;
-    color: #555577;
-  }
-  .footer a { color: var(--accent); text-decoration: none; }
-  .footer a:hover { color: var(--accent2); text-decoration: underline; }
+/* 页脚 */
+.footer {
+  margin-top: 40px;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+}
+.footer a {
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 
-  /* 响应式 */
-  @media (max-width: 600px) {
-    .rank-card { grid-template-columns: 30px 1fr; }
-    .rank-card .opportunity { grid-column: span 2; text-align: left; max-width: none; }
-    .hero h1 { font-size: 22px; }
-    .container { padding: 16px 14px 40px; }
-  }
+@media (max-width: 480px) {
+  .header { padding-top: 32px; }
+  .header .date { font-size: 22px; }
+  .card { padding: 18px 16px; }
+  .audio-wrap { flex-wrap: wrap; }
+  .container { padding: 16px 12px 40px; }
+  .item { gap: 10px; }
+  .item .rank { min-width: 20px; font-size: 13px; }
+}
 </style>
 </head>
 <body>
 
-<div class="hero">
-  <h1>✦ AI 日报 ✦</h1>
-  <div class="date">2026-06-14 · 星期六</div>
-  <div class="badge">每日早 6 点 · 小关出品</div>
-</div>
-
-<div class="tts-bar">
-  <button class="tts-btn" id="ttsBtn" onclick="toggleTTS()">🔊 朗读全文</button>
-  <div class="tts-status" id="ttsStatus"></div>
-</div>
-
-<div class="audio-bar">
-  <audio id="dailyAudio" controls preload="none" style="width:100%;max-width:400px;height:40px;border-radius:20px;">
-    <source src="2026-06-14.mp3" type="audio/mpeg">
-  </audio>
-  <div style="font-size:11px;color:#555577;margin-top:4px;">🎧 Edge TTS 中文女声 · 约 5 分钟</div>
+<div class="header">
+  <h1>AI 日报</h1>
+  <div class="date">2026-06-14</div>
+  <div class="sub">每天早 6 点 · 小关出品</div>
 </div>
 
 <div class="container">
-<div class="summary"><strong>今日焦点：</strong> 语音朗读功能正式上线，点击下方播放器即可收听今天的 AI 日报。</div>
-<h2>🚀 今日必看 TOP 5</h2>
-<div class="rank-grid">
-  <div class="rank-card"><div class="num">1</div><div><div class="name">Clawdbot · Rust Agent 框架</div><div class="highlight">48万 Star，模块化 Agent 设计</div></div><div class="opportunity">企业级私有 Agent 基础设施</div></div>
-  <div class="rank-card"><div class="num">2</div><div><div class="name">GitHub Agent HQ · Codex 集成</div><div class="highlight">OpenAI 联合发布，首周 50 万下载</div></div><div class="opportunity">自动化 CI/CD 和代码审查</div></div>
-  <div class="rank-card"><div class="num">3</div><div><div class="name">MiniCPM-o 4.5 · 全双工多模态</div><div class="highlight">面壁智能，单卡可跑</div></div><div class="opportunity">私有语音助手首选</div></div>
-  <div class="rank-card"><div class="num">4</div><div><div class="name">DeepSeek R2 · 推理增强版</div><div class="highlight">国产大模型多步推理新突破</div></div><div class="opportunity">私有化推理服务</div></div>
-  <div class="rank-card"><div class="num">5</div><div><div class="name">OpenMemory · 开源 Agent 记忆层</div><div class="highlight">轻量级记忆系统</div></div><div class="opportunity">对比 MemOS 找最优方案</div></div>
+
+<div class="card">
+  <div class="audio-wrap">
+    <span class="label">🎧 听日报</span>
+    <audio controls preload="none">
+      <source src="2026-06-14.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+  <div class="summary">语音朗读正式上线。新设计，新风格，每天早六点自动推送。</div>
 </div>
-<h2>📊 快速市场脉搏</h2>
-<p>YC 最新 194 家创业公司 60% 是 AI，Agent 供应链爆发。国产模型百万上下文成标配，推理 API 价格同比降 40%。</p>
+
+
+<div class="card">
+<h2 class="section-title" style="margin-top:0">🚀 今日必看 TOP 10</h2>
+<ul class="item-list">
+  <li class="item">
+    <span class="rank">1</span>
+    <div class="body">
+      <div class="name">Clawdbot · Rust Agent 框架</div>
+      <div class="desc">48 万 Star，模块化 Agent 架构，企业级私有 Agent 首选</div>
+      <div class="opp">→ 适合搭私有 Agent 基础设施</div>
+    </div>
+  </li>
+  <li class="item">
+    <span class="rank">2</span>
+    <div class="body">
+      <div class="name">GitHub Agent HQ · Codex 集成</div>
+      <div class="desc">OpenAI 联合 GitHub 发布，首周 50 万下载</div>
+      <div class="opp">→ 自动化 CI/CD 和代码审查</div>
+    </div>
+  </li>
+  <li class="item">
+    <span class="rank">3</span>
+    <div class="body">
+      <div class="name">MiniCPM-o 4.5 · 全双工多模态</div>
+      <div class="desc">面壁智能出品，单卡可跑，开源首个全双工多模态模型</div>
+      <div class="opp">→ 私有语音助手的最佳开源候选</div>
+    </div>
+  </li>
+  <li class="item">
+    <span class="rank">4</span>
+    <div class="body">
+      <div class="name">DeepSeek R2 · 推理增强版</div>
+      <div class="desc">国产大模型多步推理新突破，API 价格仅为 GPT-4o 八分之一</div>
+      <div class="opp">→ 批量数据处理首选</div>
+    </div>
+  </li>
+  <li class="item">
+    <span class="rank">5</span>
+    <div class="body">
+      <div class="name">OpenMemory · 开源记忆层</div>
+      <div class="desc">轻量级 Agent 记忆系统，OSI 许可，可直接替代 MemOS</div>
+      <div class="opp">→ 对比测试找最优记忆方案</div>
+    </div>
+  </li>
+</ul>
+</div>
+
+<div class="card">
+<h2 class="section-title" style="margin-top:0">📊 快速市场脉搏</h2>
+<div class="pulse-wrap">
+  <span class="pulse-tag">模型发布</span>
+  <span class="pulse-tag">开源趋势</span>
+  <span class="pulse-tag">大公司</span>
+  <span class="pulse-tag">Agent</span>
+  <span class="pulse-tag">开发工具</span>
+  <span class="pulse-tag">成本变化</span>
+</div>
+<div class="pulse-text">YC 最新 194 家创业公司中 60% 是 AI，Agent 供应链正在爆发。国产模型百万上下文成标配，推理 API 价格同比降 40%。多家创业公司在为 Agent 做基础设施——电话、支付、身份认证、保险，Agent 成了一种新"客户"。</div>
+</div>
+
+<div class="card">
+<h2 class="section-title" style="margin-top:0">🔍 深度延伸</h2>
+<div class="deep-item">
+  <h3>📄 公众号推荐 · 中国 AI 2026 趋势</h3>
+  <p>国内 AI 企业超 6000 家，核心产业规模突破 1.2 万亿元。Agent 市场的 ROI 回收期已缩至 3 个月内，国产开源大模型全球累计下载突破 100 亿次。</p>
+</div>
+<div class="deep-item">
+  <h3>💰 成本 / 增长 Hack</h3>
+  <ul>
+    <li>国产模型 API 价格仅为 GPT-4o 的八分之一，批量数据处理首选 DeepSeek 或 Qwen</li>
+    <li>Agent 供应链创业：给 Agent 卖"水和铲子"比造 Agent 本身更赚钱</li>
+  </ul>
+</div>
+</div>
+
 
 <div class="footer">
-  由 小关 · AI 日报 自动生成 &nbsp;|&nbsp;
-  <a href="https://daily.guancn.me">📋 查看历史</a> &nbsp;|&nbsp;
-  <a href="https://github.com/guancn/daily-ai">GitHub</a>
-</div>
+  <a href="https://daily.guancn.me">📋 查看历史</a>
 </div>
 
-<script>
-let ttsSynth = window.speechSynthesis;
-let ttsPlaying = false;
-let ttsUtterance = null;
-
-function getTextContent() {
-  // 提取主要文本内容
-  const container = document.querySelector('.container');
-  if (!container) return '';
-  // 跳过朗读按钮所在区域
-  const ttsBar = document.querySelector('.tts-bar');
-  const footer = document.querySelector('.footer');
-  let text = container.innerText || container.textContent;
-  // 去掉 TTS 按钮和页脚的文本
-  if (ttsBar) text = text.replace(ttsBar.innerText, '');
-  if (footer) text = text.replace(footer.innerText, '');
-  return text.replace(/\s+/g, ' ').trim();
-}
-
-function toggleTTS() {
-  const btn = document.getElementById('ttsBtn');
-  const status = document.getElementById('ttsStatus');
-
-  if (ttsPlaying) {
-    ttsSynth.cancel();
-    ttsPlaying = false;
-    btn.textContent = '🔊 朗读全文';
-    btn.classList.remove('playing');
-    status.textContent = '已暂停';
-    return;
-  }
-
-  if (!window.speechSynthesis) {
-    status.textContent = '⚠ 您的浏览器不支持语音朗读';
-    return;
-  }
-
-  const text = getTextContent();
-  if (!text) {
-    status.textContent = '⚠ 没有可朗读的内容';
-    return;
-  }
-
-  // 按段落分割，分批朗读（避免长文本被截断）
-  const paragraphs = text.split(/(?<=[。！？.!?])/);
-  let index = 0;
-
-  function speakNext() {
-    if (index >= paragraphs.length) {
-      ttsPlaying = false;
-      btn.textContent = '🔊 朗读全文';
-      btn.classList.remove('playing');
-      status.textContent = '✅ 朗读完毕';
-      return;
-    }
-
-    const p = paragraphs[index].trim();
-    if (p.length < 2) { index++; speakNext(); return; }
-
-    ttsUtterance = new SpeechSynthesisUtterance(p);
-    ttsUtterance.lang = 'zh-CN';
-    ttsUtterance.rate = 1.0;
-    ttsUtterance.pitch = 1.0;
-    ttsUtterance.volume = 1;
-
-    ttsUtterance.onend = () => {
-      index++;
-      status.textContent = '正在朗读 ' + Math.round(index / paragraphs.length * 100) + '%';
-      speakNext();
-    };
-
-    ttsUtterance.onerror = () => {
-      index++;
-      speakNext();
-    };
-
-    ttsSynth.speak(ttsUtterance);
-  }
-
-  ttsPlaying = true;
-  btn.textContent = '⏹ 停止朗读';
-  btn.classList.add('playing');
-  status.textContent = '正在朗读 0%';
-  speakNext();
-}
-</script>
+</div>
 
 </body>
 </html>
