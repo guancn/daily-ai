@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI日报 · 2026-06-16</title>
+<style>
+:root {
+  --bg: #f5f5f7;
+  --white: #ffffff;
+  --black: #000000;
+  --text: #1d1d1f;
+  --text-secondary: rgba(0,0,0,.72);
+  --text-tertiary: rgba(0,0,0,.42);
+  --blue: #0071e3;
+  --blue-active: #0066cc;
+  --border: rgba(0,0,0,.06);
+  --shadow: rgba(0,0,0,.08) 0px 2px 14px;
+  --shadow-hover: rgba(0,0,0,.12) 0px 4px 24px;
+  --radius-card: 14px;
+  --radius-pill: 980px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -.01em;
+}
+.hero {
+  background: var(--black);
+  color: var(--white);
+  text-align: center;
+  padding: 72px 24px 56px;
+}
+.hero .eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .5em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 10px;
+}
+.hero h1 {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.07;
+  letter-spacing: -.015em;
+}
+.hero .sub {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255,255,255,.5);
+  margin-top: 8px;
+  letter-spacing: -.01em;
+}
+.container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+.audio-bar {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -28px auto 24px;
+  max-width: 420px;
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 2;
+}
+.audio-bar .label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+.audio-bar audio { flex: 1; min-width: 0; height: 28px; }
+.focus-card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.focus-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 3px;
+  background: var(--blue);
+  border-radius: 0 2px 2px 0;
+}
+.focus-card .label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+.focus-card p {
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.47;
+  letter-spacing: -.01em;
+}
+.card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+  transition: box-shadow .25s ease;
+}
+.card:hover { box-shadow: var(--shadow-hover); }
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.card-header h2 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.card-header .badge {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--blue);
+  background: rgba(0,113,227,.08);
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+}
+.item-list { list-style: none; }
+.item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.item:last-child { border-bottom: none; padding-bottom: 0; }
+.item .rank {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  min-width: 22px;
+  height: 22px;
+  text-align: center;
+  line-height: 22px;
+  background: var(--bg);
+  border-radius: 6px;
+  margin-top: 2px;
+}
+.item .body { flex: 1; min-width: 0; }
+.item .name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -.01em;
+}
+.item .desc {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-top: 1px;
+  line-height: 1.5;
+}
+.item .opp {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--blue);
+  margin-top: 4px;
+  display: inline-block;
+  cursor: default;
+}
+.item .opp:hover { color: var(--blue-active); }
+.pulse-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.pulse-tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--text-secondary);
+  letter-spacing: -.01em;
+}
+.pulse-tag:first-child {
+  background: rgba(0,113,227,.08);
+  color: var(--blue);
+}
+.pulse-body {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.deep-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.deep-item:last-child { border-bottom: none; padding-bottom: 0; }
+.deep-item h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 3px;
+  letter-spacing: -.01em;
+}
+.deep-item p, .deep-item li {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.deep-item ul { padding-left: 18px; }
+.deep-item li { margin: 3px 0; }
+.footer {
+  text-align: center;
+  padding: 36px 0 52px;
+}
+.footer a {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--blue-active);
+  text-decoration: none;
+  padding: 4px 18px;
+  border: 1px solid var(--blue-active);
+  border-radius: var(--radius-pill);
+  transition: all .2s;
+}
+.footer a:hover {
+  background: var(--blue-active);
+  color: var(--white);
+}
+@media (max-width: 480px) {
+  .hero { padding: 52px 20px 40px; }
+  .hero h1 { font-size: 32px; }
+  .focus-card { padding: 18px 16px; }
+  .card { padding: 18px 16px; }
+  .audio-bar { margin-left: 12px; margin-right: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">AI 日报</div>
+  <h1>2026-06-16</h1>
+  <div class="sub">每天早 6 点 · 小关出品</div>
+</div>
+
+<div class="container">
+
+<div class="audio-bar">
+  <span class="label">收听</span>
+  <audio controls preload="none" style="height:28px">
+    <source src="2026-06-16.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<div class="focus-card">
+  <div class="label">今日焦点</div>
+  <p>MCP 生态突破 2.2 万服务器但 99.5% 无法独立验证，安全成为焦点。OpenCode 以 160K Stars 登顶开源编程 Agent。Claude Code 发布 Safe Mode 解决配置崩溃，Opus 4.8 成为默认模型。Product Hunt 6 月 AI 爆款：能打电话帮你约牙医的 Asmi AI 来了。</p>
+</div>
+
+<!-- TOP 10 -->
+<div class="card">
+  <div class="card-header">
+    <h2>🏆 头条 TOP 10</h2>
+    <span class="badge">2026-06-16</span>
+  </div>
+  <ul class="item-list">
+
+    <li class="item">
+      <span class="rank">1</span>
+      <div class="body">
+        <div class="name">OpenCode 160K Stars · 史上最受欢迎的开源编程 Agent</div>
+        <div class="desc">支持 75+ 模型自由切换（GPT-5.5、DeepSeek-V4、本地 Ollama），MIT 协议全免费。LSP 集成实现 50ms 级代码库理解，按任务分配模型可降本 60-80%。已超越 Claude Code 的 122K Stars，成为开发者首选。</div>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">2</span>
+      <div class="body">
+        <div class="name">Claude Code 6 月更新 · Safe Mode + /cd + Opus 4.8 默认</div>
+        <div class="desc">v2.1.172 发布 Safe Mode 一键禁用所有自定义配置（CLAUDE.md、skills、MCP 等），解决配置损坏启动崩溃的老大难问题。/cd 命令支持目录跳转，/usage 新增按类别查看消耗，Rate Limit 翻倍。Opus 4.8 成为默认模型。</div>
+        <span class="opp">💡 Safe Mode 终于来了，配置炸了不用删 .claude 了</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">3</span>
+      <div class="body">
+        <div class="name">MCP 生态 · 22,561 个服务器，但 99.5% 无法独立验证</div>
+        <div class="desc">MCP Atlas 六月普查显示：22,561 个去重 MCP 服务器，代码/开发工具占 46%，但只有 117 个（0.5%）有独立运行数据。43% 的 MCP 实现存在命令注入漏洞。MCP 2026 路线图聚焦传输可扩展、Agent 通信、企业治理三大方向。</div>
+        <span class="opp">⚠️ MCP 大爆发但安全盲区巨大，接入需谨慎</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">4</span>
+      <div class="body">
+        <div class="name">Product Hunt 6 月 AI 双爆款 · Bond + Asmi AI</div>
+        <div class="desc">Bond（633 票）—— 专为高管打造的 AI 行政主管，自动管理待办、准备会议、识别风险。Asmi AI（438 票）—— 能打电话帮你处理个人事务的 AI，致电牙医、银行、保险，应对 IVR 语音系统和长时间等待，完成后 iMessage 汇报。</div>
+        <span class="opp">🔥 Asmi AI 堪称 2026 最实用的 AI 生活工具之一</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">5</span>
+      <div class="body">
+        <div class="name">Cursor 3.7 发布 · Design Mode 进浏览器 + 自定义工具 SDK</div>
+        <div class="desc">6 月 4-5 日更新：Design Mode 现在浏览器和画布内可用，支持多选元素、语音旁白运行 Agent。Cursor SDK 开放自定义工具（local.customTools），自动审查分类器，支持嵌套子 Agent 无限深度。</div>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">6</span>
+      <div class="body">
+        <div class="name">LingtiStudio · 开源 AI 视频全自动生产流水线</div>
+        <div class="desc">Script → Review → Keyframes → Voice → Clip → Assembly，全链路 Agent 化。支持多模型协同（GPT/Claude/本地），输出可剪辑结构而非简单拼接。5+ 工具切换变成单工具完成，内容创作者的生产力革命。</div>
+        <span class="opp">💡 自媒体人关注：输入文案，自动出片</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">7</span>
+      <div class="body">
+        <div class="name">MCP 2026 路线图 · 从协议标准走向生产级通信层</div>
+        <div class="desc">三大优先级：无状态 Streamable HTTP 实现负载均衡、Session Migration 解决服务重启断连、MCP Server Cards 实现能力自动发现。新增 Working Group 驱动 SEP 提案机制，下个规格暂定 6 月发布。</div>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">8</span>
+      <div class="body">
+        <div class="name">Claude Fable 5 正式上架 · 100 万上下文 / 128K 输出</div>
+        <div class="desc">6 月 9 日公开发布，Mythos-class 模型层，基准超 Opus 4.8 十个百分点。定价 $10/$50 每百万 token，仅支持 adaptive thinking。Enterprise 客户优先，Pro/Max 用户可用。Fable 5 也是 Claude Code 可选模型之一。</div>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">9</span>
+      <div class="body">
+        <div class="name">2026 年免费 AI 工具大集合 · 零成本生产力全家桶</div>
+        <div class="desc">写作：GPT-5.5 Instant 免费版。编程：Trae（字节出品，原生中文支持）。PPT：博思 AIPPT 一句话生成。设计：美图 Wink + 通义千问组合。视频：剪映 AI 免费版无功能阉割。声音：Suno AI 免费创作音乐。</div>
+        <span class="opp">💡 打工人刚需：零成本 AI 工具栈，收藏</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">10</span>
+      <div class="body">
+        <div class="name">Codex vs Claude Code 六月横评 · 各有胜负怎么选</div>
+        <div class="desc">SWE-bench Pro：Claude Opus 4.8 69.2% vs GPT-5.3-Codex 56.8%。Terminal-Bench：GPT-5.5 82.7% 领先。Codex 支持 8 个子 Agent 并行，Claude 1M 上下文和 Agent Teams 更强。Token 消耗上 Claude 用 3-4 倍但输出更扎实。</div>
+      </div>
+    </li>
+
+  </ul>
+</div>
+
+<!-- 市场脉搏 -->
+<div class="card">
+  <div class="card-header">
+    <h2>📊 市场脉搏</h2>
+    <span class="badge">趋势</span>
+  </div>
+  <div class="pulse-wrap">
+    <span class="pulse-tag">🔥 MCP 生态爆发</span>
+    <span class="pulse-tag">💪 开源编码 Agent 三足鼎立</span>
+    <span class="pulse-tag">📱 AI 生活工具崛起</span>
+    <span class="pulse-tag">🔒 安全焦虑加剧</span>
+    <span class="pulse-tag">💰 Model 军备竞赛</span>
+  </div>
+  <div class="pulse-body">
+    <p><strong>MCP 增长狂飙但安全滞后</strong> · 22,561 个服务器、9700 万月 SDK 下载量、六大 AI 平台原生支持，但 43% 存在命令注入漏洞、99.5% 无独立验证数据。安全基础设施远落后于生态规模。</p><br>
+    <p><strong>编程 Agent 三强格局</strong> · OpenCode（开源/多模型/160K⭐）、Claude Code（闭源/Anthropic 专属/最优 Agent 质量）、Codex（OpenAI 生态/8 子 Agent 并行/终端性能最强）。三者互补不存在谁替代谁。</p><br>
+    <p><strong>AI 生活工具从概念到刚需</strong> · Asmi AI 能打电话办事、Bond 做行政助理、Slashspace AI 画布式协作，AI 正在渗透真实生活场景。免费工具全面开花，GPT-5.5、剪映、Trae 等大厂免费策略加速普及。</p>
+  </div>
+</div>
+
+<!-- 深度延伸 -->
+<div class="card">
+  <div class="card-header">
+    <h2>📖 深度延伸</h2>
+    <span class="badge">观点</span>
+  </div>
+  <div class="deep-item">
+    <h3>1. MCP 官方 2026 路线图深度解读</h3>
+    <p>MCP 正从"能用"走向"可靠"。无状态 Streamable HTTP 让传输层可水平扩展、Session Migration 避免服务重启断连、Server Cards 让代理自动发现能力。Working Group 驱动的 SEP 提案机制让社区参与更规范。MCP 正在复制 LSP 的成功路径。</p>
+  </div>
+  <div class="deep-item">
+    <h3>2. 编码 Agent 选型指南：2026 年 6 月版</h3>
+    <p>三句话决策：OpenCode 适合要求模型自由和零月费的开发者；Claude Code 适合需要最可靠 Agent 团队和 1M 上下文的企业；Codex 适合终端优先、需要并行子 Agent 和持久化目标的工作流。三者可以同时用。</p>
+  </div>
+  <div class="deep-item">
+    <h3>3. 2026 年免费 AI 生产力栈推荐</h3>
+    <ul>
+      <li><strong>日常对话/写作</strong>：DeepSeek V4（免费，中文首选）或 GPT-5.5 Instant</li>
+      <li><strong>编程</strong>：OpenCode（免费开源）+ Trae（字节，原生中文）</li>
+      <li><strong>PPT</strong>：博思 AIPPT（免费版足够日常）</li>
+      <li><strong>视频</strong>：剪映 AI（免费版无功能阉割）</li>
+      <li><strong>设计</strong>：即梦 AI（每天 80 张免费）</li>
+      <li><strong>音乐</strong>：Suno AI（免费版每日额度）</li>
+    </ul>
+  </div>
+</div>
+
+<div class="footer">
+  <a href="https://daily.guancn.me">查看全部历史</a>
+</div>
+
+</div>
+
+</body>
+</html>
