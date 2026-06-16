@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI日报 · 2026年6月17日 · 周三</title>
+<style>
+:root {
+  --bg: #f5f5f7;
+  --white: #ffffff;
+  --black: #000000;
+  --text: #1d1d1f;
+  --text-secondary: rgba(0,0,0,.72);
+  --text-tertiary: rgba(0,0,0,.42);
+  --blue: #0071e3;
+  --blue-active: #0066cc;
+  --border: rgba(0,0,0,.06);
+  --shadow: rgba(0,0,0,.08) 0px 2px 14px;
+  --shadow-hover: rgba(0,0,0,.12) 0px 4px 24px;
+  --radius-card: 14px;
+  --radius-pill: 980px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -.01em;
+}
+
+/* Dark hero */
+.hero {
+  background: var(--black);
+  color: var(--white);
+  text-align: center;
+  padding: 72px 24px 56px;
+}
+.hero .eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .5em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 10px;
+}
+.hero h1 {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.07;
+  letter-spacing: -.015em;
+}
+.hero .sub {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255,255,255,.5);
+  margin-top: 8px;
+  letter-spacing: -.01em;
+}
+
+/* Container */
+.container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+
+/* Audio player bar */
+.audio-bar {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -28px auto 24px;
+  max-width: 420px;
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 2;
+}
+.audio-bar .label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+.audio-bar audio { flex: 1; min-width: 0; height: 28px; }
+
+/* Focus card — deference: content leads */
+.focus-card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.focus-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 3px;
+  background: var(--blue);
+  border-radius: 0 2px 2px 0;
+}
+.focus-card .label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+.focus-card p {
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.47;
+  letter-spacing: -.01em;
+}
+
+/* Cards */
+.card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+  transition: box-shadow .25s ease;
+}
+.card:hover { box-shadow: var(--shadow-hover); }
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.card-header h2 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.card-header .badge {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--blue);
+  background: rgba(0,113,227,.08);
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+}
+
+/* Top list */
+.item-list { list-style: none; }
+.item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.item:last-child { border-bottom: none; padding-bottom: 0; }
+.item .rank {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  min-width: 22px;
+  height: 22px;
+  text-align: center;
+  line-height: 22px;
+  background: var(--bg);
+  border-radius: 6px;
+  margin-top: 2px;
+}
+.item .body { flex: 1; min-width: 0; }
+.item .name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -.01em;
+}
+.item .desc {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-top: 1px;
+  line-height: 1.5;
+}
+.item .opp {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--blue);
+  margin-top: 4px;
+  display: inline-block;
+  cursor: default;
+}
+.item .opp:hover { color: var(--blue-active); }
+
+/* Pulse tags */
+.pulse-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.pulse-tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--text-secondary);
+  letter-spacing: -.01em;
+}
+.pulse-tag:first-child {
+  background: rgba(0,113,227,.08);
+  color: var(--blue);
+}
+.pulse-body {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Deep items */
+.deep-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.deep-item:last-child { border-bottom: none; padding-bottom: 0; }
+.deep-item h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 3px;
+  letter-spacing: -.01em;
+}
+.deep-item p, .deep-item li {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.deep-item ul { padding-left: 18px; }
+.deep-item li { margin: 3px 0; }
+
+/* Footer — blue link pill */
+.footer {
+  text-align: center;
+  padding: 36px 0 52px;
+}
+.footer a {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--blue-active);
+  text-decoration: none;
+  padding: 4px 18px;
+  border: 1px solid var(--blue-active);
+  border-radius: var(--radius-pill);
+  transition: all .2s;
+}
+.footer a:hover {
+  background: var(--blue-active);
+  color: var(--white);
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 52px 20px 40px; }
+  .hero h1 { font-size: 32px; }
+  .focus-card { padding: 18px 16px; }
+  .card { padding: 18px 16px; }
+  .audio-bar { margin-left: 12px; margin-right: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">AI 日报</div>
+  <h1>2026年6月17日 · 周三</h1>
+  <div class="sub">每天早 6 点 · 小关出品</div>
+</div>
+
+<div class="container">
+
+<div class="audio-bar">
+  <span class="label">收听</span>
+  <audio controls preload="none" style="height:28px">
+    <source src="2026-06-17.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<div class="focus-card">
+  <div class="label">今日焦点</div>
+  <p>OpenAI Codex从编码工具裂变为通用工作平台、GitHub Copilot全面Agent化、NVIDIA开源技能安全扫描器——AI编程工具的三国杀进入新阶段。</p>
+</div>
+
+<div class="card">
+<div class="card-header"><h2>今日 TOP 10</h2><span class="badge">10 条</span></div>
+<ul class="item-list">
+<li class="item"><span class="rank">1</span><div class="body"><div class="name">Codex 史诗更新：编程工具→通用工作平台</div><div class="desc">OpenAI发布Codex史上最大更新——6个角色专属插件（数据分析/创意/销售/产品/投行/投资）、Sites一键建站部署、Annotations点选修改。每周用户超500万，非开发者增速是开发者3倍。</div><span class="opp">💡 机会：Codex插件生态+@Sites建站将是2026下半年最大的SaaS切入点</span></div></li>
+<li class="item"><span class="rank">2</span><div class="body"><div class="name">GitHub Copilot 2026：从代码补全到Agent开发平台</div><div class="desc">Copilot App技术预览发布，支持多Agent并行工作（Autopilot模式可自主修bug→提PR）；SDK正式GA覆盖6种语言；Sandboxes云端/本地双重隔离。标志着Copilot从"帮你写代码"到"帮你完成整个开发流程"。</div><span class="opp">💡 机会：Copilot SDK可以嵌入自有工具，适合构建内部开发者门户</span></div></li>
+<li class="item"><span class="rank">3</span><div class="body"><div class="name">NVIDIA SkillSpector 开源：Agent技能安全扫描器</div><div class="desc">NVIDIA开源SkillSpector，检测64种漏洞模式覆盖16个安全类别。研究表明42,447个技能中26.1%含漏洞、5.2%有恶意意图。支持Claude Code/Codex CLI/Gemini CLI，两阶段分析（静态+LLM语义），输出0-100风险评分。</div><span class="opp">💡 机会：Hermes Agent技能发布前先用SkillSpector扫一遍</span></div></li>
+<li class="item"><span class="rank">4</span><div class="body"><div class="name">OpenAI秘密递交IPO：AI巨头抢滩华尔街</div><div class="desc">继Anthropic（估值$965B于6月1日递交S-1）之后，OpenAI于6月8日秘密递交IPO，估值约$852B。Q1 2026收入近$60亿，Codex增速超ChatGPT。双巨头IPO或重塑AI资本市场格局。</div><span class="opp">💡 机会：上市后API定价压力增大，开源替代方案价值凸显</span></div></li>
+<li class="item"><span class="rank">5</span><div class="body"><div class="name">LMSYS Arena 6月排名：Claude Opus 4.6 1506分登顶</div><div class="desc">最新Arena Elo排名：Claude Opus 4.6 (Thinking) 以1506分夺冠，Gemini 3.1 Pro 1505分紧咬。GPT-5.1 High 1457分位列第6。DeepSeek-R1-0528以$0.5/$2.15极低成本位列第8，性价比惊人。</div><span class="opp">💡 机会：DeepSeek-R1性价比极高，适合批处理/高并发场景</span></div></li>
+<li class="item"><span class="rank">6</span><div class="body"><div class="name">Hugging Face hf CLI重构：为AI Agent量身打造</div><div class="desc">Hugging Face重写hf CLI，支持JSON输出、并行下载、Agent环境自动检测。Claude Code和Codex是最大用户，仅Claude Code每月贡献约49M请求，Codex紧随其后。Agent化后的hf比手写curl节省6× Token。</div><span class="opp">💡 机会：@general子Agent可直接调用hf CLI动态选模型</span></div></li>
+<li class="item"><span class="rank">7</span><div class="body"><div class="name">Odysseus：45K Stars自托管AI工作空间</div><div class="desc">开源项目Odysseus爆火——Docker一键部署，实现"ChatGPT+Claude+Cursor+邮箱+日历"全部本地化。基于OpenCode构建Agent能力，支持MCP协议、持久记忆、Deep Research。真正做到本地优先、隐私优先。</div><span class="opp">💡 机会：自托管AI工作空间需求爆发，可基于Odysseus做企业定制SaaS</span></div></li>
+<li class="item"><span class="rank">8</span><div class="body"><div class="name">Anthropic Project Glasswing 扩展：用AI防御AI攻击</div><div class="desc">Anthropic联合Apple/Microsoft/Google/NVIDIA/AWS发起Project Glasswing，用未公开的Claude Mythos模型防御AI网络攻击。已成功检出数千个主流OS/浏览器漏洞。CrowdStrike、摩根大通等也加入。</div><span class="opp">💡 机会：AI安全将成为2026下半年最热投资赛道</span></div></li>
+<li class="item"><span class="rank">9</span><div class="body"><div class="name">微信AI生态开测：Agent可调用数百万小程序</div><div class="desc">微信团队发布AI生态内测指引，提供"自动模式"（无需额外开发）和"开发模式"（基于MCP协议封装Skill）两种小程序接入方式。Agent可通过右滑唤出，完成搜索比价下单支付全链条。</div><span class="opp">💡 机会：微信小程序AI化，面向开发者的AI Agent培训/工具服务</span></div></li>
+<li class="item"><span class="rank">10</span><div class="body"><div class="name">karpathy/autoresearch：AI自主科研，700次实验20个改进</div><div class="desc">Karpathy的autoresearch已71K Stars——一个1000行Python的循环：Agent编辑文件→训练5分钟→评估→保留改进。在已调优的nanochat上两晚700次实验找到20个改进，加速11%。</div><span class="opp">💡 机会：AI驱动的自动化实验/调参将是MLOps新范式</span></div></li>
+</ul>
+</div>
+
+<div class="card">
+<div class="card-header"><h2>市场脉搏</h2><span class="badge">7 则短讯</span></div>
+<div class="pulse-wrap">
+<span class="pulse-tag">模型</span><span class="pulse-tag">生态</span><span class="pulse-tag">安全</span><span class="pulse-tag">投融资</span>
+</div>
+<div class="pulse-body">
+· <strong>Google Gemini 3.1 Pro 推理翻倍：</strong>ARC-AGI-2从31.1%飙升到77.1%，编程/代码/多模态全面领先前代。定价与3 Pro持平，极具竞争力。<br>
+· <strong>NVIDIA Nemotron 3 Ultra 开源：</strong>550B参数MoE混合Mamba-Transformer架构，1M上下文，推理速度提升5倍、成本降低30%。美国最大开源权重模型，AI推理成本继续下探。<br>
+· <strong>MCP 2026路线图发布：</strong>无状态协议革命，六大SEP驱动从有状态→无状态，负载均衡不再需要Sticky Session。SDK月下载突破1.1亿次。<br>
+· <strong>Agent Marketplace安全警钟：</strong>大规模研究显示42,447个Agent技能中26.1%含漏洞，5.2%为恶意。SkillSpector开源填补安全空白。<br>
+· <strong>Microsoft Copilot App扩展技术预览：</strong>作为GitHub Copilot的姐妹产品，将AI Agent能力扩展到全Office套件。<br>
+· <strong>NVIDIA Vera CPU 提案：</strong>黄仁勋暗示NVIDIA正在为Windows PC设计CPU系统，进一步拓展AI算力边界。<br>
+· <strong>Anthropic与白宫关系紧张：</strong>因Claude Fable 5拒绝移除安全护栏遭美国政府制裁，列入供应链风险黑名单。
+</div>
+</div>
+
+<div class="card">
+<div class="card-header"><h2>深度延伸</h2><span class="badge">3 篇</span></div>
+<div class="deep-item">
+<h3>🧠 从Codex到Copilot：AI编程工具的三国杀</h3>
+<p>2026年6月，三大AI编程工具同时迎来质变：</p>
+<ul>
+<li><strong>OpenAI Codex</strong>：从"工程师写代码"转向"全角色知识工作平台"——6个角色插件+Sites建站，不写代码也能用</li>
+<li><strong>GitHub Copilot</strong>：从"代码补全"转向"Agent开发平台"——App桌面端多Agent编排+SDK嵌入+安全沙箱</li>
+<li><strong>Claude Code</strong>：稳守编码Agent赛道，Opus 4.8/Dynamic Workflows/Safe Mode持续进化</li>
+</ul>
+<p>三家的分水岭已经清晰：<strong>Codex要抢非技术用户，Copilot要做开发平台，Claude Code专注工程师深度。</strong> 爸爸你的Hermes Agent生态可以借势做差异化——SkillSpector安全扫描+OpenCode开源编码+Odysseus自托管，其实拼的就是MCP/Skills生态的"开发者体验"。</p>
+</div>
+<div class="deep-item">
+<h3>🔒 Agent安全：从"没人管"到"必须管"</h3>
+<p>NVIDIA SkillSpector+大规模安全研究的数据让人警醒：每4个Agent技能就有1个带漏洞。结合Project Glasswing（Anthropic联手Apple/MS/Google防御AI攻击）和MCP 2026的治理成熟度升级，Agent安全正在从"可选"变成"强制"。</p>
+<p><strong>实际建议：</strong></p>
+<ul>
+<li>所有从市场安装的Agent技能，先用SkillSpector扫描</li>
+<li>自建技能遵循最少权限原则，MCP Server只暴露必要的Tools</li>
+<li>关注SEP-2243（MCP头路由）+ SEP-414（Trace Context），生产环境安全可观测必备</li>
+</ul>
+</div>
+<div class="deep-item">
+<h3>🌐 微信AI：超级App的Agent化，中国最大的Agent入口</h3>
+<p>微信AI生态开测可能是2026年最被低估的事件——当微信的数百万小程序都可以被Agent调用，这意味着中国最大的C端Agent入口打开了。两种接入模式（自动模式无需开发、开发模式基于MCP封装Skill）降低了99%的开发门槛。</p>
+<p><strong>战略思考：</strong>如果微信Agent成熟，MCP协议的SKILL封装需求将爆发——这个场景和Hermes Agent的Skills生态天然契合。</p>
+</div>
+</div>
+
+<div class="footer">
+  <a href="https://daily.guancn.me">查看全部历史</a>
+</div>
+
+</div>
+
+</body>
+</html>
