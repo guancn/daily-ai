@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI日报 · 2026-06-18</title>
+<style>
+:root {
+  --bg: #f5f5f7;
+  --white: #ffffff;
+  --black: #000000;
+  --text: #1d1d1f;
+  --text-secondary: rgba(0,0,0,.72);
+  --text-tertiary: rgba(0,0,0,.42);
+  --blue: #0071e3;
+  --blue-active: #0066cc;
+  --border: rgba(0,0,0,.06);
+  --shadow: rgba(0,0,0,.08) 0px 2px 14px;
+  --shadow-hover: rgba(0,0,0,.12) 0px 4px 24px;
+  --radius-card: 14px;
+  --radius-pill: 980px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -.01em;
+}
+
+/* Dark hero */
+.hero {
+  background: var(--black);
+  color: var(--white);
+  text-align: center;
+  padding: 72px 24px 56px;
+}
+.hero .eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .5em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 10px;
+}
+.hero h1 {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.07;
+  letter-spacing: -.015em;
+}
+.hero .sub {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255,255,255,.5);
+  margin-top: 8px;
+  letter-spacing: -.01em;
+}
+
+/* Container */
+.container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+
+/* Audio player bar */
+.audio-bar {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -28px auto 24px;
+  max-width: 420px;
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 2;
+}
+.audio-bar .label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+.audio-bar audio { flex: 1; min-width: 0; height: 28px; }
+
+/* Focus card */
+.focus-card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.focus-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 3px;
+  background: var(--blue);
+  border-radius: 0 2px 2px 0;
+}
+.focus-card .label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+.focus-card p {
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.47;
+  letter-spacing: -.01em;
+}
+
+/* Cards */
+.card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+  transition: box-shadow .25s ease;
+}
+.card:hover { box-shadow: var(--shadow-hover); }
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.card-header h2 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.card-header .badge {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--blue);
+  background: rgba(0,113,227,.08);
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+}
+
+/* Top list */
+.item-list { list-style: none; }
+.item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.item:last-child { border-bottom: none; padding-bottom: 0; }
+.item .rank {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  min-width: 22px;
+  height: 22px;
+  text-align: center;
+  line-height: 22px;
+  background: var(--bg);
+  border-radius: 6px;
+  margin-top: 2px;
+}
+.item .body { flex: 1; min-width: 0; }
+.item .name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -.01em;
+}
+.item .desc {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-top: 1px;
+  line-height: 1.5;
+}
+.item .opp {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--blue);
+  margin-top: 4px;
+  display: inline-block;
+  cursor: default;
+}
+.item .opp:hover { color: var(--blue-active); }
+
+/* Pulse tags */
+.pulse-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.pulse-tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--text-secondary);
+  letter-spacing: -.01em;
+}
+.pulse-tag:first-child {
+  background: rgba(0,113,227,.08);
+  color: var(--blue);
+}
+.pulse-body {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Deep items */
+.deep-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.deep-item:last-child { border-bottom: none; padding-bottom: 0; }
+.deep-item h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 3px;
+  letter-spacing: -.01em;
+}
+.deep-item p, .deep-item li {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.deep-item ul { padding-left: 18px; }
+.deep-item li { margin: 3px 0; }
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 36px 0 52px;
+}
+.footer a {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--blue-active);
+  text-decoration: none;
+  padding: 4px 18px;
+  border: 1px solid var(--blue-active);
+  border-radius: var(--radius-pill);
+  transition: all .2s;
+}
+.footer a:hover {
+  background: var(--blue-active);
+  color: var(--white);
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 52px 20px 40px; }
+  .hero h1 { font-size: 32px; }
+  .focus-card { padding: 18px 16px; }
+  .card { padding: 18px 16px; }
+  .audio-bar { margin-left: 12px; margin-right: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">AI 日报</div>
+  <h1>2026-06-18</h1>
+  <div class="sub">每天早 6 点 · 小关出品</div>
+</div>
+
+<div class="container">
+
+<div class="audio-bar">
+  <span class="label">收听</span>
+  <audio controls preload="none" style="height:28px">
+    <source src="2026-06-18.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<div class="focus-card">
+  <div class="label">今日焦点</div>
+  <p>SpaceX 以 600 亿美元股票收购 Cursor，Agent 工具链大爆发——Matt Pocock Skills 一夜 13 万星、Vercel 发布 Eve 框架、ChatGPT 市占首破 50%</p>
+</div>
+
+<!-- TOP 10 -->
+<div class="card">
+  <div class="card-header">
+    <h2>🔥 今日 TOP 10</h2>
+    <span class="badge">6月18日</span>
+  </div>
+  <ul class="item-list">
+
+    <li class="item">
+      <span class="rank">1</span>
+      <div class="body">
+        <div class="name">🚀 SpaceX 以 $600 亿股票收购 Cursor</div>
+        <div class="desc">SpaceX 在 IPO 几天后，以 600 亿美元股票收购 AI 编程工具 Cursor，创下史上最大 AI 收购案之一。交易旨在帮助 SpaceX 的 AI 部门（基于 xAI 技术）加速追赶主流 AI 实验室。此前 SpaceX 刚完成 IPO，估值一度达 $2.6T 短暂超越 Amazon。</div>
+        <span class="opp">Tag: 收购 · AI编程 · Space X · xAI</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">2</span>
+      <div class="body">
+        <div class="name">🏆 Matt Pocock Skills ⭐133K — TypeScript 大神开源 .claude</div>
+        <div class="desc">Matt Pocock（TypeScript 领域最有影响力的开发者之一）开源了自己的 .claude 目录，项目名 "Skills for Real Engineers"，发布即冲到 13.3 万星。内含他实战打磨的所有 Skills，可以直接复制到你的 Claude Code / Codex 中使用。</div>
+        <span class="opp">Tag: Skills · TypeScript · 开源 · 实战</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">3</span>
+      <div class="body">
+        <div class="name">⚡ Vercel 发布 Eve — 文件系统优先的 Agent 框架</div>
+        <div class="desc">Vercel 推出 "Eve"，一个以文件系统为中心的 Agent 框架。核心能力放在约定目录下（agent/instructions.md、agent/tools/、agent/workflows/），项目结构一目了然，便于审查、扩展和部署。两天获 569 星，TypeScript 构建。</div>
+        <span class="opp">Tag: 框架 · Agent · Vercel · 开源</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">4</span>
+      <div class="body">
+        <div class="name">🧠 Codebase Memory MCP ⭐5,114 — 代码知识图谱 MCP</div>
+        <div class="desc">高精度代码智能 MCP 服务器，将代码库索引为持久知识图谱。支持 158 种语言，毫秒级查询，减少 99% Token 消耗。单静态二进制，零依赖。适合做大代码库的 Agent 上下文增强。</div>
+        <span class="opp">Tag: MCP · 代码智能 · 知识图谱</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">5</span>
+      <div class="body">
+        <div class="name">📉 ChatGPT 市场份额首次跌破 50%</div>
+        <div class="desc">据 TechCrunch 报道，ChatGPT 在全球 AI 聊天助手市场的份额首次跌破 50%。Claude、Gemini、DeepSeek 等竞品持续蚕食，同时开源模型本地部署也在分流用户。一个时代的拐点。</div>
+        <span class="opp">Tag: 行业 · ChatGPT · 竞争格局</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">6</span>
+      <div class="body">
+        <div class="name">🔄 cc-switch ⭐103K — 一站式 AI 编程 Agent 桌面端</div>
+        <div class="desc">跨平台桌面 All-in-One 助手，一个 App 统一管理 Claude Code、Codex、OpenCode、OpenClaw、Gemini CLI。支持快速切换、共享上下文、统一会话管理。10 万+ 星表明需求真实——Agent 太多，需要一个管家。</div>
+        <span class="opp">Tag: 工具 · Agent管理 · 桌面端</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">7</span>
+      <div class="body">
+        <div class="name">🤖 Omnigent ⭐3,465 — 开源多 Agent 编排框架</div>
+        <div class="desc">全新开源 Agent 框架，可以同时协调 Claude Code、Codex、Cursor、和自定义 Agent 协同工作。适合需要多个 Agent 分工完成复杂任务的场景。</div>
+        <span class="opp">Tag: 编排 · 多Agent · 开源</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">8</span>
+      <div class="body">
+        <div class="name">💬 cc-connect ⭐12,598 — Agent 接入微信 / 飞书</div>
+        <div class="desc">将本地 AI 编程 Agent（Claude Code、Cursor、Codex 等）连接到即时通讯平台。在微信/飞书群里直接指挥 Agent 写代码、查日志、部署。国内团队的新玩法。</div>
+        <span class="opp">Tag: 微信 · 飞书 · Agent · 即时通讯</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">9</span>
+      <div class="body">
+        <div class="name">🏠 Google Gemini 重塑智能音箱 + Android 17 发布</div>
+        <div class="desc">Google 将 Gemini 深度整合进新一代智能音箱，支持自然对话和多轮任务。同日 Android 17 正式发布，新增多任务浮窗工具和大量 Gemini 系统级功能。</div>
+        <span class="opp">Tag: Google · Gemini · 硬件 · Android</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">10</span>
+      <div class="body">
+        <div class="name">📐 Junction ⭐499 — VS Code 本地 AI 编程 Agent 侧边栏</div>
+        <div class="desc">Plaer1/junction 是一个 VS Code 侧边栏工具，让你可以在不离开编辑器的情况下使用本地模型作为编程 Agent。适合隐私敏感场景。</div>
+        <span class="opp">Tag: VS Code · 本地模型 · 隐私</span>
+      </div>
+    </li>
+
+  </ul>
+</div>
+
+<!-- 市场脉搏 -->
+<div class="card">
+  <div class="card-header">
+    <h2>📊 市场脉搏</h2>
+    <span class="badge">资本·数据·趋势</span>
+  </div>
+  <div class="pulse-wrap">
+    <span class="pulse-tag">#资本</span>
+    <span class="pulse-tag">#数据</span>
+    <span class="pulse-tag">#趋势</span>
+  </div>
+
+  <div class="deep-item">
+    <h3>SpaceX 估值达 $2.6T，短暂超越 Amazon</h3>
+    <p>SpaceX 上市后市值飙升，一度达到 2.6 万亿美元，短暂超过 Amazon。随即宣布以 $600 亿股票收购 Cursor，AI 野心暴露无遗。</p>
+  </div>
+
+  <div class="deep-item">
+    <h3>Odyssey 世界模型公司估值 $14.5 亿</h3>
+    <p>世界模型制造商 Odyssey 完成新一轮融资，估值达 14.5 亿美元，Amazon 等参投。世界模型赛道持续升温。</p>
+  </div>
+
+  <div class="deep-item">
+    <h3>Plaud AI 记事本 ARR 突破 $1 亿</h3>
+    <p>AI 记事本公司 Plaud 宣布软件业务 ARR 超 1 亿美元，已出货超 200 万台设备。AI 硬件+订阅模式跑通了。</p>
+  </div>
+
+  <div class="deep-item">
+    <h3>仅 16% 美国人认为 AI 对社会有正面影响</h3>
+    <p>最新研究显示，只有 16% 的美国人认为 AI 将对社会产生积极影响。60% 消费者表示品牌消息中出现"AI"会让他们反感。AI 的公众形象问题依然严峻。</p>
+  </div>
+
+  <div class="deep-item">
+    <h3>ChatGPT 市占<50% · 拐点已至</h3>
+    <p>ChatGPT 市场份额首次跌破 50% 标志性关口。Claude、Gemini、DeepSeek 及开源本地部署方案多元分流，市场进入战国时代。</p>
+  </div>
+
+  <div class="deep-item">
+    <h3>其他快讯</h3>
+    <ul>
+      <li>Anthropic 成为首个加入 Frontier 碳移除联盟的 AI 公司</li>
+      <li>DeepL 收购 Mixhalo，进军直播音频翻译</li>
+      <li>Pramaana Labs 获 Khosla Ventures $2700 万种子轮，用形式化验证保障 AI 安全</li>
+      <li>Pinterest 推出实验性 AI 购物应用 "Ask Pinterest"</li>
+      <li>Malaysia 的 AI Agent 消息平台 Respond.io 获 $6250 万融资</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- 深度延伸 -->
+<div class="card">
+  <div class="card-header">
+    <h2>📖 深度延伸</h2>
+    <span class="badge">分析·内幕·推荐</span>
+  </div>
+  <div class="pulse-wrap">
+    <span class="pulse-tag">#分析</span>
+    <span class="pulse-tag">#推荐</span>
+  </div>
+
+  <div class="deep-item">
+    <h3>🔥 SpaceX × Cursor：AI 并购新时代</h3>
+    <p>SpaceX 以 $600 亿股票收购 Cursor 是 AI 编程工具迄今为止最重磅的退出事件。结合 SpaceX 此前与 xAI 的合并，Elon Musk 正在构建"太空 + AI 编程 + 基础模型"三位一体的帝国。对 Agent 生态意味着：编程 Agent 正式进入国家级/巨头级战略资产行列。</p>
+  </div>
+
+  <div class="deep-item">
+    <h3>😱 Meta AI 部门被员工称为"精神摧残的集中营"</h3>
+    <p>TechCrunch 报道，Meta 成立仅几个月的 AI 部门内部文化极其糟糕。工程师们抱怨持续高压、方向频繁变更、管理层不懂技术。文章标题直指 "soul-crushing gulag"。</p>
+  </div>
+
+  <div class="deep-item">
+    <h3>🌍 世界领导人的 AI 焦虑：想要美国 AI，但不想被关掉</h3>
+    <p>TechCrunch 分析文章指出，全球各国领导人都想要美国的 AI 技术，但担心美国可以随时"关掉它"。这推动了各国自主 AI 基础设施建设。</p>
+  </div>
+
+  <div class="deep-item">
+    <h3>💡 工具推荐：CowAgent ⭐45K — 开源超级 AI 助手</h3>
+    <p>zhayujie/CowAgent 是近期很火的开源 AI 助手框架，集任务规划、工具调用、Skills 执行于一体，支持自我进化。如果你想搭一个自己的 AI 助手，这个值得看看。</p>
+  </div>
+
+</div>
+
+<div class="footer">
+  <a href="https://daily.guancn.me">查看全部历史</a>
+</div>
+
+</div>
+
+</body>
+</html>
