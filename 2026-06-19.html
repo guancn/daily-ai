@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI日报 · 2026-06-19</title>
+<style>
+:root {
+  --bg: #f5f5f7;
+  --white: #ffffff;
+  --black: #000000;
+  --text: #1d1d1f;
+  --text-secondary: rgba(0,0,0,.72);
+  --text-tertiary: rgba(0,0,0,.42);
+  --blue: #0071e3;
+  --blue-active: #0066cc;
+  --border: rgba(0,0,0,.06);
+  --shadow: rgba(0,0,0,.08) 0px 2px 14px;
+  --shadow-hover: rgba(0,0,0,.12) 0px 4px 24px;
+  --radius-card: 14px;
+  --radius-pill: 980px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -.01em;
+}
+.hero {
+  background: var(--black);
+  color: var(--white);
+  text-align: center;
+  padding: 72px 24px 56px;
+}
+.hero .eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .5em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 10px;
+}
+.hero h1 {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.07;
+  letter-spacing: -.015em;
+}
+.hero .sub {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255,255,255,.5);
+  margin-top: 8px;
+  letter-spacing: -.01em;
+}
+.container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+.audio-bar {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -28px auto 24px;
+  max-width: 420px;
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 2;
+}
+.audio-bar .label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+.audio-bar audio { flex: 1; min-width: 0; height: 28px; }
+.focus-card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.focus-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 3px;
+  background: var(--blue);
+  border-radius: 0 2px 2px 0;
+}
+.focus-card .label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+.focus-card p {
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.47;
+  letter-spacing: -.01em;
+}
+.card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+  transition: box-shadow .25s ease;
+}
+.card:hover { box-shadow: var(--shadow-hover); }
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.card-header h2 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.card-header .badge {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--blue);
+  background: rgba(0,113,227,.08);
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+}
+.item-list { list-style: none; }
+.item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.item:last-child { border-bottom: none; padding-bottom: 0; }
+.item .rank {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  min-width: 22px;
+  height: 22px;
+  text-align: center;
+  line-height: 22px;
+  background: var(--bg);
+  border-radius: 6px;
+  margin-top: 2px;
+}
+.item .body { flex: 1; min-width: 0; }
+.item .name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -.01em;
+}
+.item .desc {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-top: 1px;
+  line-height: 1.5;
+}
+.item .opp {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--blue);
+  margin-top: 4px;
+  display: inline-block;
+  cursor: default;
+}
+.item .opp:hover { color: var(--blue-active); }
+.item .source {
+  font-size: 11px;
+  margin-top: 2px;
+}
+.item .source a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  transition: color .2s;
+}
+.item .source a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+.item .source a::before {
+  content: '🔗 ';
+  font-size: 10px;
+}
+.pulse-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.pulse-tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--text-secondary);
+  letter-spacing: -.01em;
+}
+.pulse-tag:first-child {
+  background: rgba(0,113,227,.08);
+  color: var(--blue);
+}
+.pulse-body {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.deep-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.deep-item:last-child { border-bottom: none; padding-bottom: 0; }
+.deep-item h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 3px;
+  letter-spacing: -.01em;
+}
+.deep-item p, .deep-item li {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.deep-item ul { padding-left: 18px; }
+.deep-item li { margin: 3px 0; }
+.deep-item .source {
+  font-size: 11px;
+  margin-top: 6px;
+}
+.deep-item .source a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  transition: color .2s;
+}
+.deep-item .source a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+.deep-item .source a::before {
+  content: '🔗 ';
+  font-size: 10px;
+}
+.footer {
+  text-align: center;
+  padding: 36px 0 52px;
+}
+.footer a {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--blue-active);
+  text-decoration: none;
+  padding: 4px 18px;
+  border: 1px solid var(--blue-active);
+  border-radius: var(--radius-pill);
+  transition: all .2s;
+}
+.footer a:hover {
+  background: var(--blue-active);
+  color: var(--white);
+}
+@media (max-width: 480px) {
+  .hero { padding: 52px 20px 40px; }
+  .hero h1 { font-size: 32px; }
+  .focus-card { padding: 18px 16px; }
+  .card { padding: 18px 16px; }
+  .audio-bar { margin-left: 12px; margin-right: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">AI 日报</div>
+  <h1>2026-06-19</h1>
+  <div class="sub">每天早 6 点 · 小关出品</div>
+</div>
+
+<div class="container">
+
+<div class="audio-bar">
+  <span class="label">收听</span>
+  <audio controls preload="none" style="height:28px">
+    <source src="https://daily.guancn.me/2026-06-19.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<div class="focus-card">
+  <div class="label">今日焦点</div>
+  <p>智谱 GLM-5.2 登顶开源权重模型榜首，编程能力超越 GPT-5.5，MIT 许可免费商用；Ponytail 36K 星爆火，让 AI Agent 学会「偷懒」；小米开源 MiMo-Code，模型与 Agent 共同演化新范式。</p>
+</div>
+
+<!-- TOP 10 -->
+<div class="card">
+  <div class="card-header">
+    <h2>十大热点</h2>
+    <span class="badge">TOP 10</span>
+  </div>
+  <ol class="item-list">
+
+    <li class="item">
+      <span class="rank">1</span>
+      <div class="body">
+        <div class="name">GLM-5.2 登顶开源权重模型 · 编程超 GPT-5.5</div>
+        <div class="desc">智谱 GLM-5.2 在 Artificial Analysis Intelligence Index v4.1 中以 51 分登顶开源权重模型。SWE-bench Pro 编程测试 62.1%（超越 GPT-5.5 的 58.6%），FrontierSWE 74.4%（紧追 Claude Opus 4.8 的 75.1%）。MoE 架构 744B/激活 40B，100 万 token 上下文，MIT 许可。</div>
+        <div class="source"><a href="https://www.oschina.net/news/460824/glm-5-2-open-source-top" target="_blank" rel="noopener">oschina.net</a></div>
+        <span class="opp">Tag: 国产大模型 · 开源 · 编程</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">2</span>
+      <div class="body">
+        <div class="name">Ponytail — 36K⭐ 让 AI 像最懒的资深工程师思考</div>
+        <div class="desc">一个反卷的 Agent 技能：「最好的代码是你从没写过的那行。」大火的原因很简单——它精准戳中了每个开发者的心声。用最少的 token 解决问题，完美平衡质量与偷懒。</div>
+        <div class="source"><a href="https://github.com/DietrichGebert/ponytail" target="_blank" rel="noopener">github.com/DietrichGebert/ponytail</a></div>
+        <span class="opp">Tag: Agent Skills · 开源工具 · 有趣</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">3</span>
+      <div class="body">
+        <div class="name">小米 MiMo-Code — 9.7K⭐ 模型与 Agent 共同演化</div>
+        <div class="desc">小米出品的全新框架，核心理念是「Where Models and Agents Co-Evolve」——不只是跑 Agent，而是让模型和 Agent 在迭代中相互增强。6 月 10 日开源，两周拿到近万星。</div>
+        <div class="source"><a href="https://github.com/XiaomiMiMo/MiMo-Code" target="_blank" rel="noopener">github.com/XiaomiMiMo/MiMo-Code</a></div>
+        <span class="opp">Tag: Agent框架 · 国产大模型 · 开源工具</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">4</span>
+      <div class="body">
+        <div class="name">guard-skills — 830⭐ 编码 Agent 的质量门</div>
+        <div class="desc">为 AI 编码 Agent 设计的「安全门」技能，能自动检测 AI 生成代码中的故障模式——包括逻辑错误、测试遗漏、文档缺失。支持 Claude Code、Codex 等主流 Agent。</div>
+        <div class="source"><a href="https://github.com/amElnagdy/guard-skills" target="_blank" rel="noopener">github.com/amElnagdy/guard-skills</a></div>
+        <span class="opp">Tag: Agent Skills · 编码工具 · 安全</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">5</span>
+      <div class="body">
+        <div class="name">uniTerm v1.0 — 内置自主 AI Agent 的跨平台终端</div>
+        <div class="desc">历经 40+ Alpha 版本，开源跨平台终端 uniTerm v1.0 正式发布。最大亮点是终端深度集成可自主运行的 AI Agent——自然语言描述任务，AI 自主拆解、执行、校验，像在终端里装了个 Claude Code。</div>
+        <div class="source"><a href="https://github.com/ys-ll/uniterm" target="_blank" rel="noopener">github.com/ys-ll/uniterm</a></div>
+        <span class="opp">Tag: 开源工具 · 开发者工具 · Agent</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">6</span>
+      <div class="body">
+        <div class="name">fanbox — 710⭐ Vibe Coding 驾驶舱</div>
+        <div class="desc">「左边文件浏览、右边/下边终端、中间看清每一次改动」——为 vibe coding 量身打造的编辑器体验。专注让 AI 编码过程更透明。</div>
+        <div class="source"><a href="https://github.com/alchaincyf/fanbox" target="_blank" rel="noopener">github.com/alchaincyf/fanbox</a></div>
+        <span class="opp">Tag: 开源工具 · 开发者工具 · 编码</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">7</span>
+      <div class="body">
+        <div class="name">sandboxd — 672⭐ 自托管开发沙箱</div>
+        <div class="desc">一条命令启动开发预览环境，自带预览 URL。专为编码 Agent 和 SaaS 工厂设计——不用 K8s，不用复杂配置，Agent 改完代码就能看到效果。</div>
+        <div class="source"><a href="https://github.com/tastyeffectco/sandboxd" target="_blank" rel="noopener">github.com/tastyeffectco/sandboxd</a></div>
+        <span class="opp">Tag: 开发者工具 · Agent · DevOps</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">8</span>
+      <div class="body">
+        <div class="name">人味儿写作 Skill — 810⭐ 保留人的声音</div>
+        <div class="desc">专为 AI 写作场景设计的 Skill，核心理念是「编辑人话而不抹去人本身」。在 AI 辅助写作时保留个人风格和「人味儿」，适合需要保持真实声音的内容创作者。</div>
+        <div class="source"><a href="https://github.com/orange2ai/renwei-writing" target="_blank" rel="noopener">github.com/orange2ai/renwei-writing</a></div>
+        <span class="opp">Tag: Agent Skills · 写作 · 生活应用</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">9</span>
+      <div class="body">
+        <div class="name">AI 引爆内存「百年一遇」危机 · 库克承认苹果涨价</div>
+        <div class="desc">HBM 内存吞噬产能致 DRAM 价格暴涨 300%、2027 年前难缓解。库克称这是苹果三十年来最剧烈的单组件成本飙升，iPhone Pro 系列或需上调约 270 美元才能维持利润率。AI 超级周期正在碾压消费电子供应链。</div>
+        <div class="source"><a href="https://www.oschina.net/news/460918" target="_blank" rel="noopener">oschina.net</a></div>
+        <span class="opp">Tag: 行业观察 · AI · 半导体</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">10</span>
+      <div class="body">
+        <div class="name">我国首发 AI 主题邮票 · 硅基材料油墨</div>
+        <div class="desc">中国邮政发行首套《人工智能》特种邮票，4 枚主题涵盖智启纪元到和谐共生。票面油墨首次融入硅基材料，兼具艺术性与科技感。属于 AI 时代的文化注脚。</div>
+        <div class="source"><a href="https://www.oschina.net/news/460761" target="_blank" rel="noopener">oschina.net</a></div>
+        <span class="opp">Tag: 文化 · AI · 有意思</span>
+      </div>
+    </li>
+
+  </ol>
+</div>
+
+<!-- 市场脉搏 -->
+<div class="card">
+  <div class="card-header">
+    <h2>市场脉搏</h2>
+    <span class="badge">MARKET</span>
+  </div>
+  <div class="pulse-wrap">
+    <span class="pulse-tag">🔥 结构性紧缺</span>
+    <span class="pulse-tag">🦀 Rust 基础设施</span>
+    <span class="pulse-tag">⚡ 开源 Agent 工具</span>
+    <span class="pulse-tag">🏭 小米入局</span>
+  </div>
+  <div class="pulse-body">
+    <ul style="list-style: none">
+      <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">🔥 <strong>AI 内存危机加剧</strong> — 三星/SK 海力士/美光将产能持续转向 HBM，消费级 DRAM 合约价 Q1 翻倍、累计涨超 300%。分析师警告「RAMageddon」可能持续到 2027 年。</li>
+      <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">🦀 <strong>Firefox 151 切换 Rust zlib-rs</strong> — 1995 年以来嵌入每一款软件的 C 语言 zlib 被 Rust 替代。Trifecta Tech Foundation 证实，gzip 压缩已全部由 zlib-rs 接管，证明了基础设施 Rust 化可以同时实现性能和安全。</li>
+      <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">⚡ <strong>开源 Agent 工具爆发</strong> — 本周 GitHub 涌现大量 Agent 工具新星：Ponytail (36K⭐)、MiMo-Code (9.7K⭐)、guard-skills、fanbox、sandboxd、uniTerm，覆盖 Agent 行为优化、质量控制、开发环境各环节。</li>
+      <li style="padding: 6px 0;">🏭 <strong>IvorySQL 5.4 发布</strong> — 升级至 PostgreSQL 18.4，上线 AI Skills 让 AI 成为数据库专家，新增云原生容器化部署和全平台发行支持。</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 深度延伸 -->
+<div class="card">
+  <div class="card-header">
+    <h2>深度延伸</h2>
+    <span class="badge">DEEP</span>
+  </div>
+
+  <div class="deep-item">
+    <h3>GLM-5.2 凭什么登顶？技术架构详解</h3>
+    <ul>
+      <li>MoE 744B/激活 40B，与 GLM-5.1 参数规模一致，但能力巨幅跃升（40→51分）</li>
+      <li>上下文从 20 万扩展至 100 万 token，最大输出 131,072 token</li>
+      <li>自研 IndexShare 架构：每 4 个稀疏注意力层共享轻量索引器，FLOP 降至约 1/3</li>
+      <li>在 FrontiierSWE 上 74.4% 接近 Claude Opus 4.8（75.1%），超越 GPT-5.5（72.6%）</li>
+    </ul>
+    <div class="source"><a href="https://www.oschina.net/news/460824/glm-5-2-open-source-top" target="_blank" rel="noopener">OSCHINA 全文阅读</a></div>
+  </div>
+
+  <div class="deep-item">
+    <h3>AI 生活应用推荐：人味儿写作助手</h3>
+    <p>写周报、发公众号、做汇报——总担心 AI 帮你写的东西太「AI 味」？试试 <strong>renwei-writing</strong> Skill。它不是一个简单的润色工具，而是理解你的语气、句式偏好后，在保持效率的同时保留你的个人风格。适合：每周周报、个人博客、社交媒体内容。</p>
+    <div class="source"><a href="https://github.com/orange2ai/renwei-writing" target="_blank" rel="noopener">GitHub: orange2ai/renwei-writing</a></div>
+  </div>
+
+  <div class="deep-item">
+    <h3>Ponytail 为什么能爆火到 36K 星？</h3>
+    <p>6 月 12 日才开源的仓库，不到一周收获 36K+ 星。理念很简单：让 AI Agent 像最懒的资深工程师那样思考 —— 资深工程师不是不干活，而是知道什么活不值得干。这个 Skill 通过抑制 Agent「过度用力」的倾向，让它在编码时优先选择最小化方案，减少无谓的 token 消耗。在 AI 编码 Agent 狂飙突进的时代，Ponytail 提供了一个反直觉但极有价值的视角：<strong>有时候最好的代码是你没写的代码</strong>。</p>
+    <div class="source"><a href="https://github.com/DietrichGebert/ponytail" target="_blank" rel="noopener">GitHub: DietrichGebert/ponytail</a></div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <a href="https://daily.guancn.me">查看全部历史</a>
+</div>
+
+</div>
+
+</body>
+</html>
