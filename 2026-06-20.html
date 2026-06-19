@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI日报 · 2026年6月20日</title>
+<style>
+:root {
+  --bg: #f5f5f7;
+  --white: #ffffff;
+  --black: #000000;
+  --text: #1d1d1f;
+  --text-secondary: rgba(0,0,0,.72);
+  --text-tertiary: rgba(0,0,0,.42);
+  --blue: #0071e3;
+  --blue-active: #0066cc;
+  --border: rgba(0,0,0,.06);
+  --shadow: rgba(0,0,0,.08) 0px 2px 14px;
+  --shadow-hover: rgba(0,0,0,.12) 0px 4px 24px;
+  --radius-card: 14px;
+  --radius-pill: 980px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -.01em;
+}
+.hero {
+  background: var(--black);
+  color: var(--white);
+  text-align: center;
+  padding: 72px 24px 56px;
+}
+.hero .eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .5em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 10px;
+}
+.hero h1 {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.07;
+  letter-spacing: -.015em;
+}
+.hero .sub {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255,255,255,.5);
+  margin-top: 8px;
+  letter-spacing: -.01em;
+}
+.container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+.audio-bar {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -28px auto 24px;
+  max-width: 420px;
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 2;
+}
+.audio-bar .label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+.audio-bar audio { flex: 1; min-width: 0; height: 28px; }
+.focus-card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.focus-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 3px;
+  background: var(--blue);
+  border-radius: 0 2px 2px 0;
+}
+.focus-card .label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+.focus-card p {
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.47;
+  letter-spacing: -.01em;
+}
+.card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+  transition: box-shadow .25s ease;
+}
+.card:hover { box-shadow: var(--shadow-hover); }
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.card-header h2 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.card-header .badge {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--blue);
+  background: rgba(0,113,227,.08);
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+}
+.item-list { list-style: none; }
+.item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.item:last-child { border-bottom: none; padding-bottom: 0; }
+.item .rank {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  min-width: 22px;
+  height: 22px;
+  text-align: center;
+  line-height: 22px;
+  background: var(--bg);
+  border-radius: 6px;
+  margin-top: 2px;
+}
+.item .body { flex: 1; min-width: 0; }
+.item .name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -.01em;
+}
+.item .desc {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-top: 1px;
+  line-height: 1.5;
+}
+.item .opp {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--blue);
+  margin-top: 4px;
+  display: inline-block;
+  cursor: default;
+}
+.item .opp:hover { color: var(--blue-active); }
+.item .source {
+  font-size: 11px;
+  margin-top: 2px;
+}
+.item .source a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  transition: color .2s;
+}
+.item .source a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+.item .source a::before {
+  content: '🔗 ';
+  font-size: 10px;
+}
+.pulse-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.pulse-tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--text-secondary);
+  letter-spacing: -.01em;
+}
+.pulse-tag:first-child {
+  background: rgba(0,113,227,.08);
+  color: var(--blue);
+}
+.pulse-body {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.deep-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.deep-item:last-child { border-bottom: none; padding-bottom: 0; }
+.deep-item h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 3px;
+  letter-spacing: -.01em;
+}
+.deep-item p, .deep-item li {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.deep-item ul { padding-left: 18px; }
+.deep-item li { margin: 3px 0; }
+.deep-item .source {
+  font-size: 11px;
+  margin-top: 6px;
+}
+.deep-item .source a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  transition: color .2s;
+}
+.deep-item .source a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+.deep-item .source a::before {
+  content: '🔗 ';
+  font-size: 10px;
+}
+.footer {
+  text-align: center;
+  padding: 36px 0 52px;
+}
+.footer a {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--blue-active);
+  text-decoration: none;
+  padding: 4px 18px;
+  border: 1px solid var(--blue-active);
+  border-radius: var(--radius-pill);
+  transition: all .2s;
+}
+.footer a:hover {
+  background: var(--blue-active);
+  color: var(--white);
+}
+@media (max-width: 480px) {
+  .hero { padding: 52px 20px 40px; }
+  .hero h1 { font-size: 32px; }
+  .focus-card { padding: 18px 16px; }
+  .card { padding: 18px 16px; }
+  .audio-bar { margin-left: 12px; margin-right: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">AI 日报</div>
+  <h1>2026年6月20日</h1>
+  <div class="sub">每天早 6 点 · 小关出品</div>
+</div>
+
+<div class="container">
+
+<div class="audio-bar">
+  <span class="label">收听</span>
+  <audio controls preload="none" style="height:28px">
+    <source src="https://daily.guancn.me/2026-06-20.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<div class="focus-card">
+  <div class="label">今日焦点</div>
+  <p>编码Agent三巨头同日亮剑：OpenCode v1.17.8 改进MCP兼容性，Claude Code支持5层子代理嵌套，Codex推出Record & Replay让演示变技能。天工3.1甩出"画布取代对话框"宣言，DeepMind发现Transformer存在拓扑缺陷——热闹极了。</p>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2>头条 · TOP 10</h2>
+    <span class="badge">热</span>
+  </div>
+  <ul class="item-list">
+
+    <li class="item">
+      <span class="rank">1</span>
+      <div class="body">
+        <div class="name">天工3.1发布：Skywork Design + Dynamic Workflows</div>
+        <div class="desc">昆仑万维天工3.1两大更新：无限画布取代对话框（"对话框是草稿纸，画布才是工作台"），Deep用户平均交互超40轮；Dynamic Workflows动态规划调度数百个并行子Agent，含独立验证与证伪。</div>
+        <div class="source"><a href="https://www.qbitai.com/2026/06/436110.html" target="_blank" rel="noopener">量子位</a></div>
+        <span class="opp">Tag: Agent框架 · 产品哲学 · SaaS机会</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">2</span>
+      <div class="body">
+        <div class="name">DeepMind：Transformer存在拓扑缺陷，思维链治标不治本</div>
+        <div class="desc">研究发现Transformer架构存在根本性的"深度耗尽"问题——随着推理路径延长，模型表达能力退化。思维链只能缓解症状而非根治，这对未来模型架构演进方向有深远影响。</div>
+        <div class="source"><a href="https://www.jiqizhixin.com/" target="_blank" rel="noopener">机器之心</a></div>
+        <span class="tag: 基础研究 · Transformer · 架构</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">3</span>
+      <div class="body">
+        <div class="name">G7峰会首次纳入AI公司CEO：主权AI议题升温</div>
+        <div class="desc">2026年G7峰会在法国举行，首次邀请OpenAI、Anthropic、Google的CEO参与正式会议。各国领导人表达对AI力量集中在少数美国公司的担忧，讨论主权AI、透明度、问责框架和出口限制。</div>
+        <div class="source"><a href="https://techcrunch.com/2026/06/17/world-leaders-want-american-ai-they-just-dont-want-america-to-be-able-to-turn-it-off/" target="_blank" rel="noopener">TechCrunch</a></div>
+        <span class="opp">Tag: 地缘政治 · AI治理 · 主权AI</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">4</span>
+      <div class="body">
+        <div class="name">挪威全面禁止小学使用AI——全球首个国家级禁令</div>
+        <div class="desc">挪威政府出台新规，近乎全面禁止在小学阶段使用人工智能工具，旨在保护儿童隐私和认知发展。引发全球关于AI教育应用的激烈讨论。</div>
+        <div class="source"><a href="https://www.reuters.com/technology/norway-imposes-near-ban-ai-elementary-school-2026-06-19/" target="_blank" rel="noopener">Reuters</a></div>
+        <span class="opp">Tag: 教育 · 政策 · 社会影响</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">5</span>
+      <div class="body">
+        <div class="name">OpenAI财务文件泄露：年收入37亿，研发支出191.8亿</div>
+        <div class="desc">泄露文件显示OpenAI 2025年收入37亿美元，但研发支出高达191.8亿，离盈利仍有巨大差距。这也解释了为何OpenAI急于IPO、引入Noam Shazeer等重磅人物的战略性。</div>
+        <div class="source"><a href="https://arstechnica.com/ai/2026/06/leaked-financial-docs-show-openai-is-losing-billions-of-dollars-a-year/" target="_blank" rel="noopener">Ars Technica</a></div>
+        <span class="opp">Tag: OpenAI · 商业 · IPO</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">6</span>
+      <div class="body">
+        <div class="name">大晓机器人世界模型融资数亿美元，15家VC抢投</div>
+        <div class="desc">具身智能明星公司完成天使+轮数亿美元融资，累计超15家VC。核心技术为"理解-生成-预测"一体化世界模型，已开源Kairos 3.0并推出全球首个端侧部署的4B世界模型。</div>
+        <div class="source"><a href="https://www.qbitai.com/2026/06/436148.html" target="_blank" rel="noopener">量子位</a></div>
+        <span class="opp">Tag: 具身智能 · 世界模型 · 融资</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">7</span>
+      <div class="body">
+        <div class="name">AlphaFold之父John Jumper离开DeepMind加入Anthropic</div>
+        <div class="desc">诺贝尔奖得主、AlphaFold核心科学家John Jumper宣布加入Anthropic，从AI for Science转向AI安全。这轮顶级人才流动引发对AI安全方向的高度关注。</div>
+        <div class="source"><a href="https://twitter.com/JohnJumperSci/status/2068001285173834106" target="_blank" rel="noopener">X/Twitter</a></div>
+        <span class="opp">Tag: 人才流动 · AI安全 · Anthropic</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">8</span>
+      <div class="body">
+        <div class="name">Midjourney推出全身超声扫描设备，60秒完成全身扫描</div>
+        <div class="desc">Midjourney Scanner——全身超声计算断层扫描系统，60秒内完成全身扫描。计划2027年在旧金山开设"Midjourney Spa"体验店，长期目标是到2031年部署5万台扫描仪。</div>
+        <div class="source"><a href="https://techcrunch.com/" target="_blank" rel="noopener">TechCrunch</a></div>
+        <span class="opp">Tag: AI硬件 · 医疗 · 消费科技</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">9</span>
+      <div class="body">
+        <div class="name">OpenAI GPT-5.5 Instant 成为ChatGPT默认模型</div>
+        <div class="desc">OpenAI推出GPT-5.5 Instant作为ChatGPT新默认模型，并增加对话式世界杯更新和发音指导等新功能。同时Google将Gemini 3.5 Flash设为AI Mode搜索全球默认模型。</div>
+        <div class="source"><a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank" rel="noopener">OpenAI</a></div>
+        <span class="opp">Tag: 模型发布 · OpenAI · Google</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">10</span>
+      <div class="body">
+        <div class="name">林俊旸创办"卜拉格"，首轮估值135亿</div>
+        <div class="desc">前阿里通义千问负责人林俊旸（OpenCode的核心贡献者之一）创办卜拉格（Pragmatics），聚焦世界模型+具身大脑。腾讯高榕红杉全跟投，核心理念从"Reasoning Thinking"升级到"Agentic Thinking"。</div>
+        <div class="source"><a href="https://www.qbitai.com/2026/06/436138.html" target="_blank" rel="noopener">量子位</a></div>
+        <span class="opp">Tag: 创业 · 融资 · Agentic Thinking</span>
+      </div>
+    </li>
+
+  </ul>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2>市场脉搏</h2>
+    <span class="badge">速览</span>
+  </div>
+
+  <div class="pulse-wrap">
+    <span class="pulse-tag">💰 投融资</span>
+    <span class="pulse-tag">🏗️ 基础设施</span>
+    <span class="pulse-tag">🎯 新产品</span>
+    <span class="pulse-tag">🏛️ 政策</span>
+  </div>
+
+  <div class="pulse-body">
+    <p><strong>💰 OpenAI IPO前军备升级：</strong>引入Transformer论文合著者Noam Shazeer和前白宫AI政策官Dean Ball。 | <a href="https://techcrunch.com/2026/06/18/openai-is-bringing-on-some-big-guns-in-the-lead-up-to-its-ipo/" target="_blank" rel="noopener" style="color:#0071e3;">TechCrunch</a></p>
+    <br>
+    <p><strong>🏗️ Odyssey世界模型B轮3.1亿美元：</strong>Amazon、AMD、GV跟投，估值14.5亿美元。 | <a href="https://techcrunch.com/2026/06/17/world-model-maker-odyssey-nabs-1-45b-valuation-backed-by-amazon-and-other-big-names/" target="_blank" rel="noopener" style="color:#0071e3;">TechCrunch</a></p>
+    <br>
+    <p><strong>🎯 Product Hunt 6月AI新星：</strong>Goldfish（Option键一键知你工作替你回复）、Fundraisly（AI自动融资代理）、Publora（AI Agent社交发布API）领跑月度榜。 | <a href="https://www.producthunt.com/leaderboard/monthly/2026/6" target="_blank" rel="noopener" style="color:#0071e3;">Product Hunt</a></p>
+    <br>
+    <p><strong>🏛️ 挪威AI教育禁令：</strong>全球首个国家级小学AI禁令生效。白宫同周发布新AI行政令，聚焦创新与安全分类基准。 | <a href="https://www.reuters.com/technology/norway-imposes-near-ban-ai-elementary-school-2026-06-19/" target="_blank" rel="noopener" style="color:#0071e3;">Reuters</a></p>
+    <br>
+    <p><strong>🏥 国产医疗AI破局：</strong>多家国产医疗AI在关键测评上击败GPT-5.5，跑通"数据壁垒-监管滞后-商业化"死循环。 | <a href="https://www.qbitai.com/2026/06/436171.html" target="_blank" rel="noopener" style="color:#0071e3;">量子位</a></p>
+    <br>
+    <p><strong>🤖 UBTech发布超逼真机器人伴侣：</strong>中国机器人公司加入消费级人形机器人赛道。 | <a href="https://www.rundown.ai/" target="_blank" rel="noopener" style="color:#0071e3;">The Rundown</a></p>
+    <br>
+    <p><strong>📊 企业AI ROI清算：</strong>NEA合伙人指出Uber在数月内耗尽年度AI预算，企业从"Tokenmaxxing"转向审慎评估。 | <a href="https://techcrunch.com/video/neas-tiffany-luck-says-enterprises-are-still-figuring-out-their-ai-roi/" target="_blank" rel="noopener" style="color:#0071e3;">TechCrunch</a></p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2>深度延伸</h2>
+    <span class="badge">值得读</span>
+  </div>
+
+  <div class="deep-item">
+    <h3>编码Agent三巨头同日更新：OpenCode v1.17.8 · Claude Code 5层子代理 · Codex Record & Replay</h3>
+    <p>三个编码Agent在同一天放出重要更新，竞争白热化：<br>
+    <strong>OpenCode v1.17.8</strong> — 会话时间线加载大幅提速，MCP工具schema与OpenAI兼容提供商对齐修复，Desktop新增Home标签页切换。<br>
+    <strong>Claude Code v2.1.181</strong> — 子代理可嵌套至5层深度（子代理能生成自己的子代理），/config key=value语法，新增macOS Sandbox和Presence选项。<br>
+    <strong>Codex App 26.616</strong> — Record & Replay (macOS)将演示的工作流自动转化为可复用skill，Browser Use可见标签页路由改进。</p>
+    <div class="source">
+      <a href="https://github.com/anomalyco/opencode/releases" target="_blank" rel="noopener">OpenCode GitHub</a> ·
+      <a href="https://github.com/anthropics/claude-code/releases" target="_blank" rel="noopener">Claude Code GitHub</a> ·
+      <a href="https://developers.openai.com/codex/changelog" target="_blank" rel="noopener">Codex Changelog</a>
+    </div>
+  </div>
+
+  <div class="deep-item">
+    <h3>「对话框是草稿纸，画布才是工作台」——天工3.1的产品哲学</h3>
+    <p>天工3.1用无限延展画布取代传统对话框。核心洞察：对话框把用户锁在"问一句答一句"的线性交互中，画布则支持品牌规范驱动、多页面并行迭代。搭配Dynamic Workflows——Agent动态规划后调度数十至上百个并行子Agent，每个都有独立验证与证伪机制。产品上比竞品多想了一步：AI不只是回答问题，还要帮用户组织工作空间。</p>
+    <div class="source">
+      <a href="https://www.qbitai.com/2026/06/436110.html" target="_blank" rel="noopener">量子位深度报道</a>
+    </div>
+  </div>
+
+  <div class="deep-item">
+    <h3>DeepMind: Transformer的"拓扑天花板"</h3>
+    <p>DeepMind最新研究发现Transformer在拓扑学意义上存在根本性缺陷——随着推理路径加深，模型的信息表达能力会系统性退化。思维链（CoT）只能缓解症状，不能根治。如果这个结论成立，意味着即便把模型做得更大、训练数据更多，"深推理"能力的上限已经被架构锁死了。下一代架构（可能类似Mamba、RWKV状态空间模型或新的混合架构）必须解决这个问题。</p>
+    <div class="source">
+      <a href="https://www.jiqizhixin.com/" target="_blank" rel="noopener">机器之心解读</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <a href="https://daily.guancn.me">查看全部历史</a>
+</div>
+
+</div>
+
+</body>
+</html>
