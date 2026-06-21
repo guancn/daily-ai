@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI日报 · 2026-06-22</title>
+<style>
+:root {
+  --bg: #f5f5f7;
+  --white: #ffffff;
+  --black: #000000;
+  --text: #1d1d1f;
+  --text-secondary: rgba(0,0,0,.72);
+  --text-tertiary: rgba(0,0,0,.42);
+  --blue: #0071e3;
+  --blue-active: #0066cc;
+  --border: rgba(0,0,0,.06);
+  --shadow: rgba(0,0,0,.08) 0px 2px 14px;
+  --shadow-hover: rgba(0,0,0,.12) 0px 4px 24px;
+  --radius-card: 14px;
+  --radius-pill: 980px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -.01em;
+}
+.hero {
+  background: var(--black);
+  color: var(--white);
+  text-align: center;
+  padding: 72px 24px 56px;
+}
+.hero .eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .5em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 10px;
+}
+.hero h1 {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.07;
+  letter-spacing: -.015em;
+}
+.hero .sub {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255,255,255,.5);
+  margin-top: 8px;
+  letter-spacing: -.01em;
+}
+.container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+.audio-bar {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -28px auto 24px;
+  max-width: 420px;
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 2;
+}
+.audio-bar .label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+.audio-bar audio { flex: 1; min-width: 0; height: 28px; }
+.focus-card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.focus-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 3px;
+  background: var(--blue);
+  border-radius: 0 2px 2px 0;
+}
+.focus-card .label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+.focus-card p {
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.47;
+  letter-spacing: -.01em;
+}
+.card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+  transition: box-shadow .25s ease;
+}
+.card:hover { box-shadow: var(--shadow-hover); }
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.card-header h2 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.card-header .badge {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--blue);
+  background: rgba(0,113,227,.08);
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+}
+.item-list { list-style: none; }
+.item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.item:last-child { border-bottom: none; padding-bottom: 0; }
+.item .rank {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  min-width: 22px;
+  height: 22px;
+  text-align: center;
+  line-height: 22px;
+  background: var(--bg);
+  border-radius: 6px;
+  margin-top: 2px;
+}
+.item .body { flex: 1; min-width: 0; }
+.item .name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -.01em;
+}
+.item .desc {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-top: 1px;
+  line-height: 1.5;
+}
+.item .opp {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--blue);
+  margin-top: 4px;
+  display: inline-block;
+  cursor: default;
+}
+.item .opp:hover { color: var(--blue-active); }
+.item .source {
+  font-size: 11px;
+  margin-top: 2px;
+}
+.item .source a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  transition: color .2s;
+}
+.item .source a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+.item .source a::before {
+  content: '🔗 ';
+  font-size: 10px;
+}
+.pulse-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.pulse-tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--text-secondary);
+  letter-spacing: -.01em;
+}
+.pulse-tag:first-child {
+  background: rgba(0,113,227,.08);
+  color: var(--blue);
+}
+.pulse-body {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.deep-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.deep-item:last-child { border-bottom: none; padding-bottom: 0; }
+.deep-item h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 3px;
+  letter-spacing: -.01em;
+}
+.deep-item p, .deep-item li {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.deep-item ul { padding-left: 18px; }
+.deep-item li { margin: 3px 0; }
+.deep-item .source {
+  font-size: 11px;
+  margin-top: 6px;
+}
+.deep-item .source a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  transition: color .2s;
+}
+.deep-item .source a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+.deep-item .source a::before {
+  content: '🔗 ';
+  font-size: 10px;
+}
+.footer {
+  text-align: center;
+  padding: 36px 0 52px;
+}
+.footer a {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--blue-active);
+  text-decoration: none;
+  padding: 4px 18px;
+  border: 1px solid var(--blue-active);
+  border-radius: var(--radius-pill);
+  transition: all .2s;
+}
+.footer a:hover {
+  background: var(--blue-active);
+  color: var(--white);
+}
+@media (max-width: 480px) {
+  .hero { padding: 52px 20px 40px; }
+  .hero h1 { font-size: 32px; }
+  .focus-card { padding: 18px 16px; }
+  .card { padding: 18px 16px; }
+  .audio-bar { margin-left: 12px; margin-right: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">AI 日报</div>
+  <h1>2026-06-22</h1>
+  <div class="sub">每天早 6 点 · 小关出品</div>
+</div>
+
+<div class="container">
+
+<div class="audio-bar">
+  <span class="label">收听</span>
+  <audio controls preload="none" style="height:28px">
+    <source src="2026-06-22.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<div class="focus-card">
+  <div class="label">今日焦点</div>
+  <p>GPT-5.6代号iris-alpha泄露，150万Token上下文窗口；Hermes Agent v0.17.0携iMessage原生接入发布，199K Stars；GLM-5.2登顶开源权重模型榜，编程能力超越GPT-5.5</p>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2>TOP 10</h2>
+    <span class="badge">15 条</span>
+  </div>
+  <ul class="item-list">
+
+    <li class="item">
+      <span class="rank">1</span>
+      <div class="body">
+        <div class="name">GPT-5.6 代号 "iris-alpha" 泄露 · 150万Token上下文</div>
+        <div class="desc">开发者从 Codex 后端日志中发现未发布模型 GPT-5.6，上下文窗口达 150 万 token，性能据称超越 Claude，预计 6 月正式发布。OpenAI 内部战略同步转向编程和企业市场。</div>
+        <div class="source"><a href="https://www.aibetas.com.cn/p/6269.html" target="_blank" rel="noopener">AIBetas · 6月21日</a></div>
+        <span class="opp">Tag: 模型发布 · 大公司</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">2</span>
+      <div class="body">
+        <div class="name">Hermes Agent v0.17.0 "The Reach Release"</div>
+        <div class="desc">~1,475 commits，245 社区贡献者。iMessage 原生接入（无需 Mac 中继）、Raft 代理网络、后台子代理、桌面端快捷键与 RTL、Skills Hub 重构、内存工具批量操作。GitHub 199K Stars。</div>
+        <div class="source"><a href="https://github.com/NousResearch/hermes-agent/releases/tag/v2026.6.19" target="_blank" rel="noopener">GitHub Releases · 6月19日</a></div>
+        <span class="opp">Tag: Agent · 开源工具 · Hermes</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">3</span>
+      <div class="body">
+        <div class="name">GLM-5.2 登顶开源权重模型榜首</div>
+        <div class="desc">智谱 GLM-5.2 在 Artificial Analysis Intelligence Index v4.1 中登顶开源权重模型排行榜，编程能力超越 GPT-5.5，MIT 许可免费可用。Fable 5 被出口管制当晚，智谱宣布完全开源："前沿智能属于每一个人"。</div>
+        <div class="source"><a href="https://www.oschina.net/news/460824" target="_blank" rel="noopener">开源中国 · 6月21日</a></div>
+        <span class="opp">Tag: 模型发布 · 开源趋势 · 国产大模型</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">4</span>
+      <div class="body">
+        <div class="name">MiniMax M3 正式开源</div>
+        <div class="desc">国产 AI 里程碑，原生多模态 + 超长上下文 + 高阶 Agent 能力，编程评测超越 GPT-5.5，实现国产 AI 从追赶到领跑。</div>
+        <div class="source"><a href="https://www.oschina.net/news" target="_blank" rel="noopener">开源中国 · 6月16日</a></div>
+        <span class="opp">Tag: 模型发布 · 国产大模型 · 开源</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">5</span>
+      <div class="body">
+        <div class="name">Agent 学徒生态 · Forsy-AI/agent-apprenticeship 破 600 星</div>
+        <div class="desc">让 AI Agent 从真实世界工作中学习的生态系统，通过迭代工作流循环、可复用经验和 Agent 经济体系运转。GitHub 606 星，3 天内快速增长。</div>
+        <div class="source"><a href="https://github.com/Forsy-AI/agent-apprenticeship" target="_blank" rel="noopener">GitHub</a></div>
+        <span class="opp">Tag: Agent · 开源工具 · 自动化工作流</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">6</span>
+      <div class="body">
+        <div class="name">umacloud/umadev — AI 编码项目总监 Agent</div>
+        <div class="desc">驱动你已登录的 Claude Code / Codex / OpenCode，套上 9 阶段可治理的商业级交付流水线。50 星，创意方向值得关注。</div>
+        <div class="source"><a href="https://github.com/umacloud/umadev" target="_blank" rel="noopener">GitHub</a></div>
+        <span class="opp">Tag: Agent · 开发工具 · 编码Agent</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">7</span>
+      <div class="body">
+        <div class="name">智谱 ZCode 3.0 发布 · 全面切换自研 Agent 内核</div>
+        <div class="desc">智谱 AI 编程工具 ZCode 3.0 正式发布，全面切换自研 ZCode Agent 内核，强化编程智能体能力。</div>
+        <div class="source"><a href="https://www.oschina.net/news" target="_blank" rel="noopener">开源中国 · 6月15日</a></div>
+        <span class="opp">Tag: 开发工具 · 国产大模型 · Agent</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">8</span>
+      <div class="body">
+        <div class="name">微信 AI 助手「小微」灰度上线</div>
+        <div class="desc">微信端 AI 助手「小微」开始灰度测试，用户可通过自然语言与 AI 交互，调用微信生态服务能力。</div>
+        <div class="source"><a href="https://www.aibetas.com.cn/p/category/ai_coffee" target="_blank" rel="noopener">AIBetas · 6月21日</a></div>
+        <span class="opp">Tag: 大公司 · Agent · 微信生态</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">9</span>
+      <div class="body">
+        <div class="name">华为云 Agentic AI 系列新品发布</div>
+        <div class="desc">华为云提出 Agentic Infra 新范式，发布智果 AgentArts 企业级智能体平台、AICS 灵衢智算集群（10万卡/200EFLOPS）、AMS Agentic 记忆存储等新品，开源 openJiuwen 与内核同源 90%。</div>
+        <div class="source"><a href="https://finance.sina.com.cn/wm/2026-06-05/doc-iniaiyys8417337.shtml" target="_blank" rel="noopener">新浪财经 · 6月5日</a></div>
+        <span class="opp">Tag: Agent · 大公司 · 基础设施</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">10</span>
+      <div class="body">
+        <div class="name">Snap 发布 Specs AR 眼镜 · $2,195 空间 AI</div>
+        <div class="desc">Snap 在长滩空间 AI 大会上发布消费者 AR 眼镜 Specs，定价 $2,195，搭载空间 AI 能力，面向消费者智能眼镜市场。</div>
+        <div class="source"><a href="https://creati.ai/ai-news/2026-06-17/snap-debuts-specs-ar-glasses-spatial-ai-2195/" target="_blank" rel="noopener">Creati.ai · 6月17日</a></div>
+        <span class="opp">Tag: 硬件 · 消费电子 · AR</span>
+      </div>
+    </li>
+
+  </ul>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2>市场脉搏</h2>
+    <span class="badge">3 条</span>
+  </div>
+  <div class="pulse-wrap">
+    <span class="pulse-tag">成本变化</span>
+    <span class="pulse-tag">硬件</span>
+    <span class="pulse-tag">行业趋势</span>
+    <span class="pulse-tag">大公司</span>
+  </div>
+  <div class="pulse-body">
+    <p><strong>库克承认苹果将全面涨价</strong>，AI 浪潮引爆内存"百年一遇"危机，苹果产品价格上涨已"不可避免"。<a href="https://www.oschina.net/news/460918" target="_blank" style="color:var(--blue);text-decoration:none;">查看</a></p>
+    <p style="margin-top:8px;"><strong>摩根大通：2030 年 AI 基建总花费将达 5.5 万亿美元</strong>，超大规模数据中心运营商投资加速，基础设施进入万亿市值时代。<a href="https://www.oschina.net/news/460719" target="_blank" style="color:var(--blue);text-decoration:none;">查看</a></p>
+    <p style="margin-top:8px;"><strong>谷歌 48 小时内连失两位核心 AI 人才</strong>，OpenAI 核心芯片骨干跳槽 Anthropic，人才争夺战持续白热化。</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2>深度延伸</h2>
+    <span class="badge">3 篇</span>
+  </div>
+  <div class="deep-item">
+    <h3>Windows-Copilot-API · 逆向工程开源 121 星</h3>
+    <p>将 Windows Copilot 逆向工程为 OpenAI 兼容 API，可访问 GPT-4 和 GPT-5 模型。GitHub 121 星，三天内快速增长，为开发者提供低成本模型访问新路径。</p>
+    <div class="source"><a href="https://github.com/sums001/Windows-Copilot-API" target="_blank" rel="noopener">GitHub</a></div>
+  </div>
+  <div class="deep-item">
+    <h3>qiaomu-llm-mcp · 多模型 Provider MCP 网关</h3>
+    <p>42 星开源项目，将多模型 Provider、本地密钥和 HeavySkill 讨论统一成 MCP 网关，支持 Claude Code / Codex / DeepSeek 等，简化多模型切换与密钥管理。</p>
+    <div class="source"><a href="https://github.com/joeseesun/qiaomu-llm-mcp" target="_blank" rel="noopener">GitHub</a></div>
+  </div>
+  <div class="deep-item">
+    <h3>Hermes Agent v0.17.0 技术拆解</h3>
+    <p>v0.17.0 代号 "The Reach Release"：iMessage 基于 Photon Spectrum 托管线路池实现，无需 Mac 中继；Raft 代理网络支持隐私保护型 Agent 间通信；后台子代理异步执行；桌面端获生产级能力。199K Stars，MIT 开源。</p>
+    <div class="source"><a href="https://github.com/NousResearch/hermes-agent/releases/tag/v2026.6.19" target="_blank" rel="noopener">GitHub Releases</a></div>
+  </div>
+</div>
+
+<div class="footer">
+  <a href="https://daily.guancn.me">查看全部历史</a>
+</div>
+
+</div>
+
+</body>
+</html>
