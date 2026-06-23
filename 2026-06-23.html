@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI日报 · 2026年6月23日</title>
+<style>
+:root {
+  --bg: #f5f5f7;
+  --white: #ffffff;
+  --black: #000000;
+  --text: #1d1d1f;
+  --text-secondary: rgba(0,0,0,.72);
+  --text-tertiary: rgba(0,0,0,.42);
+  --blue: #0071e3;
+  --blue-active: #0066cc;
+  --border: rgba(0,0,0,.06);
+  --shadow: rgba(0,0,0,.08) 0px 2px 14px;
+  --shadow-hover: rgba(0,0,0,.12) 0px 4px 24px;
+  --radius-card: 14px;
+  --radius-pill: 980px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -.01em;
+}
+.hero {
+  background: var(--black);
+  color: var(--white);
+  text-align: center;
+  padding: 72px 24px 56px;
+}
+.hero .eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .5em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 10px;
+}
+.hero h1 {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.07;
+  letter-spacing: -.015em;
+}
+.hero .sub {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255,255,255,.5);
+  margin-top: 8px;
+  letter-spacing: -.01em;
+}
+.container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+.audio-bar {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -28px auto 24px;
+  max-width: 420px;
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 2;
+}
+.audio-bar .label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+.audio-bar audio { flex: 1; min-width: 0; height: 28px; }
+.focus-card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.focus-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 3px;
+  background: var(--blue);
+  border-radius: 0 2px 2px 0;
+}
+.focus-card .label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+.focus-card p {
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.47;
+  letter-spacing: -.01em;
+}
+.card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+  transition: box-shadow .25s ease;
+}
+.card:hover { box-shadow: var(--shadow-hover); }
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.card-header h2 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.card-header .badge {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--blue);
+  background: rgba(0,113,227,.08);
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+}
+.item-list { list-style: none; }
+.item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.item:last-child { border-bottom: none; padding-bottom: 0; }
+.item .rank {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  min-width: 22px;
+  height: 22px;
+  text-align: center;
+  line-height: 22px;
+  background: var(--bg);
+  border-radius: 6px;
+  margin-top: 2px;
+}
+.item .body { flex: 1; min-width: 0; }
+.item .name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -.01em;
+}
+.item .desc {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-top: 1px;
+  line-height: 1.5;
+}
+.item .opp {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--blue);
+  margin-top: 4px;
+  display: inline-block;
+  cursor: default;
+}
+.item .source {
+  font-size: 11px;
+  margin-top: 2px;
+}
+.item .source a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  transition: color .2s;
+}
+.item .source a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+.item .source a::before {
+  content: '🔗 ';
+  font-size: 10px;
+}
+.pulse-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.pulse-tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--text-secondary);
+  letter-spacing: -.01em;
+}
+.pulse-tag:first-child {
+  background: rgba(0,113,227,.08);
+  color: var(--blue);
+}
+.pulse-body {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.deep-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.deep-item:last-child { border-bottom: none; padding-bottom: 0; }
+.deep-item h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 3px;
+  letter-spacing: -.01em;
+}
+.deep-item p, .deep-item li {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.deep-item ul { padding-left: 18px; }
+.deep-item li { margin: 3px 0; }
+.deep-item .source {
+  font-size: 11px;
+  margin-top: 6px;
+}
+.deep-item .source a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  transition: color .2s;
+}
+.deep-item .source a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+.deep-item .source a::before {
+  content: '🔗 ';
+  font-size: 10px;
+}
+.footer {
+  text-align: center;
+  padding: 36px 0 52px;
+}
+.footer a {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--blue-active);
+  text-decoration: none;
+  padding: 4px 18px;
+  border: 1px solid var(--blue-active);
+  border-radius: var(--radius-pill);
+  transition: all .2s;
+}
+.footer a:hover {
+  background: var(--blue-active);
+  color: var(--white);
+}
+@media (max-width: 480px) {
+  .hero { padding: 52px 20px 40px; }
+  .hero h1 { font-size: 32px; }
+  .focus-card { padding: 18px 16px; }
+  .card { padding: 18px 16px; }
+  .audio-bar { margin-left: 12px; margin-right: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">AI 日报</div>
+  <h1>2026年6月23日</h1>
+  <div class="sub">每天早 6 点 · 小关出品</div>
+</div>
+
+<div class="container">
+
+<div class="audio-bar">
+  <span class="label">收听</span>
+  <audio controls preload="none" style="height:28px">
+    <source src="2026-06-23.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<div class="focus-card">
+  <div class="label">今日焦点</div>
+  <p>GPT-5.5 幻觉率是开源 GLM-5.2 的 3 倍引发热议。MCP 发布 2026 路线图：传输层可扩展、企业治理成核心。Claude Code 更新流式自动重试。Cloudflare 为 AI Agent 推出临时账户。</p>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2>TOP 10</h2>
+    <span class="badge">6月23日</span>
+  </div>
+  <ul class="item-list">
+
+    <li class="item">
+      <span class="rank">1</span>
+      <div class="body">
+        <div class="name">GPT-5.5 幻觉率是 GLM-5.2 的 3 倍</div>
+        <div class="desc">独立评测爆出 GPT-5.5 幻觉率高达 MIT 开源 GLM-5.2 的 3 倍。GLM-5.2 成为首个开源权重模型在多项基准上超越闭源旗舰的案例，"更大≠更好"的讨论再次被点燃。</div>
+        <div class="source"><a href="https://arrowtsx.dev/bigger-models/" target="_blank" rel="noopener">arrowtsx.dev</a></div>
+        <span class="opp">Tag: 模型 · 评测 · 幻觉</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">2</span>
+      <div class="body">
+        <div class="name">MCP 2026 路线图发布 — 四大优先级</div>
+        <div class="desc">MCP 官方路线图披露 2026 年四大方向：① 传输层可扩展（Streamable HTTP 生产就绪）② 细粒度 Agent 间通信 ③ 企业级授权治理 ④ 分支机构架构。MCP 正从"协议原型"走向"生产级标准"。</div>
+        <div class="source"><a href="https://a2a-mcp.org/blog/mcp-2026-roadmap" target="_blank" rel="noopener">a2a-mcp.org</a></div>
+        <span class="opp">Tag: MCP · 协议 · 路线图</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">3</span>
+      <div class="body">
+        <div class="name">Claude Code 更新：流式自动重试 + Config 热设置</div>
+        <div class="desc">Anthropic 发布 Claude Code v2.1.181，新增 /config key=value 语法允许从 prompt 中热设置参数，流式断连自动重试不再显示"连接断开"，macOS 沙箱支持 Apple Events。v2.1.185 进一步优化流式超时提示词。</div>
+        <div class="source"><a href="https://code.claude.com/docs/en/whats-new/2026-w23" target="_blank" rel="noopener">Claude Code Changelog</a></div>
+        <span class="opp">Tag: Claude Code · 更新 · 流式</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">4</span>
+      <div class="body">
+        <div class="name">Cloudflare 为 AI Agent 推出临时账户</div>
+        <div class="desc">Cloudflare 发布 Temporary Accounts 功能，AI Agent 可以获取一次性临时凭证访问受保护资源，用完即焚。解决了 Agent 长期凭据泄露的风险——相当于 "Agent 版的隐私浏览模式"。</div>
+        <div class="source"><a href="https://blog.cloudflare.com/temporary-accounts/" target="_blank" rel="noopener">Cloudflare Blog</a></div>
+        <span class="opp">Tag: 安全 · Agent · 鉴权</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">5</span>
+      <div class="body">
+        <div class="name">LLMs Are Complicated Now — 深度反思</div>
+        <div class="desc">独立博客长文反思 LLM 生态现状：模型数量膨胀、评测标准混乱、框架层比模型层还复杂。"六个月前的"最佳实践"今天可能已经是错误做法，这种变化速度本身就是问题。</div>
+        <div class="source"><a href="https://ianbarber.blog/2026/06/19/llms-are-complicated-now/" target="_blank" rel="noopener">ianbarber.blog</a></div>
+        <span class="opp">Tag: LLM · 生态 · 思考</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">6</span>
+      <div class="body">
+        <div class="name">Cisco AI 推出 FAPO — 流水线感知提示优化</div>
+        <div class="desc">Cisco 发布 FAPO（Pipeline-Aware Prompt Optimization），用 Claude Code 编排，对多步骤 Agent 流水线进行步骤级错误归属和自动提示修复。小措辞变化导致准确率波动 20% 的问题有望解决。</div>
+        <div class="source"><a href="https://www.marktechpost.com/2026/06/20/cisco-ai-introduces-fapo-pipeline-aware-prompt-optimization-with-step-level-failure-attribution-and-claude-code-orchestration" target="_blank" rel="noopener">MarkTechPost</a></div>
+        <span class="opp">Tag: 提示优化 · Agent · Cisco</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">7</span>
+      <div class="body">
+        <div class="name">SMPTE 标准免费开放 — 媒体技术里程碑</div>
+        <div class="desc">电影电视工程师协会（SMPTE）宣布将其所有标准免费公开访问。长期以来 SMPTE 标准（如 ST 2110）需要付费获取，这次开放对媒体技术生态意义深远。</div>
+        <div class="source"><a href="https://www.smpte.org/blog/smpte-makes-its-standards-freely-accessible-openingstandards-library-to-the-global-media-technology-community" target="_blank" rel="noopener">SMPTE</a></div>
+        <span class="opp">Tag: 标准 · 媒体 · 开源</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">8</span>
+      <div class="body">
+        <div class="name">英国推出 £75M PoliceAI 中心</div>
+        <div class="desc">英国内政部启动 7500 万英镑的 PoliceAI 中心，将 AI 技术应用于警务。同步推进的面部扫描计划和 VPN 禁令引发隐私争议，"AI 警务"成为新的监管焦点。</div>
+        <div class="source"><a href="https://stateofsurveillance.org/news/daily-surveillance-briefing-june-21-2026" target="_blank" rel="noopener">State of Surveillance</a></div>
+        <span class="opp">Tag: 监管 · 隐私 · AI 警务</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">9</span>
+      <div class="body">
+        <div class="name">Open-Source AI Radar — 6月值得关注的 19 个新仓库</div>
+        <div class="desc">月度盘点：19 个新兴开源 AI 项目，重点包括 shimmy（纯 Rust 推理引擎单二进制运行）、OpenMemory（全开源记忆层）、UI-TARS-desktop（桌面 UI Agent）等。附带真实许可证分类（OSI-open vs open weight vs source-available）。</div>
+        <div class="source"><a href="https://aitoolradar.io/blog/open-source-ai-radar-june-2026" target="_blank" rel="noopener">aitoolradar.io</a></div>
+        <span class="opp">Tag: 开源 · 盘点 · 工具</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">10</span>
+      <div class="body">
+        <div class="name">华为鸿蒙 Next 将 AI Agent 嵌入操作系统核心</div>
+        <div class="desc">华为开发者大会（6月12-14日）预告下一代鸿蒙深度集成 AI Agent 能力。Agent 直接嵌入系统级的资源调度、用户交互层，不依赖云端推理，本地 AI 执行成核心卖点。</div>
+        <div class="source"><a href="https://peerlist.io/cnyouzige/articles/ai-agents-news--june-2026-openai-robotics-huawei-harmonyos-a" target="_blank" rel="noopener">peerlist.io</a></div>
+        <span class="opp">Tag: 华为 · 鸿蒙 · 端侧 AI</span>
+      </div>
+    </li>
+
+  </ul>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2>市场脉搏</h2>
+    <span class="badge">行业风向</span>
+  </div>
+  <div class="pulse-wrap">
+    <span class="pulse-tag">开源反超</span>
+    <span class="pulse-tag">MCP 成熟</span>
+    <span class="pulse-tag">Agent 安全</span>
+    <span class="pulse-tag">端侧 AI</span>
+  </div>
+  <div class="pulse-body">
+    <p>GPT-5.5 幻觉率落后的消息令人意外——如果 GLM-5.2 不是个案，开源模型在可靠性上反超闭源将成为趋势。MCP 路线图的发布意味着 Agent 协议层正式进入"标准化"阶段，不再是试验品。Cloudflare 临时账户和 Cisco FAPO 都指向同一个方向：Agent 正在从"炫技"走向"生产级安全治理"。</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2>深度延伸</h2>
+    <span class="badge">值得细读</span>
+  </div>
+
+  <div class="deep-item">
+    <h3>📐 MCP 2026 路线图四大方向拆解</h3>
+    <p><strong>传输层可扩展：</strong> Streamable HTTP 被列为最高优先级，意味着 MCP 不再只有 SSE 一种传输方式。对于生产环境，HTTP/2 流式传输可以大幅降低连接开销。</p>
+    <p><strong>Agent 间通信：</strong> 不是取代 A2A，而是在 MCP 框架内定义 Agent 如何协商能力边界——"你能做什么，我能做什么"。</p>
+    <p><strong>企业授权治理：</strong> 对接 OAuth 2.1 和企业 IdP，让 Agent 可以安全地访问企业资源，配合 Cloudflare 临时账户的思路。</p>
+    <p><strong>分支机构（Federation）：</strong> 多站点 MCP 服务器如何协同——跨数据中心、跨云的 Agent 工具发现和调用。</p>
+    <div class="source"><a href="https://a2a-mcp.org/blog/mcp-2026-roadmap" target="_blank" rel="noopener">原文 · MCP 2026 Roadmap</a></div>
+  </div>
+
+  <div class="deep-item">
+    <h3>🔍 LLMs Are Complicated Now — 值得每个 AI 开发者读</h3>
+    <p>文章的核心论点是：LLM 生态的复杂度本身已经成为问题。模型太多（每月新增 10+ 个旗舰级）、评测太乱（同一个模型在不同榜单上排名天差地别）、框架层迭代太快（LangGraph/CrewAI/Claude SDK 每个月都在大改）。作者建议：不要追最新，选一个稳定的栈用半年再说。</p>
+    <div class="source"><a href="https://ianbarber.blog/2026/06/19/llms-are-complicated-now/" target="_blank" rel="noopener">原文 · ianbarber.blog</a></div>
+  </div>
+
+  <div class="deep-item">
+    <h3>🛡️ Cloudflare 临时账户 — Agent 安全新范式</h3>
+    <p>AI Agent 要访问 API、数据库、S3，传统方案需要长期有效的 API Key——泄露一次就全完。Cloudflare 的方案：Agent 通过 CF 的代理获取一次性临时凭证（TTL 可设秒级），用完自动销毁。这个思路如果能推广，可能成为 Agent 鉴权的标准模式。</p>
+    <div class="source"><a href="https://blog.cloudflare.com/temporary-accounts/" target="_blank" rel="noopener">原文 · Cloudflare Blog</a></div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <a href="https://daily.guancn.me">查看全部历史</a>
+</div>
+
+</div>
+
+</body>
+</html>
