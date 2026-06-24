@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI日报 · 2026-06-25</title>
+<style>
+:root {
+  --bg: #f5f5f7;
+  --white: #ffffff;
+  --black: #000000;
+  --text: #1d1d1f;
+  --text-secondary: rgba(0,0,0,.72);
+  --text-tertiary: rgba(0,0,0,.42);
+  --blue: #0071e3;
+  --blue-active: #0066cc;
+  --border: rgba(0,0,0,.06);
+  --shadow: rgba(0,0,0,.08) 0px 2px 14px;
+  --shadow-hover: rgba(0,0,0,.12) 0px 4px 24px;
+  --radius-card: 14px;
+  --radius-pill: 980px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -.01em;
+}
+.hero {
+  background: var(--black);
+  color: var(--white);
+  text-align: center;
+  padding: 72px 24px 56px;
+}
+.hero .eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .5em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 10px;
+}
+.hero h1 {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.07;
+  letter-spacing: -.015em;
+}
+.hero .sub {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255,255,255,.5);
+  margin-top: 8px;
+  letter-spacing: -.01em;
+}
+.container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+.audio-bar {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -28px auto 24px;
+  max-width: 420px;
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 2;
+}
+.audio-bar .label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+.audio-bar audio { flex: 1; min-width: 0; height: 28px; }
+.focus-card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.focus-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 3px;
+  background: var(--blue);
+  border-radius: 0 2px 2px 0;
+}
+.focus-card .label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+.focus-card p {
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.47;
+  letter-spacing: -.01em;
+}
+.card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+  transition: box-shadow .25s ease;
+}
+.card:hover { box-shadow: var(--shadow-hover); }
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.card-header h2 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.card-header .badge {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--blue);
+  background: rgba(0,113,227,.08);
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+}
+.item-list { list-style: none; }
+.item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.item:last-child { border-bottom: none; padding-bottom: 0; }
+.item .rank {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  min-width: 22px;
+  height: 22px;
+  text-align: center;
+  line-height: 22px;
+  background: var(--bg);
+  border-radius: 6px;
+  margin-top: 2px;
+}
+.item .body { flex: 1; min-width: 0; }
+.item .name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -.01em;
+}
+.item .desc {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-top: 1px;
+  line-height: 1.5;
+}
+.item .opp {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--blue);
+  margin-top: 4px;
+  display: inline-block;
+  cursor: default;
+}
+.item .opp:hover { color: var(--blue-active); }
+.item .source {
+  font-size: 11px;
+  margin-top: 2px;
+}
+.item .source a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  transition: color .2s;
+}
+.item .source a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+.item .source a::before {
+  content: '🔗 ';
+  font-size: 10px;
+}
+.pulse-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.pulse-tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--text-secondary);
+  letter-spacing: -.01em;
+}
+.pulse-tag:first-child {
+  background: rgba(0,113,227,.08);
+  color: var(--blue);
+}
+.pulse-body {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.pulse-body p {
+  margin-top: 8px;
+}
+.pulse-body p:first-child {
+  margin-top: 0;
+}
+.deep-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.deep-item:last-child { border-bottom: none; padding-bottom: 0; }
+.deep-item h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 3px;
+  letter-spacing: -.01em;
+}
+.deep-item p {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.deep-item .source {
+  font-size: 11px;
+  margin-top: 6px;
+}
+.deep-item .source a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  transition: color .2s;
+}
+.deep-item .source a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+.deep-item .source a::before {
+  content: '🔗 ';
+  font-size: 10px;
+}
+.footer {
+  text-align: center;
+  padding: 36px 0 52px;
+}
+.footer a {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--blue-active);
+  text-decoration: none;
+  padding: 4px 18px;
+  border: 1px solid var(--blue-active);
+  border-radius: var(--radius-pill);
+  transition: all .2s;
+}
+.footer a:hover {
+  background: var(--blue-active);
+  color: var(--white);
+}
+@media (max-width: 480px) {
+  .hero { padding: 52px 20px 40px; }
+  .hero h1 { font-size: 32px; }
+  .focus-card { padding: 18px 16px; }
+  .card { padding: 18px 16px; }
+  .audio-bar { margin-left: 12px; margin-right: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">AI 日报</div>
+  <h1>2026-06-25</h1>
+  <div class="sub">每天早 6 点 · 小关出品</div>
+</div>
+
+<div class="container">
+
+<div class="audio-bar">
+  <span class="label">收听</span>
+  <audio controls preload="none" style="height:28px">
+    <source src="2026-06-25.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<div class="focus-card">
+  <div class="label">今日焦点</div>
+  <p>OpenAI 发布首款自研 AI 推理芯片 Jalapeño，9 个月从设计到流片，推理性能功耗比超越 Nvidia，年底部署。同期 Anthropic 让 AI 成为 Slack 团队成员，千问开源首个语言世界模型。</p>
+</div>
+
+<!-- TOP 10 -->
+<div class="card">
+  <div class="card-header">
+    <h2>今日 Top 10</h2>
+    <span class="badge">10 条</span>
+  </div>
+  <ul class="item-list">
+
+    <li class="item">
+      <span class="rank">1</span>
+      <div class="body">
+        <div class="name">OpenAI 发布首款自研 AI 推理芯片 Jalapeño</div>
+        <div class="desc">与 Broadcom 联合开发，9 个月设计流片。专为推理优化，性能功耗比超越现有方案。首批芯片今年底部署，是 OpenAI 摆脱 Nvidia 依赖的关键一步。</div>
+        <div class="source"><a href="https://techcrunch.com/2026/06/24/openai-unveils-its-first-custom-chip-built-by-broadcom" target="_blank" rel="noopener">TechCrunch</a></div>
+        <span class="opp">Tag: 芯片 · 大公司</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">2</span>
+      <div class="body">
+        <div class="name">Anthropic 推出 Claude Tag — AI 以团队成员身份加入 Slack</div>
+        <div class="desc">在 Slack 频道 @Claude，它能理解上下文、分配任务、异步执行并主动汇报。Agent 从 IDE 正式走向日常协作工具。</div>
+        <div class="source"><a href="https://www.oschina.net/news/466760" target="_blank" rel="noopener">开源中国</a></div>
+        <span class="opp">Tag: Agent · 企业工具</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">3</span>
+      <div class="body">
+        <div class="name">千问开源 Qwen-AgentWorld — 首个原生语言世界模型</div>
+        <div class="desc">通义千问发布首个原生语言世界模型 (LWM)，支持文本、图形等多领域智能体交互环境模拟，为 Agent 训练提供可交互的仿真平台。</div>
+        <div class="source"><a href="https://www.oschina.net/news/466541" target="_blank" rel="noopener">开源中国</a></div>
+        <span class="opp">Tag: 开源 · 国产大模型</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">4</span>
+      <div class="body">
+        <div class="name">xAI 悄然上线 Grok Build 0.1 — 性能超越 Grok 4.3</div>
+        <div class="desc">Elon Musk 的 xAI 在未公告情况下上线新模型。评测平台 Artificial Analysis 认为其智能超越 Grok 4.3，定价策略激进。</div>
+        <div class="source"><a href="https://www.oschina.net/news/466730/grok-build-0-1-06-16" target="_blank" rel="noopener">开源中国</a></div>
+        <span class="opp">Tag: 模型发布 · 大公司</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">5</span>
+      <div class="body">
+        <div class="name">Claude Code v2.1.187 — 沙箱凭据拦截 + 5 层嵌套子 Agent</div>
+        <div class="desc">Anthropic 更新编码 Agent：新增沙箱凭据保护防止敏感信息泄漏，子 Agent 支持 5 层深嵌套，组织可限制可用模型列表。</div>
+        <div class="source"><a href="https://releasebot.io/updates/anthropic/claude-code" target="_blank" rel="noopener">ReleaseBot</a></div>
+        <span class="opp">Tag: 编码 Agent · 安全</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">6</span>
+      <div class="body">
+        <div class="name">Codex 新增 macOS Record & Replay — 录屏自动转 Skill</div>
+        <div class="desc">Codex 支持录屏回放用户工作流，自动转为可复用的 Skill。周活用户已达 500 万，角色插件覆盖 62 个应用、110 项技能。</div>
+        <div class="source"><a href="https://releasebot.io/updates/openai/codex" target="_blank" rel="noopener">ReleaseBot</a></div>
+        <span class="opp">Tag: 编码 Agent · 产品更新</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">7</span>
+      <div class="body">
+        <div class="name">豆包专业版正式上线 — 办公 Agent 模式，68 元/月</div>
+        <div class="desc">基于豆包 2.1 系列大模型，支持 Agent 办公任务模式。免费用户也可体验豆包 2.1 Turbo。国产 AI 消费级产品加速落地。</div>
+        <div class="source"><a href="https://www.oschina.net/news/466434" target="_blank" rel="noopener">开源中国</a></div>
+        <span class="opp">Tag: SaaS · 国产大模型</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">8</span>
+      <div class="body">
+        <div class="name">benchflow-ai/awesome-evals — AI Agent 评估资源合集</div>
+        <div class="desc">6月24日热榜项目，159 Stars。精选论文、博客、工具、基准测试，涵盖 Agent 评估全链路。适合做 Agent 测评的参考起点。</div>
+        <div class="source"><a href="https://github.com/benchflow-ai/awesome-evals" target="_blank" rel="noopener">GitHub</a></div>
+        <span class="opp">Tag: 开源 · 开发工具</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">9</span>
+      <div class="body">
+        <div class="name">opentag — 开源 @Agent 跨平台路由工具</div>
+        <div class="desc">在 Slack/GitHub 中 @agent 即可自动路由请求到 Codex 或 Claude Code，实现团队成员与 AI Agent 的统一交互入口。</div>
+        <div class="source"><a href="https://github.com/amplifthq/opentag" target="_blank" rel="noopener">GitHub</a></div>
+        <span class="opp">Tag: 开源 · 开发工具</span>
+      </div>
+    </li>
+
+    <li class="item">
+      <span class="rank">10</span>
+      <div class="body">
+        <div class="name">SpaceX 官宣 Starmind — 100 万颗 AI 算力卫星计划</div>
+        <div class="desc">轨道 AI 数据中心项目定名 Starmind，计划发射最高 100 万颗搭载 AI 算力单元的计算卫星，直接为地面提供新型 AI 算力。</div>
+        <div class="source"><a href="https://www.oschina.net/news/466647" target="_blank" rel="noopener">开源中国</a></div>
+        <span class="opp">Tag: 基础设施 · 大公司</span>
+      </div>
+    </li>
+
+  </ul>
+</div>
+
+<!-- 市场脉搏 -->
+<div class="card">
+  <div class="card-header">
+    <h2>市场脉搏</h2>
+    <span class="badge">趋势</span>
+  </div>
+  <div class="pulse-wrap">
+    <span class="pulse-tag pulse-chip">芯片军备</span>
+    <span class="pulse-tag pulse-agent">Agent协作</span>
+    <span class="pulse-tag pulse-open">开源世界模型</span>
+    <span class="pulse-tag pulse-price">AI订阅化</span>
+  </div>
+  <div class="pulse-body">
+    <p><strong>芯片军备竞赛白热化</strong> — OpenAI 加入 Google/Amazon 自研芯片阵营，Jalapeño 专为推理优化，AI 算力供应链正在去 Nvidia 化。</p>
+    <p><strong>Agent 融入协作工具</strong> — Claude Tag 让 AI 成为 Slack 团队成员、opentag 实现 @agent 统一路由，Agent 正从 IDE 扩展到办公基础设施。</p>
+    <p><strong>开源世界模型新范式</strong> — Qwen-AgentWorld 为 Agent 训练提供可交互仿真环境，大大降低 Agent 研发门槛。</p>
+    <p><strong>AI 消费走向聚合订阅</strong> — 豆包专业版 68 元/月推办公 Agent 模式，Crewdle AI 一个订阅用所有工具，AI 正在 SaaS 化。</p>
+  </div>
+</div>
+
+<!-- 深度延伸 -->
+<div class="card">
+  <div class="card-header">
+    <h2>深度延伸</h2>
+    <span class="badge">分析</span>
+  </div>
+  <div class="deep-item">
+    <h3>2026 年 8 大 AI Agent 框架全面对比</h3>
+    <p>最新横评：Microsoft Agent Framework 1.0 GA（合并 AutoGen + Semantic Kernel）、Claude Agent SDK 独立信用额度、CrewAI 52.4K Stars 约 20 亿次 Agent 执行、Google ADK 支持 4 语言 SDK。各框架定位分化明显，选型需看应用场景。</p>
+    <div class="source"><a href="https://www.morphllm.com/ai-agent-framework" target="_blank" rel="noopener">Morphllm</a></div>
+  </div>
+  <div class="deep-item">
+    <h3>Superpowers — 面向 AI 编码 Agent 的技能框架</h3>
+    <p>开发者 obra 发布 Superpowers，基于可组合技能模块为 Agent 提供结构化操作环境。类似 Hermes Skills 体系的设计思路，但聚焦编码场景。</p>
+    <div class="source"><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener">GitHub</a></div>
+  </div>
+</div>
+
+<div class="footer">
+  <a href="https://daily.guancn.me">查看全部历史</a>
+</div>
+
+</div>
+
+</body>
+</html>
