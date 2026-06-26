@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI日报 · 2026-06-27</title>
+<style>
+:root {
+  --bg: #f5f5f7;
+  --white: #ffffff;
+  --black: #000000;
+  --text: #1d1d1f;
+  --text-secondary: rgba(0,0,0,.72);
+  --text-tertiary: rgba(0,0,0,.42);
+  --blue: #0071e3;
+  --blue-active: #0066cc;
+  --border: rgba(0,0,0,.06);
+  --shadow: rgba(0,0,0,.08) 0px 2px 14px;
+  --shadow-hover: rgba(0,0,0,.12) 0px 4px 24px;
+  --radius-card: 14px;
+  --radius-pill: 980px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -.01em;
+}
+
+/* Dark hero */
+.hero {
+  background: var(--black);
+  color: var(--white);
+  text-align: center;
+  padding: 72px 24px 56px;
+}
+.hero .eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .5em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 10px;
+}
+.hero h1 {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.07;
+  letter-spacing: -.015em;
+}
+.hero .sub {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255,255,255,.5);
+  margin-top: 8px;
+  letter-spacing: -.01em;
+}
+
+/* Container */
+.container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+
+/* Audio player bar */
+.audio-bar {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -28px auto 24px;
+  max-width: 420px;
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 2;
+}
+.audio-bar .label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+.audio-bar audio { flex: 1; min-width: 0; height: 28px; }
+
+/* Focus card — deference: content leads */
+.focus-card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.focus-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 3px;
+  background: var(--blue);
+  border-radius: 0 2px 2px 0;
+}
+.focus-card .label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+.focus-card p {
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.47;
+  letter-spacing: -.01em;
+}
+
+/* Cards */
+.card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+  transition: box-shadow .25s ease;
+}
+.card:hover { box-shadow: var(--shadow-hover); }
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.card-header h2 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.card-header .badge {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--blue);
+  background: rgba(0,113,227,.08);
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+}
+
+/* Top list */
+.item-list { list-style: none; }
+.item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.item:last-child { border-bottom: none; padding-bottom: 0; }
+.item .rank {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  min-width: 22px;
+  height: 22px;
+  text-align: center;
+  line-height: 22px;
+  background: var(--bg);
+  border-radius: 6px;
+  margin-top: 2px;
+}
+.item .body { flex: 1; min-width: 0; }
+.item .name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -.01em;
+}
+.item .desc {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-top: 1px;
+  line-height: 1.5;
+}
+.item .opp {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--blue);
+  margin-top: 4px;
+  display: inline-block;
+  cursor: default;
+}
+.item .opp:hover { color: var(--blue-active); }
+.item .source {
+  font-size: 11px;
+  margin-top: 2px;
+}
+.item .source a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  transition: color .2s;
+}
+.item .source a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+.item .source a::before {
+  content: '🔗 ';
+  font-size: 10px;
+}
+
+/* Pulse tags */
+.pulse-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.pulse-tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--text-secondary);
+  letter-spacing: -.01em;
+}
+.pulse-tag:first-child {
+  background: rgba(0,113,227,.08);
+  color: var(--blue);
+}
+.pulse-body {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Deep items */
+.deep-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.deep-item:last-child { border-bottom: none; padding-bottom: 0; }
+.deep-item h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 3px;
+  letter-spacing: -.01em;
+}
+.deep-item p, .deep-item li {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.deep-item ul { padding-left: 18px; }
+.deep-item li { margin: 3px 0; }
+.deep-item .source {
+  font-size: 11px;
+  margin-top: 6px;
+}
+.deep-item .source a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  transition: color .2s;
+}
+.deep-item .source a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+.deep-item .source a::before {
+  content: '🔗 ';
+  font-size: 10px;
+}
+
+/* Footer — blue link pill */
+.footer {
+  text-align: center;
+  padding: 36px 0 52px;
+}
+.footer a {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--blue-active);
+  text-decoration: none;
+  padding: 4px 18px;
+  border: 1px solid var(--blue-active);
+  border-radius: var(--radius-pill);
+  transition: all .2s;
+}
+.footer a:hover {
+  background: var(--blue-active);
+  color: var(--white);
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 52px 20px 40px; }
+  .hero h1 { font-size: 32px; }
+  .focus-card { padding: 18px 16px; }
+  .card { padding: 18px 16px; }
+  .audio-bar { margin-left: 12px; margin-right: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">AI 日报</div>
+  <h1>2026-06-27</h1>
+  <div class="sub">每天早 6 点 · 小关出品</div>
+</div>
+
+<div class="container">
+
+<div class="audio-bar">
+  <span class="label">收听</span>
+  <audio controls preload="none" style="height:28px">
+    <source src="2026-06-27.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<div class="focus-card">
+  <div class="label">今日焦点</div>
+  <p>编码 Agent 生态激战正酣：Claude Code 全面升级自动模式，Codex 默认启用 MCP 工具搜索，美国政府要求 OpenAI 分阶段发布 GPT-5.6</p>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2>TOP 10</h2>
+    <span class="badge">10 项</span>
+  </div>
+  <ul class="item-list">
+<li class="item">
+  <span class="rank">1</span>
+  <div class="body">
+    <div class="name">Claude Code 2.1.193 — 全命令自动分类 + 5 层子 Agent</div>
+    <div class="desc">自动模式升级：所有 Bash/PowerShell 命令走自动分类器。新增 OTel 日志、MCP 启动授权通知、闲置 shell 自动回收。子 Agent 可嵌套至 5 层深度。</div>
+    <div class="source"><a href="https://releasebot.io/updates/anthropic/claude-code" target="_blank" rel="noopener">releasebot.io/updates/anthropic/claude-code</a></div>
+    <span class="opp">编码 Agent · 开发工具</span>
+  </div>
+</li>
+<li class="item">
+  <span class="rank">2</span>
+  <div class="body">
+    <div class="name">Codex 0.142.2 — MCP 工具搜索默认启用</div>
+    <div class="desc">MCP 工具发现机制默认开启，提升 Agent 工具调用兼容性。macOS 端新增系统代理、PAC、WPAD 支持。</div>
+    <div class="source"><a href="https://github.com/openai/codex/releases/tag/rust-v0.142.2" target="_blank" rel="noopener">github.com/openai/codex</a></div>
+    <span class="opp">MCP 协议 · 编码 Agent</span>
+  </div>
+</li>
+<li class="item">
+  <span class="rank">3</span>
+  <div class="body">
+    <div class="name">美国政府要求 OpenAI 分阶段发布 GPT-5.6</div>
+    <div class="desc">The Information 报道，特朗普政府要求 GPT-5.6 先面向小范围筛选用户，逐步扩大发布范围。安全顾虑首次直接影响大模型发布节奏。</div>
+    <div class="source"><a href="https://www.oschina.net/news/467764" target="_blank" rel="noopener">oschina.net/news/467764</a></div>
+    <span class="opp">行业监管 · 模型发布</span>
+  </div>
+</li>
+<li class="item">
+  <span class="rank">4</span>
+  <div class="body">
+    <div class="name">Anthropic Claude 赢得付费消费者市场</div>
+    <div class="desc">TechCrunch 报道，Anthropic Claude 在付费消费者市场份额首次超越 ChatGPT，AI 竞争格局迎来转折点。</div>
+    <div class="source"><a href="https://techcrunch.com/2026/06/25/anthropics-claude-is-winning-over-paid-consumers-a-market-owned-by-chatgpt/" target="_blank" rel="noopener">techcrunch.com</a></div>
+    <span class="opp">大公司 · 市场格局</span>
+  </div>
+</li>
+<li class="item">
+  <span class="rank">5</span>
+  <div class="body">
+    <div class="name">OpenMontage 23K Stars — 开源 AI 视频生产系统</div>
+    <div class="desc">全球首个开源 Agent 化视频制作系统：12 条流水线、52 种工具、500+ Agent 技能。AI 编码助手秒变视频工作室。</div>
+    <div class="source"><a href="https://github.com/calesthio/OpenMontage" target="_blank" rel="noopener">github.com/calesthio/OpenMontage</a></div>
+    <span class="opp">开源 · 内容生产工具</span>
+  </div>
+</li>
+<li class="item">
+  <span class="rank">6</span>
+  <div class="body">
+    <div class="name">gstack 116K Stars — Garry Tan 的 Claude Code 生产配置</div>
+    <div class="desc">YC 掌门人出品的 23 个 Claude Code 工具：CEO、设计师、工程经理、QA 等角色化 AI 协作。GitHub 爆火。</div>
+    <div class="source"><a href="https://github.com/garrytan/gstack" target="_blank" rel="noopener">github.com/garrytan/gstack</a></div>
+    <span class="opp">Agent 工作流 · 开发者工具</span>
+  </div>
+</li>
+<li class="item">
+  <span class="rank">7</span>
+  <div class="body">
+    <div class="name">Mistral AI 发布 OCR4 多语言模型</div>
+    <div class="desc">支持 170 种语言、10 个语族。OmniDocBench 得分 93.07，超越 GPT-5.5 Pro 和 Gemini 3.1 Pro Preview。定价 $4/千页。</div>
+    <div class="source"><a href="https://www.oschina.net/news/467954" target="_blank" rel="noopener">oschina.net/news/467954</a></div>
+    <span class="opp">模型发布 · 文档处理</span>
+  </div>
+</li>
+<li class="item">
+  <span class="rank">8</span>
+  <div class="body">
+    <div class="name">Google Gemini 3.5 Flash 原生集成 Computer Use</div>
+    <div class="desc">Google DeepMind 将计算机使用能力原生集成到 Gemini 3.5 Flash，单一模型可操作浏览器、移动设备、桌面，Agent 能力内置。</div>
+    <div class="source"><a href="https://www.oschina.net/news/467115/introducing-computer-use-gemini-3-5-flash" target="_blank" rel="noopener">oschina.net/news/467115</a></div>
+    <span class="opp">大公司 · Agent</span>
+  </div>
+</li>
+<li class="item">
+  <span class="rank">9</span>
+  <div class="body">
+    <div class="name">General Intuition 23 亿美元 — 游戏训练现实 AI Agent</div>
+    <div class="desc">前 DeepMind 团队获 23 亿美元融资，用电子游戏训练能操作真实世界的 AI Agent。瞄准具身智能+仿真训练赛道。</div>
+    <div class="source"><a href="https://techcrunch.com/2026/06/25/general-intuitions-2-3b-bet-that-video-games-can-train-ai-agents-for-the-real-world/" target="_blank" rel="noopener">techcrunch.com</a></div>
+    <span class="opp">融资 · 具身智能</span>
+  </div>
+</li>
+<li class="item">
+  <span class="rank">10</span>
+  <div class="body">
+    <div class="name">Recoil — 一个 Go 二进制搞定 Agent 记忆</div>
+    <div class="desc">轻量 Agent 记忆工具：记住你出过的错，下次提醒你。不需要嵌入向量库，一个 Go 二进制文件搞定。本地优先。</div>
+    <div class="source"><a href="https://github.com/EclipseElips/recoil" target="_blank" rel="noopener">github.com/EclipseElips/recoil</a></div>
+    <span class="opp">开源 · Agent 工具</span>
+  </div>
+</li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2>市场脉搏</h2>
+    <span class="badge">趋势</span>
+  </div>
+<div class="pulse-wrap">
+  <span class="pulse-tag">编码 Agent</span>
+  <span class="pulse-tag">开源</span>
+  <span class="pulse-tag">模型发布</span>
+  <span class="pulse-tag">大公司</span>
+  <span class="pulse-tag">行业监管</span>
+  <span class="pulse-tag">具身智能</span>
+  <span class="pulse-tag">定价</span>
+</div>
+<div class="pulse-body">
+  <p><strong>编码 Agent 全面竞争。</strong> Claude Code 和 Codex 一周内同步进化：子 Agent 深度（5 层 vs 工具发现）、自动模式、MCP 集成成为差异化焦点。gstack 116K Stars 说明开发者对"最佳实践模板"有强烈需求。</p>
+  <p><strong>监管出手了。</strong> 美国政府首次直接介入大模型发布节奏——安全顾虑不再停留在实验室讨论层面，正在变成实实在在的发布限制。这可能是 2026 年下半年最重要的趋势。</p>
+  <p><strong>开源持续爆发。</strong> OpenMontage（23K Stars）、gstack（116K Stars）、Recoil、GITVERSE，AI 工具化快速向视频生产、投资分析、记忆管理等垂直场景渗透。</p>
+</div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2>深度延伸</h2>
+    <span class="badge">4 篇</span>
+  </div>
+
+<div class="deep-item">
+  <h3>DESIGN.md — 视觉设计规范格式标准化</h3>
+  <p>谷歌实验室发布 DESIGN.md 规范格式，让 AI 编码 Agent 能持久理解设计系统。21134 Stars，类似 README.md 对开源项目的标准化作用，DESIGN.md 可能成为 AI 时代前端开发的标配。</p>
+  <div class="source"><a href="https://github.com/google-labs-code/design.md" target="_blank" rel="noopener">github.com/google-labs-code/design.md</a></div>
+</div>
+<div class="deep-item">
+  <h3>翁荔 Scaling Laws 检讨：停更 13 月后的深度反思</h3>
+  <p>前 OpenAI 安全研究 VP 在个人博客发布《Scaling Laws, Carefully...》，审视 Scaling Laws 的局限性和行业盲目追求规模的隐患。AI 圈的必读文章。</p>
+  <div class="source"><a href="https://www.oschina.net/news/467860/lilianweng-scaling-laws" target="_blank" rel="noopener">oschina.net/news/467860</a></div>
+</div>
+<div class="deep-item">
+  <h3>开放权重模型定价碾压闭源：$0.09 vs $5.00</h3>
+  <p>DeepSeek 推理定价 $0.09/M token vs Anthropic $5.00/M token，55 倍差距。开放权重模型的价格优势正在重塑市场格局，自部署大模型的经济账越来越划算。</p>
+  <div class="source"><a href="https://www.oschina.net/news/467888" target="_blank" rel="noopener">oschina.net/news/467888</a></div>
+</div>
+<div class="deep-item">
+  <h3>hackmyclaw.com — 2000+ 黑客没攻破的 AI 助手</h3>
+  <p>开发者将 AI 助手 "Fiu" 挂在公网（基于 OpenClaw + Claude Opus 4.6），开放邮箱、日历、文件权限。2000+ 攻击者发送 6000+ 邮件，零成功。反注入规则值得借鉴。</p>
+  <div class="source"><a href="https://www.oschina.net/news/467910" target="_blank" rel="noopener">oschina.net/news/467910</a></div>
+</div>
+</div>
+
+<div class="footer">
+  <a href="https://daily.guancn.me">查看全部历史</a>
+</div>
+
+</div>
+
+</body>
+</html>
