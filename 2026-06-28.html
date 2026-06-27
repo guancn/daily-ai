@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI日报 · 2026-06-28</title>
+<style>
+:root {
+  --bg: #f5f5f7;
+  --white: #ffffff;
+  --black: #000000;
+  --text: #1d1d1f;
+  --text-secondary: rgba(0,0,0,.72);
+  --text-tertiary: rgba(0,0,0,.42);
+  --blue: #0071e3;
+  --blue-active: #0066cc;
+  --border: rgba(0,0,0,.06);
+  --shadow: rgba(0,0,0,.08) 0px 2px 14px;
+  --shadow-hover: rgba(0,0,0,.12) 0px 4px 24px;
+  --radius-card: 14px;
+  --radius-pill: 980px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -.01em;
+}
+
+/* Dark hero */
+.hero {
+  background: var(--black);
+  color: var(--white);
+  text-align: center;
+  padding: 72px 24px 56px;
+}
+.hero .eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .5em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 10px;
+}
+.hero h1 {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.07;
+  letter-spacing: -.015em;
+}
+.hero .sub {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255,255,255,.5);
+  margin-top: 8px;
+  letter-spacing: -.01em;
+}
+
+/* Container */
+.container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+
+/* Audio player bar */
+.audio-bar {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -28px auto 24px;
+  max-width: 420px;
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 2;
+}
+.audio-bar .label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+.audio-bar audio { flex: 1; min-width: 0; height: 28px; }
+
+/* Focus card — deference: content leads */
+.focus-card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.focus-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 3px;
+  background: var(--blue);
+  border-radius: 0 2px 2px 0;
+}
+.focus-card .label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+.focus-card p {
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.47;
+  letter-spacing: -.01em;
+}
+
+/* Cards */
+.card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+  transition: box-shadow .25s ease;
+}
+.card:hover { box-shadow: var(--shadow-hover); }
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.card-header h2 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.card-header .badge {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--blue);
+  background: rgba(0,113,227,.08);
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+}
+
+/* Top list */
+.item-list { list-style: none; }
+.item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.item:last-child { border-bottom: none; padding-bottom: 0; }
+.item .rank {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  min-width: 22px;
+  height: 22px;
+  text-align: center;
+  line-height: 22px;
+  background: var(--bg);
+  border-radius: 6px;
+  margin-top: 2px;
+}
+.item .body { flex: 1; min-width: 0; }
+.item .name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -.01em;
+}
+.item .desc {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-top: 1px;
+  line-height: 1.5;
+}
+.item .opp {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--blue);
+  margin-top: 4px;
+  display: inline-block;
+  cursor: default;
+}
+.item .opp:hover { color: var(--blue-active); }
+.item .source {
+  font-size: 11px;
+  margin-top: 2px;
+}
+.item .source a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  transition: color .2s;
+}
+.item .source a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+.item .source a::before {
+  content: '🔗 ';
+  font-size: 10px;
+}
+
+/* Pulse tags */
+.pulse-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.pulse-tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--text-secondary);
+  letter-spacing: -.01em;
+}
+.pulse-tag:first-child {
+  background: rgba(0,113,227,.08);
+  color: var(--blue);
+}
+.pulse-body {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Deep items */
+.deep-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.deep-item:last-child { border-bottom: none; padding-bottom: 0; }
+.deep-item h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 3px;
+  letter-spacing: -.01em;
+}
+.deep-item p, .deep-item li {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.deep-item ul { padding-left: 18px; }
+.deep-item li { margin: 3px 0; }
+.deep-item .source {
+  font-size: 11px;
+  margin-top: 6px;
+}
+.deep-item .source a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  transition: color .2s;
+}
+.deep-item .source a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+.deep-item .source a::before {
+  content: '🔗 ';
+  font-size: 10px;
+}
+
+/* Footer — blue link pill */
+.footer {
+  text-align: center;
+  padding: 36px 0 52px;
+}
+.footer a {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--blue-active);
+  text-decoration: none;
+  padding: 4px 18px;
+  border: 1px solid var(--blue-active);
+  border-radius: var(--radius-pill);
+  transition: all .2s;
+}
+.footer a:hover {
+  background: var(--blue-active);
+  color: var(--white);
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 52px 20px 40px; }
+  .hero h1 { font-size: 32px; }
+  .focus-card { padding: 18px 16px; }
+  .card { padding: 18px 16px; }
+  .audio-bar { margin-left: 12px; margin-right: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">AI 日报</div>
+  <h1>2026-06-28</h1>
+  <div class="sub">每天早 6 点 · 小关出品</div>
+</div>
+
+<div class="container">
+
+<div class="audio-bar">
+  <span class="label">收听</span>
+  <audio controls preload="none" style="height:28px">
+    <source src="2026-06-28.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<div class="focus-card">
+  <div class="label">今日焦点</div>
+  <p>GPT-5.6 Sol 正式预览但受美国政府限制仅对 20 家合作伙伴开放 · DeepSeek 开源 DeepSpec 推测解码框架一夜 1218⭐ · 黄仁勋提出「Loop 取代 Prompt」· Anthropic 年收入 470 亿美元 B 端反超 OpenAI</p>
+</div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2>🚀 TOP 10</h2>
+          <span class="badge">2026-06-28</span>
+        </div>
+        <ul class="item-list">
+
+          <li class="item">
+            <span class="rank">1</span>
+            <div class="body">
+              <div class="name">OpenAI GPT-5.6 Sol / Terra / Luna 三档模型预览 · 美国政府限制发布</div>
+              <div class="desc">OpenAI 发布 GPT-5.6 系列：Sol（旗舰推理）、Terra（日常/成本降2倍）、Luna（最快最经济）。Sol 在 Terminal-Bench 2.1 达 88.8%，编码能力超越 Mythos 5。但美国政府以安全为由要求限制发布，目前仅限约20家政府批准合作伙伴使用。OpenAI 称"这种政府准入不应成为长期常态"。</div>
+              <div class="source"><a href="https://techcrunch.com/2026/06/26/openai-limits-gpt-5-6-rollout-after-government-request-says-restrictions-shouldnt-be-the-norm/" target="_blank" rel="noopener">TechCrunch</a></div>
+              <span class="opp">Tag: 模型发布 · 监管</span>
+            </div>
+          </li>
+
+          <li class="item">
+            <span class="rank">2</span>
+            <div class="body">
+              <div class="name">DeepSeek 开源 DeepSpec · 推测解码全栈框架一夜 1218⭐</div>
+              <div class="desc">DeepSeek AI 开源 DeepSpec，全栈推测解码（Speculative Decoding）训练与评估框架。MIT 许可，Python 实现，是加速 LLM 推理的关键基础设施。发布仅两天即获1218⭐，是本周 GitHub 增长最快的新仓库。</div>
+              <div class="source"><a href="https://github.com/deepseek-ai/DeepSpec" target="_blank" rel="noopener">GitHub · deepseek-ai/DeepSpec</a></div>
+              <span class="opp">Tag: 开源 · 推理优化 · DeepSeek</span>
+            </div>
+          </li>
+
+          <li class="item">
+            <span class="rank">3</span>
+            <div class="body">
+              <div class="name">黄仁勋提出 Loop 新范式 · "Prompt 正在过时"</div>
+              <div class="desc">黄仁勋在最新演讲中提出 AI 工程正从 Prompt Engineering 转向 Loop Engineering——写指令的时代过去，设计自主闭环系统才是未来。Claude Code 已推出 /loop、/goal、/schedule 三件套，Codex 支持 8 Agent 并行。开发者角色从"翻译官"升级为"系统架构师"。</div>
+              <div class="source"><a href="https://www.neican.ai/insights/promptloopai-20260625224007362-1/" target="_blank" rel="noopener">AI内参深度分析</a></div>
+              <span class="opp">Tag: 范式转变 · Agent · 工程方法论</span>
+            </div>
+          </li>
+
+          <li class="item">
+            <span class="rank">4</span>
+            <div class="body">
+              <div class="name">Anthropic 年化收入 470 亿美元 · B 端反超 OpenAI</div>
+              <div class="desc">Anthropic 年化收入飙至 470 亿美元，企业客户贡献超 80%，金融领域独占 40%。在美国政府向 100+ 机构和公司开放 Mythos 5 的助推下，企业级市场全面反超 OpenAI。</div>
+              <div class="source"><a href="https://blog.csdn.net/haohaizi_liu/article/details/162341969" target="_blank" rel="noopener">CSDN AI科技热点日报</a></div>
+              <span class="opp">Tag: 商业 · Anthropic · 企业市场</span>
+            </div>
+          </li>
+
+          <li class="item">
+            <span class="rank">5</span>
+            <div class="body">
+              <div class="name">微软《工作趋势指数 2026》：58% 因 AI 产出过去无法完成的成果</div>
+              <div class="desc">覆盖全球 10 个市场 2 万名用户。中国高达 72% 的受访者借助 AI 完成过去无法实现的工作，但 67% 的 AI 价值取决于组织环境——员工已准备好，但组织和领导还没跟上。</div>
+              <div class="source"><a href="https://www.aitntnews.com/newDetail.html?newId=26606" target="_blank" rel="noopener">AITNT News</a></div>
+              <span class="opp">Tag: 行业报告 · 工作趋势 · 生产力</span>
+            </div>
+          </li>
+
+          <li class="item">
+            <span class="rank">6</span>
+            <div class="body">
+              <div class="name">Godcoder · 本地优先开源桌面编码 Agent（222⭐）</div>
+              <div class="desc">基于 Rust/Tauri 构建的本地优先开源编码 Agent。自带 LLM 密钥，代码仅发送给模型提供商，数据完全留在本地。支持 MCP 协议，本地化+开源双重优势直击企业隐私痛点。</div>
+              <div class="source"><a href="https://github.com/eli-labz/Godcoder" target="_blank" rel="noopener">GitHub · eli-labz/Godcoder</a></div>
+              <span class="opp">Tag: 开源 · 编码Agent · 本地优先</span>
+            </div>
+          </li>
+
+          <li class="item">
+            <span class="rank">7</span>
+            <div class="body">
+              <div class="name">IBM 首款 0.7nm 芯片技术 · 指甲盖面积集成近 1000 亿晶体管</div>
+              <div class="desc">IBM 公布全球首款 sub-1nm（0.7nm / 7埃）芯片技术，性能比 2nm 提升 50% 或能效改善 70%。对 AI 训练与推理基础设施有直接意义，将大幅降低大模型的算力成本门槛。</div>
+              <div class="source"><a href="https://txtmix.com/posts/news/ai-morning-news-2026-06-26" target="_blank" rel="noopener">TextMatrix AI早报</a></div>
+              <span class="opp">Tag: 芯片 · 硬件突破 · 算力</span>
+            </div>
+          </li>
+
+          <li class="item">
+            <span class="rank">8</span>
+            <div class="body">
+              <div class="name">FORT 30B 开源搜索 Agent · 刷新同规模 SOTA</div>
+              <div class="desc">IQuest 等联合推出 FORT-Searcher，以 Qwen3-30B 为基座，在 BrowseComp 和 BrowseComp-ZH 上分别达 72.2 和 75.0，同规模开源 Agent 最高分。30B 参数就能达到顶尖搜索 Agent 水平，Agent 能力的"小型化"趋势明显。</div>
+              <div class="source"><a href="https://www.aitntnews.com/newDetail.html?newId=26605" target="_blank" noopener">AITNT News</a></div>
+              <span class="opp">Tag: 搜索Agent · 开源 · 小型化</span>
+            </div>
+          </li>
+
+          <li class="item">
+            <span class="rank">9</span>
+            <div class="body">
+              <div class="name">Apple Vision Pro 高管离职加入 OpenAI 硬件团队</div>
+              <div class="desc">Apple Vision Pro 副总裁 Paul Meade 据报将离开 Apple 加入 OpenAI 的硬件团队。此前 OpenAI 已发布自研推理芯片 Jalapeño，此举或暗示 OpenAI 正在加速硬件产品布局。</div>
+              <div class="source"><a href="https://techcrunch.com/2026/06/27/apple-vision-pro-exec-is-reportedly-leaving-for-openai/" target="_blank" rel="noopener">TechCrunch</a></div>
+              <span class="opp">Tag: 人才流动 · 硬件 · OpenAI</span>
+            </div>
+          </li>
+
+          <li class="item">
+            <span class="rank">10</span>
+            <div class="body">
+              <div class="name">第 21 届开源中国高峰论坛 · 中国大模型跻身全球 AI 第一梯队</div>
+              <div class="desc">Linux 基金会成立 AAIF 智能体基金会（创始会员含 OpenAI、Google），MCP SDK 月下载量突破 1.2 亿次。DeepSeek、Kimi、通义千问等国产开源模型被官方认定跻身全球第一梯队，国产 Agent 生态加速成熟。</div>
+              <div class="source"><a href="https://www.aitntnews.com/newDetail.html?newId=26601" target="_blank" rel="noopener">AITNT News</a></div>
+              <span class="opp">Tag: 开源生态 · 国产大模型 · MCP</span>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2>📊 市场脉搏</h2>
+          <span class="badge">6 项</span>
+        </div>
+        <div class="pulse-wrap">
+          <span class="pulse-tag">GPT-5.6 三档定价</span>
+          <span class="pulse-tag">监管趋严</span>
+          <span class="pulse-tag">版权诉讼</span>
+          <span class="pulse-tag">Agent 开源爆发</span>
+          <span class="pulse-tag">硬核芯片</span>
+          <span class="pulse-tag">国产模型崛起</span>
+        </div>
+        <div class="pulse-body">
+          <p><strong>GPT-5.6 定价分层：</strong> Sol $5/$30、Terra $2.5/$15、Luna $1/$6（每百万 token），三档精准切割不同需求场景。Luna 定价已接近成本价，意图锁定高频 Agent 调用场景。</p>
+          <p><strong>AI 监管博弈升级：</strong> 美国政府要求 OpenAI 限制 GPT-5.6 发布、向 100+ 机构开放 Anthropic Mythos 5、近 400 家美国报纸联合起诉微软与 OpenAI 版权侵权——AI 产业正从技术竞争演变为法律与地缘政治的多维博弈。</p>
+          <p><strong>Agent 开源生态爆发：</strong> 过去 3 天 GitHub 涌现大量 Agent 相关新项目——Godcoder（编码 Agent）、Semaphore（Agent 状态灯）、opencode-subagent-magazine（子 Agent 监控）、skills-hub（技能市场）、MCPsnoop（MCP 抓包工具）。Agent 从"玩概念"进入"搞工具"阶段。</p>
+          <p><strong>DeepSeek 全面扩招：</strong> 510 亿融资到位后全员至少翻倍，重点布局 AI 搜索和智能体底层架构——这是国产模型公司从"做模型"转向"做产品"的关键信号。</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2>🔍 深度延伸</h2>
+          <span class="badge">2 篇</span>
+        </div>
+
+        <div class="deep-item">
+          <h3>从 Prompt 到 Loop：AI 工程范式的深层进化</h3>
+          <p>温故智新实验室的一篇深度分析，完整阐述了 Loop Engineering 的架构：五大核心要素（触发器、技能库、持久化状态文件、门禁、硬停止条件），以及最重要的 "Maker-Checker 分离"原则——写代码的模型和执行验收的模型必须解耦，否则自我确认偏差会导致低效幻觉循环。文章将 AI 控制粒度划分为四个阶段：Prompt（翻译官）→ Context（信息组织者）→ Harness（工程师）→ Loop（系统架构师）。</p>
+          <div class="source"><a href="https://www.neican.ai/insights/promptloopai-20260625224007362-1/" target="_blank" rel="noopener">AI内参 · 温故智新AIGC实验室</a></div>
+        </div>
+
+        <div class="deep-item">
+          <h3>OpenAI GPT-5.6 Sol vs Anthropic Mythos 5：从模型竞争到地缘政治博弈</h3>
+          <p>GPT-5.6 Sol 在 Terminal-Bench 2.1 以 88.8% 领先 Mythos 5 的输出效率（1/3 token 量），但 Anthropic 凭借 470 亿美元年收入和 100+ 机构的政府背书在 B 端市场领先。亚洲 AI 初创公司开始推出类 Mythos 模型规避美国出口管制——AI 模型本身已成地缘政治筹码。</p>
+          <div class="source"><a href="https://techcrunch.com/2026/06/26/its-not-about-anthropic-vs-openai-anymore/" target="_blank" rel="noopener">TechCrunch · It's not about Anthropic vs. OpenAI anymore</a></div>
+        </div>
+
+      </div>
+
+
+<div class="footer">
+  <a href="https://daily.guancn.me">查看全部历史</a>
+</div>
+
+</div>
+
+</body>
+</html>
