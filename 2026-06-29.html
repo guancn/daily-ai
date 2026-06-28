@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI日报 · 2026-06-29</title>
+<style>
+:root {
+  --bg: #f5f5f7;
+  --white: #ffffff;
+  --black: #000000;
+  --text: #1d1d1f;
+  --text-secondary: rgba(0,0,0,.72);
+  --text-tertiary: rgba(0,0,0,.42);
+  --blue: #0071e3;
+  --blue-active: #0066cc;
+  --border: rgba(0,0,0,.06);
+  --shadow: rgba(0,0,0,.08) 0px 2px 14px;
+  --shadow-hover: rgba(0,0,0,.12) 0px 4px 24px;
+  --radius-card: 14px;
+  --radius-pill: 980px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -.01em;
+}
+
+/* Dark hero */
+.hero {
+  background: var(--black);
+  color: var(--white);
+  text-align: center;
+  padding: 72px 24px 56px;
+}
+.hero .eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .5em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 10px;
+}
+.hero h1 {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.07;
+  letter-spacing: -.015em;
+}
+.hero .sub {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255,255,255,.5);
+  margin-top: 8px;
+  letter-spacing: -.01em;
+}
+
+/* Container */
+.container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+
+/* Audio player bar */
+.audio-bar {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -28px auto 24px;
+  max-width: 420px;
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 2;
+}
+.audio-bar .label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+.audio-bar audio { flex: 1; min-width: 0; height: 28px; }
+
+/* Focus card — deference: content leads */
+.focus-card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.focus-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 3px;
+  background: var(--blue);
+  border-radius: 0 2px 2px 0;
+}
+.focus-card .label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+.focus-card p {
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.47;
+  letter-spacing: -.01em;
+}
+
+/* Cards */
+.card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 24px 28px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+  transition: box-shadow .25s ease;
+}
+.card:hover { box-shadow: var(--shadow-hover); }
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.card-header h2 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.card-header .badge {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--blue);
+  background: rgba(0,113,227,.08);
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+}
+
+/* Top list */
+.item-list { list-style: none; }
+.item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.item:last-child { border-bottom: none; padding-bottom: 0; }
+.item .rank {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  min-width: 22px;
+  height: 22px;
+  text-align: center;
+  line-height: 22px;
+  background: var(--bg);
+  border-radius: 6px;
+  margin-top: 2px;
+}
+.item .body { flex: 1; min-width: 0; }
+.item .name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -.01em;
+}
+.item .desc {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-top: 1px;
+  line-height: 1.5;
+}
+.item .opp {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--blue);
+  margin-top: 4px;
+  display: inline-block;
+  cursor: default;
+}
+.item .opp:hover { color: var(--blue-active); }
+.item .source {
+  font-size: 11px;
+  margin-top: 2px;
+}
+.item .source a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  transition: color .2s;
+}
+.item .source a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+.item .source a::before {
+  content: '🔗 ';
+  font-size: 10px;
+}
+
+/* Pulse tags */
+.pulse-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.pulse-tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--text-secondary);
+  letter-spacing: -.01em;
+}
+.pulse-tag:first-child {
+  background: rgba(0,113,227,.08);
+  color: var(--blue);
+}
+.pulse-body {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Deep items */
+.deep-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.deep-item:last-child { border-bottom: none; padding-bottom: 0; }
+.deep-item h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 3px;
+  letter-spacing: -.01em;
+}
+.deep-item p, .deep-item li {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.deep-item ul { padding-left: 18px; }
+.deep-item li { margin: 3px 0; }
+.deep-item .source {
+  font-size: 11px;
+  margin-top: 6px;
+}
+.deep-item .source a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  transition: color .2s;
+}
+.deep-item .source a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+.deep-item .source a::before {
+  content: '🔗 ';
+  font-size: 10px;
+}
+
+/* Footer — blue link pill */
+.footer {
+  text-align: center;
+  padding: 36px 0 52px;
+}
+.footer a {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--blue-active);
+  text-decoration: none;
+  padding: 4px 18px;
+  border: 1px solid var(--blue-active);
+  border-radius: var(--radius-pill);
+  transition: all .2s;
+}
+.footer a:hover {
+  background: var(--blue-active);
+  color: var(--white);
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 52px 20px 40px; }
+  .hero h1 { font-size: 32px; }
+  .focus-card { padding: 18px 16px; }
+  .card { padding: 18px 16px; }
+  .audio-bar { margin-left: 12px; margin-right: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">AI 日报</div>
+  <h1>2026-06-29</h1>
+  <div class="sub">每天早 6 点 · 小关出品</div>
+</div>
+
+<div class="container">
+
+<div class="audio-bar">
+  <span class="label">收听</span>
+  <audio controls preload="none" style="height:28px">
+    <source src="https://daily.guancn.me/2026-06-29.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<div class="focus-card">
+  <div class="label">今日焦点</div>
+  <p>GPT-5.6 Sol 三档模型预览、美国政府逐用户审查机制引关注 · Agent 模型路由开源降本 40-70% · 记忆基础设施密集爆发，cognee/codegraph/MemPalace 同日上榜</p>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2>TOP 10</h2>
+    <span class="badge">本期 10 条</span>
+  </div>
+  <ul class="item-list">
+    <li class="item">
+      <span class="rank">1</span>
+      <div class="body">
+        <div class="name">OpenAI GPT-5.6 Sol 预览 · 美国政府将逐用户审查访问权限</div>
+        <div class="desc">OpenAI 正式预告 GPT-5.6 系列，分 Sol（旗舰）/ Terra（均衡）/ Luna（轻量）三档。Sol 在 Terminal-Bench 2.1 编程测试中刷新 SOTA，ExploitBench 安全测试以 Mythos Preview 1/3 的 Token 用量取得同等水平。最值得关注的是美国政府要求 OpenAI 对 Sol 的每个用户进行安全审查，开创了前沿模型「逐用户许可」的先河。新增 max 深度推理和 ultra 子 Agent 加速模式。</div>
+        <div class="source"><a href="https://openai.com/index/previewing-gpt-5-6-sol/" target="_blank" rel="noopener">原文链接</a></div>
+        <span class="opp">Tag: 模型发布 · AI安全 · 政府监管</span>
+      </div>
+    </li>
+    <li class="item">
+      <span class="rank">2</span>
+      <div class="body">
+        <div class="name">workweave/router — Agent 智能模型路由开源，降本 40-70%</div>
+        <div class="desc">一个 drop-in 代理，50ms 内为每轮请求选择最优模型。支持 Anthropic / OpenAI / Gemini / DeepSeek / Qwen 等全系列，可直接接入 Claude Code、Codex、OpenCode 和 Cursor。基于 Avengers-Pro 论文的小型嵌入模型做集群评分，BYOK 密钥本地加密存储，内置 OTLP 可观测仪表盘。534 Stars 的 Show HN 项目，解决多模型场景下「哪个模型干哪件事」的痛点。</div>
+        <div class="source"><a href="https://github.com/workweave/router" target="_blank" rel="noopener">原文链接</a></div>
+        <span class="opp">Tag: 开源工具 · Agent · 模型路由</span>
+      </div>
+    </li>
+    <li class="item">
+      <span class="rank">3</span>
+      <div class="body">
+        <div class="name">OpenAI 在戛纳推介 ChatGPT 广告，IPO 前押注 25 亿美元广告收入</div>
+        <div class="desc">OpenAI CRO Denise Dresser 明确表示「我们已进入广告业务」。ChatGPT 广告在 Free/Go 用户回复下方展示，仅触发有商业意图的查询。目标 2026 年广告收入 25 亿美元，但整个 AI 聊天广告市场今年预计不到 10 亿美元。已接入 Criteo（2000+ 品牌使用），下一步拓展巴西和墨西哥。用户关闭广告的比例已下降 50%。</div>
+        <div class="source"><a href="https://winbuzzer.com/2026/06/26/openai-pitches-chatgpt-ads-at-cannes-before-ipo-push-xcxwbn/" target="_blank" rel="noopener">原文链接</a></div>
+        <span class="opp">Tag: 商业化 · IPO · 广告</span>
+      </div>
+    </li>
+    <li class="item">
+      <span class="rank">4</span>
+      <div class="body">
+        <div class="name">Codegraph — 预索引本地代码知识图谱，为 Agent 降 Token 消耗</div>
+        <div class="desc">一个开源工具，为代码库建立预索引、本地同步的知识图谱，供 Claude Code、Codex、Cursor 等 Agent 使用。本质上是把「每次对话都要重新理解项目结构」变成「一次索引、多次复用」，显著降低上下文窗口占用和 Token 费用。366 Stars 今日新增，说明 Agent 工具链正在从「能干活」进化到「干得便宜」。</div>
+        <div class="source"><a href="https://github.com/colbymchenry/codegraph" target="_blank" rel="noopener">原文链接</a></div>
+        <span class="opp">Tag: 开源工具 · 代码智能 · Token优化</span>
+      </div>
+    </li>
+    <li class="item">
+      <span class="rank">5</span>
+      <div class="body">
+        <div class="name">cognee — 开源 AI 记忆平台，知识图谱持久化 Agent 记忆</div>
+        <div class="desc">一个自托管的开源 AI 记忆平台，通过知识图谱为 Agent 提供持久化记忆。支持长程任务的上下文保持，让 Agent 在多次对话和工作会话之间记住用户偏好和历史决策。780 Stars 今日新增，与 MemPalace（156 Stars）、memanto（117 Stars）等记忆层项目同期爆发，标志着 Agent 记忆基础设施进入密集竞争期。</div>
+        <div class="source"><a href="https://github.com/topoteretes/cognee" target="_blank" rel="noopener">原文链接</a></div>
+        <span class="opp">Tag: 开源 · Agent记忆 · 知识图谱</span>
+      </div>
+    </li>
+    <li class="item">
+      <span class="rank">6</span>
+      <div class="body">
+        <div class="name">Anthropic Claude Code v2.1.195 — 全屏鼠标控制 + 语音输入大修</div>
+        <div class="desc">Claude Code 更新加入全屏鼠标点击/拖拽/悬停控制（可禁用），修复了语音听写在长会话中静默捕获的问题，以及日/中/泰等无空格语言的自动提交。插件匹配从子串匹配改为精确匹配（mcp__brave-search__.* 语法），后台 Agent 崩溃后恢复不再显示 5 秒白屏。</div>
+        <div class="source"><a href="https://raw.githubusercontent.com/anthropics/claude-code/refs/heads/main/CHANGELOG.md" target="_blank" rel="noopener">原文链接</a></div>
+        <span class="opp">Tag: Claude Code · 更新日志 · Agent</span>
+      </div>
+    </li>
+    <li class="item">
+      <span class="rank">7</span>
+      <div class="body">
+        <div class="name">freellmapi — 16 家 LLM 免费层聚合，单端点智能路由 + 故障转移</div>
+        <div class="desc">一个 OpenAI 兼容代理，聚合 16 家 LLM 提供商的免费层额度（包括各家新用户赠送），通过智能路由和故障转移保证可用性。354 Stars 今日新增。对于个人开发者和预算有限的团队来说，这相当于把各家「薅羊毛」额度集中管理，极大降低了 LLM 调用的起步成本。</div>
+        <div class="source"><a href="https://github.com/tashfeenahmed/freellmapi" target="_blank" rel="noopener">原文链接</a></div>
+        <span class="opp">Tag: 开源 · LLM路由 · 成本优化</span>
+      </div>
+    </li>
+    <li class="item">
+      <span class="rank">8</span>
+      <div class="body">
+        <div class="name">google-labs-code/design.md — Agent 可读的视觉设计规范格式</div>
+        <div class="desc">Google Labs 发布的 DESIGN.md 规范格式，用结构化标记语言定义视觉设计系统（颜色、间距、排版、组件），让编码 Agent 可以直接「读懂」设计规范并生成符合品牌的 UI。1541 Stars 暴涨，说明「Agent 要怎么知道设计长什么样」在 2026 年成了一个有明确痛点的真问题。</div>
+        <div class="source"><a href="https://github.com/google-labs-code/design.md" target="_blank" rel="noopener">原文链接</a></div>
+        <span class="opp">Tag: Google · 设计规范 · Agent友好</span>
+      </div>
+    </li>
+    <li class="item">
+      <span class="rank">9</span>
+      <div class="body">
+        <div class="name">Anthropic Claude Dev Platform 提高 API 速率限制，统一用量层级</div>
+        <div class="desc">Anthropic 将 Claude Sonnet 和 Haiku 的速率限制提升到与 Opus 一致，用量层级简化为 Start / Build / Scale 三级。大多数组织自动升级到更高层级，无需任何操作。这意味着 Anthropic 在降低企业部署 Claude 的准入门槛——API 不再是「越贵的模型限制越宽」，而是一视同仁。</div>
+        <div class="source"><a href="https://docs.claude.com/en/release-notes/overview.md" target="_blank" rel="noopener">原文链接</a></div>
+        <span class="opp">Tag: Anthropic · API · 企业服务</span>
+      </div>
+    </li>
+    <li class="item">
+      <span class="rank">10</span>
+      <div class="body">
+        <div class="name">用户正转向高效开源模型，OpenAI 和 Anthropic 面临 AI 支出放缓</div>
+        <div class="desc">CNBC 报道，企业正在收紧 AI 预算，从「先上了再说」转向「算 ROI」。开源模型（DeepSeek、GLM、Qwen）以显著更低的成本提供接近前沿水平的性能，正在侵蚀闭源 API 的市场空间。这意味着 AI 公司的增长叙事正在从「用户数增长」切换到「留存 + 单用户价值」，对即将 IPO 的 OpenAI 和 Anthropic 影响深远。</div>
+        <div class="source"><a href="https://www.cnbc.com/2026/06/26/openai-anthropic-new-ai-spending-reality-as-users-shift-to-efficiency.html" target="_blank" rel="noopener">原文链接</a></div>
+        <span class="opp">Tag: 行业趋势 · 开源 · 商业化</span>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2>市场脉搏</h2>
+    <span class="badge">短讯汇总</span>
+  </div>
+  <div class="pulse-wrap">
+    <span class="pulse-tag">商业化</span>
+    <span class="pulse-tag">Agent生态</span>
+    <span class="pulse-tag">安全</span>
+    <span class="pulse-tag">开源</span>
+    <span class="pulse-tag">Persona.js</span>
+  </div>
+  <div class="pulse-body">
+    <p><strong>· Product Hunt 6/28:</strong> discode.ai 登顶（100+模型统一接口，282 upvotes），Persona.js 获209 upvotes（WebMCP原生AI聊天UI库，零框架依赖，支持Chrome WebMCP协议）→ <a href="https://www.producthunt.com/leaderboard/daily/2026/6/28" target="_blank" rel="noopener">查看</a></p>
+    <p><strong>· 微信AI生态新动向：</strong> 微信发布AI小程序成长计划，新开发者可获6个月免费云开发环境和1亿混元Token额度，iOS虚拟支付已落地。微信AI Agent接入文档公开，支持自动/开发双模式 → <a href="https://cloud.tencent.com/developer/article/2613128" target="_blank" rel="noopener">了解详情</a></p>
+    <p><strong>· garrytan/gstack 持续火爆：</strong> 加里·谭（Garry Tan，YC CEO）的 Claude Code 配置模板达 116K Stars，包含 CEO、设计师、EM、发布经理、文档工程师、QA 共 23 个工具角色 — 一日再增 674 Stars</p>
+    <p><strong>· OpenAI Daybreak 扩大：</strong> GPT-5.5-Cyber 全量发布，在 CyberGym 基准 85.6% 超越 Claude Mythos 5 的 83.8%。Codex Security 更新支持全流程漏洞发现→验证→补丁生成，覆盖 30,000+ 代码库 → <a href="https://openai.com/index/daybreak-securing-the-world/" target="_blank" rel="noopener">详情</a></p>
+    <p><strong>· Product Hunt 6/27: </strong> Gemini Spark（24/7个人Agent 313 upvotes）、Agent Arena（Agent对比擂台 326 upvotes）、Atlas（企业上下文AI层 194 upvotes）</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2>深度延伸</h2>
+    <span class="badge">深度分析</span>
+  </div>
+  <div class="deep-item">
+    <h3>GPT-5.6 Sol 为什么值得关注？</h3>
+    <p>三个层面看这次发布：</p>
+    <ul>
+      <li><strong>模型架构：</strong> Sol 引入了 max 深度推理模式+ultra 子Agent加速模式。这意味着 OpenAI 在「更慢更准」和「更快更省」之间给了开发者显式的控制旋钮。</li>
+      <li><strong>政府审查机制：</strong> 美国政府要求逐用户审查 Sol 访问权限，这在 AI 行业是第一次。不是公司自愿的伦理审查，而是政府直接的出口管制式管控。未来前沿模型可能像核材料一样被分级管理。</li>
+      <li><strong>定价信号：</strong> Sol $5/$30 每百万 Token，Terra $2.5/$15（性能对标 GPT-5.5 但便宜一半），Luna $1/$6。这个价位意味着 OpenAI 在同时打高端和性价比两张牌。Sol 在 Cerebras 上可达 750 tokens/s，7月上线。</li>
+    </ul>
+    <div class="source"><a href="https://openai.com/index/previewing-gpt-5-6-sol/" target="_blank" rel="noopener">来源：OpenAI 官方</a> · <a href="https://www.washingtonpost.com/technology/2026/06/26/openai-says-us-government-will-vet-users-its-latest-ai-model/" target="_blank" rel="noopener">Washington Post</a></div>
+  </div>
+
+  <div class="deep-item">
+    <h3>Agent 模型路由：workweave/router 为什么值得试？</h3>
+    <p>现在 Agent 面临一个很现实的问题：Claude Code 默认只用 Claude，Codex 只用 GPT，但你明明有更好的模型组合方案。</p>
+    <ul>
+      <li>编程用 Claude Opus，简单查询用 GPT-5.5 Instant，创意写作用 Gemini — 每个模型干自己最擅长的事</li>
+      <li>workweave/router 用 50ms 不到的客户端评分决定本轮路由，不需要额外 API 调用</li>
+      <li>支持主流 Agent 工具的一键接入：npx @workweave/router --claude 就能让 Claude Code 走路由</li>
+      <li>自带可观测仪表盘，能看到每轮请求选了哪个模型、为什么</li>
+    </ul>
+    <p>对日调用量大的团队，40-70% 的成本降幅不是理论值。</p>
+    <div class="source"><a href="https://github.com/workweave/router" target="_blank" rel="noopener">来源：GitHub</a></div>
+  </div>
+
+  <div class="deep-item">
+    <h3>微信公众号精选：Vibe Coding + 一人公司 = 天作之合</h3>
+    <p>鲁工在「AI编程实验室」发表深度分析，讨论 2026 年一人公司（OPC）与 Vibe Coding 的结合。核心观点：一人公司最大的瓶颈是单人产出上限，而 Vibe Coding 用 AI 会话替代了虚拟团队。Pieter Levels 年收入超 300 万美元零员工，以色列开发者 8000 万美元退出的案例给出了实证。但同时，注意力管控成了新的瓶颈——同时管理 10+ 个 AI 终端，切换成本非常高。这篇公众号文章从实战出发，讲透了从「会写代码」到「管理 AI 写代码」的角色转变。</p>
+    <div class="source"><a href="https://mp.weixin.qq.com/s/5UceF6sUMsOb6V_t6PGd9Q" target="_blank" rel="noopener">来源：AI编程实验室</a></div>
+  </div>
+</div>
+
+<div class="footer">
+  <a href="https://daily.guancn.me">查看全部历史</a>
+</div>
+
+</div>
+
+</body>
+</html>
