@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI日报 · 2026-07-02</title>
+<style>
+:root {
+  --bg: #f5f5f7;
+  --white: #ffffff;
+  --black: #000000;
+  --text: #1d1d1f;
+  --text-secondary: rgba(0,0,0,.72);
+  --text-tertiary: rgba(0,0,0,.42);
+  --blue: #0071e3;
+  --blue-active: #0066cc;
+  --border: rgba(0,0,0,.06);
+  --shadow: rgba(0,0,0,.08) 0px 2px 14px;
+  --shadow-hover: rgba(0,0,0,.12) 0px 4px 24px;
+  --radius-card: 14px;
+  --radius-pill: 980px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -.01em;
+}
+.hero {
+  background: var(--black);
+  color: var(--white);
+  text-align: center;
+  padding: 72px 24px 56px;
+}
+.hero .eyebrow {
+  font-size: 11px; font-weight: 500; letter-spacing: .5em;
+  text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 10px;
+}
+.hero h1 { font-size: 48px; font-weight: 600; line-height: 1.07; letter-spacing: -.015em; }
+.hero .sub { font-size: 15px; color: rgba(255,255,255,.5); margin-top: 8px; }
+.container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+.focus-card {
+  background: var(--white); border-radius: var(--radius-card); padding: 24px 28px;
+  margin-bottom: 20px; box-shadow: var(--shadow); position: relative; overflow: hidden;
+}
+.focus-card::before {
+  content: ''; position: absolute; top: 0; left: 0; bottom: 0;
+  width: 3px; background: var(--blue); border-radius: 0 2px 2px 0;
+}
+.focus-card .label { font-size: 11px; font-weight: 600; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--blue); margin-bottom: 6px;
+}
+.focus-card p { font-size: 17px; font-weight: 400; color: var(--text); line-height: 1.47; }
+.card {
+  background: var(--white); border-radius: var(--radius-card); padding: 24px 28px;
+  margin-bottom: 14px; box-shadow: var(--shadow); transition: box-shadow .25s ease;
+}
+.card:hover { box-shadow: var(--shadow-hover); }
+.card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.card-header h2 { font-size: 13px; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--text-tertiary);
+}
+.card-header .badge { font-size: 11px; font-weight: 500; color: var(--blue);
+  background: rgba(0,113,227,.08); padding: 2px 10px; border-radius: var(--radius-pill);
+}
+.item-list { list-style: none; }
+.item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.item:last-child { border-bottom: none; padding-bottom: 0; }
+.item .rank { font-size: 11px; font-weight: 600; color: var(--text-tertiary);
+  min-width: 22px; height: 22px; text-align: center; line-height: 22px;
+  background: var(--bg); border-radius: 6px; margin-top: 2px;
+}
+.item .body { flex: 1; min-width: 0; }
+.item .name { font-size: 15px; font-weight: 600; color: var(--text); letter-spacing: -.01em; }
+.item .desc { font-size: 13px; color: var(--text-secondary); margin-top: 1px; line-height: 1.5; }
+.item .opp { font-size: 13px; color: var(--blue); margin-top: 4px; display: inline-block; }
+.item .source { font-size: 11px; margin-top: 2px; }
+.item .source a { color: var(--text-tertiary); text-decoration: none; }
+.item .source a:hover { color: var(--blue); text-decoration: underline; }
+.pulse-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.pulse-tag { font-size: 11px; font-weight: 500; padding: 3px 12px;
+  border-radius: var(--radius-pill); background: var(--bg); color: var(--text-secondary);
+}
+.pulse-tag:first-child { background: rgba(0,113,227,.08); color: var(--blue); }
+.pulse-body { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+.pulse-body p { margin: 6px 0; }
+.deep-item { padding: 14px 0; border-bottom: 1px solid var(--border); }
+.deep-item:last-child { border-bottom: none; padding-bottom: 0; }
+.deep-item h3 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+.deep-item p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+.deep-item .source { font-size: 11px; margin-top: 6px; }
+.deep-item .source a { color: var(--text-tertiary); text-decoration: none; }
+.deep-item .source a:hover { color: var(--blue); text-decoration: underline; }
+.footer { text-align: center; padding: 36px 0 52px; }
+.footer a { display: inline-block; font-size: 14px; font-weight: 500;
+  color: var(--blue-active); text-decoration: none; padding: 4px 18px;
+  border: 1px solid var(--blue-active); border-radius: var(--radius-pill);
+  transition: all .2s;
+}
+.footer a:hover { background: var(--blue-active); color: var(--white); }
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="eyebrow">AI 日报</div>
+  <h1>2026-07-02</h1>
+  <div class="sub">每天早 6 点 · 小关出品</div>
+</div>
+<div class="container">
+<div class="focus-card">
+  <div class="label">今日焦点</div>
+  <p>Anthropic 今天放大招——Claude Sonnet 5 正式发布，同时 Fable 5 和 Mythos 5 的出口管制被解除，海外开发者终于能用上了。DeepSeek 那边也没闲着，V4 正式版定档7月中旬还玩起了峰谷定价。Cursor 把 AI 编程塞进了 iPhone，合上笔记本 Agent 在云端继续跑。GitHub 上 self-learning-skills 飙到 736 星，AI 编码 Agent 开始学会自己进化了。对了，Ornith-1 开源了——基于 Qwen 3.5 + RL 训练的编码 Agent，SWE-bench 82.4%。</p>
+</div>
+<div class="card">
+  <div class="card-header">
+    <h2>Top 10 · 今日亮点</h2>
+    <span class="badge">10 项</span>
+  </div>
+  <ul class="item-list">
+    <li class="item">
+      <span class="rank">1</span>
+      <div class="body">
+        <div class="name">Claude Sonnet 5 发布 + Fable 5 解禁</div>
+        <div class="desc">Anthropic 双响炮：Sonnet 5 是最具 Agent 能力的 Sonnet 系列模型——自主规划、操作浏览器和终端；同时美国商务部解除对 Fable 5 和 Mythos 5 的出口管制。</div>
+        <div class="source"><a href="https://www.oschina.net/news/470795/claude-sonnet-5" target="_blank" rel="noopener">原文链接</a></div>
+        <span class="opp">模型发布 · Anthropic · Agent</span>
+      </div>
+    </li>
+    <li class="item">
+      <span class="rank">2</span>
+      <div class="body">
+        <div class="name">DeepSeek V4 正式版定档 7 月中旬</div>
+        <div class="desc">首次引入 API 峰谷定价机制：上午 9-12 点、下午 2-6 点为高峰时段，价格翻倍；其余时段维持基准价。V4 预览版已拥有百万上下文和 Agent 能力。</div>
+        <div class="source"><a href="https://www.oschina.net/news/470031" target="_blank" rel="noopener">原文链接</a></div>
+        <span class="opp">DeepSeek · 定价创新 · 国产大模型</span>
+      </div>
+    </li>
+    <li class="item">
+      <span class="rank">3</span>
+      <div class="body">
+        <div class="name">Cursor 推出 iOS 端 App</div>
+        <div class="desc">合上笔记本，Agent 继续在云端跑。手机锁屏推送 CI 结果，拿起手机就能审 diff、点 merge。Cloud Agent 是核心——所有付费用户可从 App Store 直接下载。</div>
+        <div class="source"><a href="https://www.oschina.net/news/470150/cursor-mobile-app-for-ios" target="_blank" rel="noopener">原文链接</a></div>
+        <span class="opp">Cursor · AI编程 · 移动端</span>
+      </div>
+    </li>
+    <li class="item">
+      <span class="rank">4</span>
+      <div class="body">
+        <div class="name">Ornith-1 开源：编码 Agent SWE-bench 82.4%</div>
+        <div class="desc">DeepReinforce 团队开源，基于 Gemma 4 / Qwen 3.5 + RL post-training，提供 9B / 31B / 35B MoE / 397B MoE 四个规格，MIT 许可。同尺寸 SWE-bench 最佳成绩。</div>
+        <div class="source"><a href="https://www.oschina.net/news/470235/ornith-1-0" target="_blank" rel="noopener">原文链接</a></div>
+        <span class="opp">开源工具 · 编码Agent · SWE-bench</span>
+      </div>
+    </li>
+    <li class="item">
+      <span class="rank">5</span>
+      <div class="body">
+        <div class="name">Qwen 3.6 27B 实测：本地模型达到 GPT-5 水平</div>
+        <div class="desc">Piotr Migdał 在 MacBook Max M5 上跑了一整天，结论是这是他第一次觉得本地模型能当通用智能用。8-bit GGUF + llama.cpp + MTP，推理体验接近 GPT-5。</div>
+        <div class="source"><a href="https://www.oschina.net/news/470261/qwen-36-is-awesome" target="_blank" rel="noopener">原文链接</a></div>
+        <span class="opp">本地模型 · Qwen · 国产大模型</span>
+      </div>
+    </li>
+    <li class="item">
+      <span class="rank">6</span>
+      <div class="body">
+        <div class="name">软银完成 OpenAI 百亿追加投资</div>
+        <div class="desc">通过 Vision Fund 2 完成 100 亿美元后续投资，这是此前宣布的总额 300 亿美元投资计划的第二期。10 月还将再投 100 亿美元。</div>
+        <div class="source"><a href="https://www.oschina.net/news/470846" target="_blank" rel="noopener">原文链接</a></div>
+        <span class="opp">OpenAI · 资本动态 · 软银</span>
+      </div>
+    </li>
+    <li class="item">
+      <span class="rank">7</span>
+      <div class="body">
+        <div class="name">Kimi 估值升至 315 亿美元，ARR 突破 3 亿美元</div>
+        <div class="desc">月之暗面新一轮投前估值涨至 315 亿美元。6 月中旬 ARR 突破 3 亿美元，收入增长主要来自模型迭代带动的开发者使用和 API 收入提升，曲线现 Anthropic 早期特征。</div>
+        <div class="source"><a href="https://www.oschina.net/news/470103" target="_blank" rel="noopener">原文链接</a></div>
+        <span class="opp">Kimi · 独角兽 · 估值</span>
+      </div>
+    </li>
+    <li class="item">
+      <span class="rank">8</span>
+      <div class="body">
+        <div class="name">Meta 非侵入脑机接口准确率从 8% 做到 78%</div>
+        <div class="desc">Brain2Qwerty v2 在 Nature Neuroscience 上发表。无需手术植入，就能将脑电信号解码为文字，准确率大幅跃升。此前非侵入方案最佳仅 8%。</div>
+        <div class="source"><a href="https://www.oschina.net/news/470296/brain2qwerty-brain-ai-human-communication" target="_blank" rel="noopener">原文链接</a></div>
+        <span class="opp">脑机接口 · Meta · 研究突破</span>
+      </div>
+    </li>
+    <li class="item">
+      <span class="rank">9</span>
+      <div class="body">
+        <div class="name">Nano Banana 2 Lite：Google 最快最便宜的图像模型</div>
+        <div class="desc">Gemini 3.1 Flash-Lite Image，代号 Nano Banana 2 Lite。相同质量比 Flash Image 快 2.7 倍，延迟极低，成本大幅降低，适合批量图像推理。</div>
+        <div class="source"><a href="https://www.oschina.net/news/470800/nano-banana-2-lite" target="_blank" rel="noopener">原文链接</a></div>
+        <span class="opp">Google · 图像模型 · 成本优化</span>
+      </div>
+    </li>
+    <li class="item">
+      <span class="rank">10</span>
+      <div class="body">
+        <div class="name">self-learning-skills：AI 编码 Agent 自我进化技能</div>
+        <div class="desc">一个让 AI 编码 Agent（Claude Code / Cursor / AGENTS.md）在实战中自我改进的技能库。上线 GitHub 几天飙到 736 星，代表了 Agent 能力自动化的新方向。</div>
+        <div class="source"><a href="https://github.com/Kulaxyz/self-learning-skills" target="_blank" rel="noopener">原文链接</a></div>
+        <span class="opp">GitHub 热门 · Agent Skills · 自我进化</span>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2>市场脉搏</h2>
+    <span class="badge">7 项</span>
+  </div>
+  <div class="pulse-wrap">
+    <span class="pulse-tag">Agent 框架</span>
+    <span class="pulse-tag">模型发布</span>
+    <span class="pulse-tag">资本动态</span>
+    <span class="pulse-tag">开源趋势</span>
+    <span class="pulse-tag">GitHub 热门</span>
+    <span class="pulse-tag">国产大模型</span>
+  </div>
+  <div class="pulse-body">
+    <p><b>美团开源 LongCat-2.0</b>（1.6T MoE）—— 全部使用国产算力集群，5 万余芯片耗时月余完成预训练，代表了国产大模型的自研实力。</p>
+    <p><b>谷歌限制 Meta 访问 Gemini</b> —— 云计算能力持续短缺，Meta 的自动安全审核工作流被迫转向其它方案。</p>
+    <p><b>ACL v1.0 发布</b> —— 面向 AI 时代的"开源"商业许可证，填补了现有许可证对 AI 模型训练和代码补全场景的空白。</p>
+    <p><b>GitHub 新趋势</b> —— self-learning-skills ⭐736、Fundamental-Ava ⭐717（自主社会智能 Agent）、sim-use ⭐395（iOS模拟器 Agent 控制），Agent 工具成为本周 GitHub 最大热点。</p>
+    <p><b>谷歌限制 Meta 访问 Gemini AI 模型</b> —— 云计算资源紧张导致谷歌收紧顶级模型访问权限。</p>
+    <p><b>Hermes Agent 生态</b> —— hermes-agency-orchestrator（Claude Code Agent Workflows Guide 2026）开源 154⭐，Agent 工作流编排正在形成工具链。</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2>深度延伸</h2>
+    <span class="badge">6 篇</span>
+  </div>
+  <div class="deep-item">
+    <h3>AI Coding 的底层框架：一切优化都是在对抗熵增</h3>
+    <p>从信息论出发，拆解 AI Coding 的底层逻辑。为什么新项目 AI 好用、历史业务总翻车？回到"信息"和"不确定性"的底层，很多问题会清晰得多。</p>
+    <div class="source"><a href="https://my.oschina.net/u/4939618/blog/19715254" target="_blank" rel="noopener">原文链接</a></div>
+  </div>
+  <div class="deep-item">
+    <h3>Tokenmaxxing 已死？Tokenmaxxing 万岁</h3>
+    <p>去年 Meta 把员工 Token 消耗量写进绩效考核，结果员工让两个 Agent 互相对话刷量。作者复盘了这一现象——Tokenmaxxing 的第一阶段已结束，但第二阶段正以更隐蔽的方式重新开始。</p>
+    <div class="source"><a href="https://www.oschina.net/news/470129/agentics-tech-things-tokenmaxxing" target="_blank" rel="noopener">原文链接</a></div>
+  </div>
+  <div class="deep-item">
+    <h3>Claude Code 藏在系统提示词里的"暗门"</h3>
+    <p>隐私研究员发现 Claude Code 在 7 款 Chromium 浏览器配置目录中写入检测文件，可以检查代理、时区和系统环境。引发 Reddit 社区关于"间谍软件"的激烈讨论。</p>
+    <div class="source"><a href="https://www.oschina.net/news/470656" target="_blank" rel="noopener">原文链接</a></div>
+  </div>
+  <div class="deep-item">
+    <h3>从 Claude Code 隐私争议，看 SolonCode 的设计选择</h3>
+    <p>针对 Reddit 上的"间谍软件"指控，SolonCode 作者从设计理念出发，分析 AI 编码 Agent 在隐私和安全方面的 trade-off。</p>
+    <div class="source"><a href="https://www.oschina.net/news/470553" target="_blank" rel="noopener">原文链接</a></div>
+  </div>
+  <div class="deep-item">
+    <h3>Ornith-1：Qwen 3.5 + RL 训练的编码 Agent</h3>
+    <p>DeepReinforce 团队的技术路线揭秘：基座用 Gemma 4 / Qwen 3.5，RL post-training 方向是让模型学会"自改进"，训练中每个错误都会转化为推理链中的教训。</p>
+    <div class="source"><a href="https://www.oschina.net/news/470235/ornith-1-0" target="_blank" rel="noopener">原文链接</a></div>
+  </div>
+  <div class="deep-item">
+    <h3>ACL v1.0：面向 AI 时代的"开源"商业许可证</h3>
+    <p>你的 Copilot 补全代码、Codex 重构、AI Agent 轮询仓库——但 BUSL 和 Elastic 2.0 对此只字未提。爱沙尼亚 MarketAlly OÜ 发布的 ACL v1.0 填补了这个空白。</p>
+    <div class="source"><a href="https://www.oschina.net/news/470024" target="_blank" rel="noopener">原文链接</a></div>
+  </div>
+</div>
+<div class="footer">
+  <a href="https://daily.guancn.me">查看全部历史</a>
+</div>
+</div>
+</body>
+</html>
